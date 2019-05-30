@@ -1,0 +1,32 @@
+# swissmuni: Download (meta)data about Swiss municipalities from the [web services](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl) provided by the [Federal Statistical Office](https://www.bfs.admin.ch/bfs/en/home.html)
+```{r, prep-snippets, echo = FALSE}
+# download the snippets to insert later on
+## define temporary file paths
+file_path_installation_notice_dev_version <- tempfile(pattern = "installation_notice_dev_version_")
+file_path_literate_programming_notice <- tempfile(pattern = "literate_programming_notice_")
+
+## download the files
+download.file(url = "https://gitlab.com/salim_b/snippets/raw/master/R%20Markdown/installation_notice_dev_version.Rmd",
+              destfile = file_path_installation_notice_dev_version,
+              quiet = TRUE)
+download.file(url = "https://gitlab.com/salim_b/snippets/raw/master/R%20Markdown/literate_programming_notice.Rmd",
+              destfile = file_path_literate_programming_notice,
+              quiet = TRUE)
+```
+swissmuni is an R package that provides functions to access municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots), [correspondances](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances) and [mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) from the [web services](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl) provided by the [Federal Statistical Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's _Statistical Metadata System (SMS)_.
+
+## Features
+
+...
+
+## Details
+
+...
+
+## Installation
+```{r, install-snippet, child = file_path_installation_notice_dev_version}
+```
+
+## Development
+```{r, development-snippet, child = file_path_literate_programming_notice}
+```

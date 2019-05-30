@@ -1,0 +1,9 @@
+*_cache
+*.backup
+*.html
+.~lock*
+.httr-oauth
+.RData
+.Rhistory
+.Rproj.user
+.Ruserdata
