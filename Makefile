@@ -8,7 +8,7 @@ knit2md = Rscript -e "knitr::knit2pandoc(input = '$(1)', \
                                          output = '$(2)', \
                                          tangle = FALSE, \
                                          encoding = 'UTF-8', \
-                                         to = 'markdown_github')"
+                                         to = 'gfm')"
 
 # generate all target R filenames
 rfiles:=$(patsubst Rmd/%.Rmd,R/%-GEN.R,$(wildcard Rmd/*.Rmd))
@@ -24,7 +24,7 @@ R/%-GEN.R: Rmd/%.Rmd
 # build README.md (always rebuild due to possibly changed external snippets in README.Rmd)
 README.md: FORCE
 	$(call knit2md,README.Rmd,README.md)
-	if test -f README.markdown_github; then rm README.markdown_github; fi
+	if test -f README.gfm; then rm README.gfm; fi
 
 FORCE:
 
