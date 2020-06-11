@@ -1,7 +1,14 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-^Rmd/.*$
-^Makefile$
+^Rmd$
+^_output.yaml$
 ^README\.Rmd$
+^pkgdown$
+^_pkgdown\.yml$
+^\.ackrc$
+^\.github$
+^\.lintr$
+^\.travis\.yml$ 
+^cran-comments\.md$
 ^TODO\.md$
-
+^LICENSE$
