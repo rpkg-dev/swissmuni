@@ -10,7 +10,7 @@ editor_options:
 cf. <https://github.com/tidyverse/magrittr/issues/29#issuecomment-74313262>
 
 ```{r}
-utils::globalVariables(names = c("."))
+utils::globalVariables(names = ".")
 ```
 
 ## Package load/unload
@@ -20,7 +20,7 @@ utils::globalVariables(names = c("."))
   pkgpins::clear(pkg = pkgname)
 }
 
-.onUnload <- function (libpath) {
+.onUnload <- function(libpath) {
   pkgpins::deregister(pkg = pkg)
 }
 ```
@@ -52,7 +52,7 @@ as_api_date <- function(date) {
     checkmate::assert_date(any.missing = FALSE,
                            null.ok = TRUE,
                            .var.name = "start/end_date") %>%
-    purrr::when(length(.) == 0 ~ NULL,
+    purrr::when(length(.) == 0L ~ NULL,
                 ~ format(., "%d-%m-%Y"))
 }
 ```
@@ -109,7 +109,7 @@ api_params <- function(type = c("snapshots",
            "classifications" = "GetGeographicLevel") %>%
     paste0("//xs:element[@name='", ., "']") %>%
     xml2::xml_find_all(x = api_wsdl) %>%
-    checkmate::assert_list(len = 1,
+    checkmate::assert_list(len = 1L,
                            types = "xml_node",
                            any.missing = FALSE) %>%
     xml2::xml_find_all(xpath = ".//xs:element") %>%
@@ -205,7 +205,7 @@ httr::GET(url = api_base_url,
 #' snapshots(start_date = "2020-01-01",
 #'           end_date = "2020-01-01",
 #'           use_cache = FALSE)
-snapshots <- function(start_date = lubridate::today() - 1,
+snapshots <- function(start_date = lubridate::today() - 1L,
                       end_date = start_date,
                       historicized_code = FALSE,
                       use_cache = TRUE,
@@ -232,7 +232,7 @@ snapshots <- function(start_date = lubridate::today() - 1,
                              endPeriod = as_api_date(end_date),
                              useBfsCode = tolower(historicized_code))) %>%
       parse_result(col_types = pal::as_string("iccii", rep("c",
-                                                           times = 29)))
+                                                           times = 29L)))
   }
   
   if (use_cache) {
@@ -447,7 +447,7 @@ classifications <- function(start_date = NULL,
                              endPeriod = as_api_date(end_date),
                              useBfsCode = tolower(historicized_code))) %>%
       parse_result(col_types = pal::as_string("iciii", rep("i",
-                                                           times = 49), "ci"))
+                                                           times = 49L), "ci"))
   }
   
   if (use_cache) {

@@ -5,7 +5,7 @@
 \title{Get municipality snapshots}
 \usage{
 snapshots(
-  start_date = lubridate::today() - 1,
+  start_date = lubridate::today() - 1L,
   end_date = start_date,
   historicized_code = FALSE,
   use_cache = TRUE,
