@@ -8,8 +8,8 @@
     Statistical Office's Web Services}
 \description{
 swissmuni provides functions to access
-    municipality snapshots, correspondances, mutations and their
-    geographic levels from the web services provided by the Swiss Federal
+    municipality snapshots, congruences, mutations and their geographical
+    classifications from the web services provided by the Swiss Federal
     Statistical Office (FSO). These web services are part of the FSO's
     Statistical Metadata System (SMS).
 }

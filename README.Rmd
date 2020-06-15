@@ -5,9 +5,9 @@ output: pal::gitlab_document
 # `r paste0(pal::desc_value("Package"), ": ", pal::desc_value("Title"))`
 
 swissmuni provides functions to access municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots),
-[correspondances](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances),
+[congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances),
 [mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their
-[geographic levels](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the
+[geographical classifications](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the
 [web services](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl) provided by the
 [Swiss Federal Statistical Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's
 _Statistical Metadata System (SMS)_[^sms].
@@ -37,3 +37,5 @@ Note that there's also an official web application [available](https://www.agvch
 ## See also
 
 - [Official municipality data web application from the Swiss Federal Statistical Office (FSO)](https://www.agvchapp.bfs.admin.ch/de/communes/query)
+
+---
