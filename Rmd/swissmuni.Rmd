@@ -1,0 +1,462 @@
+---
+editor_options:
+  chunk_output_type: console
+---
+
+# INTERNAL
+
+## Avoid `R CMD check` notes about undefined global objects used in magrittr pipes
+
+cf. <https://github.com/tidyverse/magrittr/issues/29#issuecomment-74313262>
+
+```{r}
+utils::globalVariables(names = c("."))
+```
+
+## Package load/unload
+
+```{r}
+.onLoad <- function(libname, pkgname) {
+  pkgpins::clear(pkg = pkgname)
+}
+
+.onUnload <- function (libpath) {
+  pkgpins::deregister(pkg = pkg)
+}
+```
+
+## Constants
+
+```{r}
+pkg <- utils::packageName()
+
+# URLs/paths common to all API endpoints
+api_base_url <- "https://sms.bfs.admin.ch/"
+api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
+
+# CSV column names which should be parsed as dates in the format `DD.MM.YYYY`
+date_colnames <- c("MutationDate",
+                   "ValidFrom",
+                   "ValidTo")
+
+# WSDL XML
+api_wsdl <- xml2::read_xml("https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl")
+```
+
+## Convert ISO-8601 formatted date string to `DD-MM-YYYY` format
+
+```{r}
+as_api_date <- function(date) {
+  
+  lubridate::ymd(date) %>%
+    checkmate::assert_date(any.missing = FALSE,
+                           null.ok = TRUE,
+                           .var.name = "start/end_date") %>%
+    purrr::when(length(.) == 0 ~ NULL,
+                ~ format(., "%d-%m-%Y"))
+}
+```
+
+## Get allowed API URL parameters
+
+This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
+possible URL parameters.
+
+Use the following code to get a tibble per API endpoint containing param details:
+
+```r
+c("snapshots",
+  "congruences",
+  "mutations",
+  "classifications") %>%
+  {
+    rlang::set_names(x = purrr::map(.x = .,
+                                    .f = swissmuni:::api_params),
+                     nm = .)
+  }
+```
+
+```{r}
+#' Get allowed API URL parameters
+#'
+#' @param type The API endpoint.
+#'
+#' @return A [tibble][tibble::tbl_df].
+#' @keywords internal
+#'
+#' @examples
+#' # to get all params for all 3 API endpoints:
+#' library(magrittr)
+#'
+#' endpoints <- c("snapshots",
+#'                "congruences",
+#'                "mutations",
+#'                "classifications")
+#'
+#' \dontrun{
+#' endpoints %>%
+#'   purrr::map(api_params) %>%
+#'   rlang::set_names(nm = endpoints)}
+api_params <- function(type = c("snapshots",
+                                "congruences",
+                                "mutations",
+                                "classifications")) {
+  
+  rlang::arg_match(type) %>%
+    switch("snapshots" = "GetSnapshot",
+           "congruences" = "GetCorrespondances",
+           "mutations" = "GetMutations",
+           "classifications" = "GetGeographicLevel") %>%
+    paste0("//xs:element[@name='", ., "']") %>%
+    xml2::xml_find_all(x = api_wsdl) %>%
+    checkmate::assert_list(len = 1,
+                           types = "xml_node",
+                           any.missing = FALSE) %>%
+    xml2::xml_find_all(xpath = ".//xs:element") %>%
+    xml2::xml_attrs() %>%
+    purrr::map(as.list) %>%
+    purrr::map_dfr(tibble::as_tibble)
+}
+```
+
+## Parse API result
+
+**Notes:**
+
+- The API doesn't have the proper content type set (would be `text/csv`).
+
+```{r}
+parse_result <- function(response,
+                         col_types) {
+  
+  response %>%
+    httr::content(as = "text") %>%
+    readr::read_csv(col_types = col_types) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(date_colnames),
+                                lubridate::dmy))
+}
+```
+
+# Get municipality snapshots
+
+Example URL:
+
+<https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots?useBfsCode=true&startPeriod=01-01-2018&endPeriod=01-01-2018>
+
+Possible URL parameters:
+
+- `format`
+- `escapeChars`
+- `startPeriod`
+- `endPeriod`
+- `useBfsCode`
+
+---
+
+Differences regarding URL parameters:
+
+column name if `use_fso_code = TRUE` | column name if `use_fso_code = FALSE`
+------------------------------------ | -------------------------------------
+CODE_HIST_1_Text_en                  | CODE_OFS_1_Text_en
+CODE_HIST_1_Text_fr                  | CODE_OFS_1_Text_fr
+CODE_HIST_1_Text_de                  | CODE_OFS_1_Text_de
+CODE_HIST_1_Text_it                  | CODE_OFS_1_Text_it
+CODE_HIST_1_Text                     | CODE_OFS_1_Text
+
+The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number".
+-> The URL parameter's name `useBfsCode` seems misleading (inversed)!
+
+---
+
+Determine the column names:
+
+```r
+httr::GET(url = api_base_url,
+                path = paste0(api_common_path, "snapshots"),
+                query = list(startPeriod = as_api_date(NULL),
+                             endPeriod = as_api_date(NULL),
+                             useBfsCode = tolower(T))) %>%
+  httr::content(as = "text") %>%
+  stringr::str_split(pattern = "\n") %>%
+  dplyr::first() %>%
+  dplyr::first() %>%
+  stringr::str_split(pattern = ",") %>%
+  pal::cat_lines()
+```
+
+```{r}
+#' Get municipality snapshots
+#'
+#' This function returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
+#' point in time. Therefore you probably want to set `start_date = end_date`.
+#'
+#' @includeRmd snippets/fso_vs_historicized_code.Rmd
+#'
+#' @param start_date The begin of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
+#' @param end_date The end of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
+#' @param historicized_code If `TRUE`, the `CODE_HIST` of the municipalities is returned instead of the `CODE_OFS`?
+#' @param use_cache `r pkgsnippets::param_label("use_cache")`
+#' @param cache_lifespan `r pkgsnippets::param_label("cache_lifespan")` Defaults to 1 day (24 hours).
+#'
+#' @return `r pkgsnippets::return_label("data")`
+#' @export
+#'
+#' @examples
+#' snapshots(start_date = "2020-01-01",
+#'           end_date = "2020-01-01",
+#'           use_cache = FALSE)
+snapshots <- function(start_date = lubridate::today() - 1,
+                      end_date = start_date,
+                      historicized_code = FALSE,
+                      use_cache = TRUE,
+                      cache_lifespan = "1 day") {
+  
+  if (checkmate::assert_flag(use_cache)) {
+    
+    pin_name <- pkgpins::call_to_name()
+    result <- pkgpins::get_obj(id = pin_name,
+                               max_age = cache_lifespan,
+                               pkg = pkg)
+    fetch <- is.null(result)
+    
+  } else {
+    fetch <- TRUE
+  }
+  
+  if (fetch) {
+    
+    result <-
+      httr::GET(url = api_base_url,
+                path = paste0(api_common_path, "snapshots"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             useBfsCode = tolower(historicized_code))) %>%
+      parse_result(col_types = pal::as_string("iccii", rep("c",
+                                                           times = 29)))
+  }
+  
+  if (use_cache) {
+    
+    pkgpins::cache_obj(x = result,
+                       id = pin_name,
+                       pkg = pkg)
+  }
+  
+  result
+}
+```
+
+# Get municipality congruences
+
+Example URL:
+
+<https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances?includeUnmodified=true&startPeriod=01-01-2017&endPeriod=01-01-2018>
+
+Possible URL parameters:
+
+- `format`
+- `escapeChars`
+- `startPeriod`
+- `endPeriod`
+- `includeUnmodified`
+- `includeTerritoryExchange`
+
+```{r}
+#' Get municipality congruences
+#'
+#' This function returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities.
+#'
+#' @inheritParams snapshots
+#' @param incl_unmodified Include municipalities where no changes occurred in the defined period.
+#' @param incl_territory_exchange Include information about territory exchanges between municipalities.
+#'
+#' @inherit snapshots return
+#' @export
+#'
+#' @examples
+#' congruences(start_date = "2010-01-01",
+#'             end_date = Sys.Date(),
+#'             cache_lifespan = "6 hours")
+congruences <- function(start_date = NULL,
+                        end_date = NULL,
+                        incl_unmodified = TRUE,
+                        incl_territory_exchange = FALSE,
+                        use_cache = TRUE,
+                        cache_lifespan = "1 day") {
+  
+  if (checkmate::assert_flag(use_cache)) {
+    
+    pin_name <- pkgpins::call_to_name()
+    result <- pkgpins::get_obj(id = pin_name,
+                               max_age = cache_lifespan,
+                               pkg = pkg)
+    fetch <- is.null(result)
+    
+  } else {
+    fetch <- TRUE
+  }
+  
+  if (fetch) {
+    
+    result <-
+      httr::GET(url = api_base_url,
+                path = paste0(api_common_path, "correspondances"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             includeUnmodified = tolower(incl_unmodified),
+                             includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
+      parse_result(col_types = "iiciciiicici")
+  }
+  
+  if (use_cache) {
+    
+    pkgpins::cache_obj(x = result,
+                       id = pin_name,
+                       pkg = pkg)
+  }
+  
+  result
+}
+```
+
+# Get municipality mutations
+
+Example URL:
+
+<https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations?startPeriod=01-01-2017&endPeriod=01-01-2018&includeTerritoryExchange=false>
+
+Possible URL parameters:
+
+- `format`
+- `escapeChars`
+- `startPeriod`
+- `endPeriod`
+- `includeTerritoryExchange`
+
+```{r}
+#' Get municipality mutations
+#'
+#' This function returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities.
+#'
+#' @inheritParams snapshots
+#' @inheritParams congruences
+#'
+#' @inherit snapshots return
+#' @export
+#'
+#' @examples
+#' mutations(start_date = "2020-01-01",
+#'           end_date = "2020-06-01")
+mutations <- function(start_date = NULL,
+                      end_date = NULL,
+                      incl_territory_exchange = FALSE,
+                      use_cache = TRUE,
+                      cache_lifespan = "1 day") {
+  
+  if (checkmate::assert_flag(use_cache)) {
+    
+    pin_name <- pkgpins::call_to_name()
+    result <- pkgpins::get_obj(id = pin_name,
+                               max_age = cache_lifespan,
+                               pkg = pkg)
+    fetch <- is.null(result)
+    
+  } else {
+    fetch <- TRUE
+  }
+  
+  if (fetch) {
+    
+    result <-
+      httr::GET(url = api_base_url,
+                path = paste0(api_common_path, "mutations"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
+      parse_result(col_types = "iciiciciiicici")
+  }
+  
+  if (use_cache) {
+    
+    pkgpins::cache_obj(x = result,
+                       id = pin_name,
+                       pkg = pkg)
+  }
+  
+  result
+}
+```
+
+# Get geographical classifications of municipalities
+
+Example URL:
+
+<https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels?startPeriod=01-01-2017&endPeriod=01-01-2018>
+
+Possible URL parameters:
+
+- `format`
+- `escapeChars`
+- `startPeriod`
+- `endPeriod`
+- `useBfsCode`
+- `labelLanguages`[^no-clue]
+- `oracleCompatible` [^no-clue]
+
+[^no-clue]: Not a clue what that is supposed to do...
+
+```{r}
+#' Get geographical classifications of municipalities
+#'
+#' This function returns a [tibble][tibble::tbl_df] with a wide range of geographical classifications of Swiss municipalities.
+#'
+#' @includeRmd snippets/fso_vs_historicized_code.Rmd
+#'
+#' @inheritParams snapshots
+#'
+#' @inherit snapshots return
+#' @export
+#'
+#' @examples
+#' classifications(historicized_code = TRUE,
+#'                 cache_lifespan = "1 week")
+classifications <- function(start_date = NULL,
+                            end_date = NULL,
+                            historicized_code = FALSE,
+                            use_cache = TRUE,
+                            cache_lifespan = "1 day") {
+  
+  if (checkmate::assert_flag(use_cache)) {
+    
+    pin_name <- pkgpins::call_to_name()
+    result <- pkgpins::get_obj(id = pin_name,
+                               max_age = cache_lifespan,
+                               pkg = pkg)
+    fetch <- is.null(result)
+    
+  } else {
+    fetch <- TRUE
+  }
+  
+  if (fetch) {
+    
+    result <-
+      httr::GET(url = api_base_url,
+                path = paste0(api_common_path, "levels"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             useBfsCode = tolower(historicized_code))) %>%
+      parse_result(col_types = pal::as_string("iciii", rep("i",
+                                                           times = 49), "ci"))
+  }
+  
+  if (use_cache) {
+    
+    pkgpins::cache_obj(x = result,
+                       id = pin_name,
+                       pkg = pkg)
+  }
+  
+  result
+}
+```

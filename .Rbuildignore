@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^Rmd$
+^snippets$
 ^_output.yaml$
 ^README\.Rmd$
 ^pkgdown$

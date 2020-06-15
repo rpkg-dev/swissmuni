@@ -1,0 +1,13 @@
+## FSO commune number vs. historicization number
+
+By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. You can set `historicized_code = TRUE` to get the _historicization number_ instead. Details about the differences between the both can be found in [this PDF](https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch/historisiertes-gemeindeverzeichnis.assetdetail.4062821.html) (in German). A translation of the relevant paragraph (p. 2):
+
+`r "\U2015"`
+
+The mutation processes at the cantonal, district and municipal level cause changes in the official register of Swiss municipalities. The so-called historicization number uniquely identifies the entries in the [official commune register](https://www.bfs.admin.ch/bfs/en/home/basics/swiss-official-commune-register.html) that have been changed, "deleted" or added as a result of mutation processes.
+
+In contrast to the **FSO commune number** or district number, the **historicization number** is _unique within the database_ and defines the state of the communes or districts during a certain period of time. The mutation numbers, the type of inclusion or revocation and the date of inclusion or revocation are used to fully describe the individual mutation events in the "Municipalities" and "Districts" tables. The mutation number identifies the individual mutation events that may affect one or more entries.
+
+The historicization number does not replace the existing municipality and district numbers. It is used for the computer-aided mapping of the various states and mutation processes of the official commune register and the districts.
+
+`r "\U2015"`
