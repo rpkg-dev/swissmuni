@@ -34,11 +34,6 @@ pkg <- utils::packageName()
 api_base_url <- "https://sms.bfs.admin.ch/"
 api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 
-# CSV column names which should be parsed as dates in the format `DD.MM.YYYY`
-date_colnames <- c("MutationDate",
-                   "ValidFrom",
-                   "ValidTo")
-
 # WSDL XML
 api_wsdl <- xml2::read_xml("https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl")
 ```
@@ -125,15 +120,19 @@ api_params <- function(type = c("snapshots",
 
 - The API doesn't have the proper content type set (would be `text/csv`).
 
+- The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column type spec
+  to tell `readr::read_csv()` how to parse the results dynamically.
+
 ```{r}
 parse_result <- function(response,
                          col_types) {
   
-  response %>%
-    httr::content(as = "text") %>%
-    readr::read_csv(col_types = col_types) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(date_colnames),
-                                lubridate::dmy))
+  response %<>% httr::content(as = "text")
+  
+  response %>% readr::read_csv(col_types = pal::cols_regex("(Name|_Title|_Text|^ABBREV)" = readr::col_character(),
+                                                           "^(MutationDate|ValidFrom|ValidTo)$" = readr::col_date(format = "%d.%m.%Y"),
+                                                           .col_names = pal::dsv_colnames(response),
+                                                           .default = readr::col_integer()))
 }
 ```
 
@@ -231,8 +230,7 @@ snapshots <- function(start_date = lubridate::today() - 1L,
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              useBfsCode = tolower(historicized_code))) %>%
-      parse_result(col_types = pal::as_string("iccii", rep("c",
-                                                           times = 29L)))
+      parse_result()
   }
   
   if (use_cache) {
@@ -305,7 +303,7 @@ congruences <- function(start_date = NULL,
                              endPeriod = as_api_date(end_date),
                              includeUnmodified = tolower(incl_unmodified),
                              includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
-      parse_result(col_types = "iiciciiicici")
+      parse_result()
   }
   
   if (use_cache) {
@@ -373,7 +371,7 @@ mutations <- function(start_date = NULL,
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
-      parse_result(col_types = "iciiciciiicici")
+      parse_result()
   }
   
   if (use_cache) {
@@ -446,8 +444,7 @@ classifications <- function(start_date = NULL,
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              useBfsCode = tolower(historicized_code))) %>%
-      parse_result(col_types = pal::as_string("iciii", rep("i",
-                                                           times = 49L), "ci"))
+      parse_result()
   }
   
   if (use_cache) {
