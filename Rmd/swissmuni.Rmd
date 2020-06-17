@@ -154,13 +154,13 @@ Possible URL parameters:
 
 Differences regarding URL parameters:
 
-column name if `use_fso_code = TRUE` | column name if `use_fso_code = FALSE`
------------------------------------- | -------------------------------------
-CODE_HIST_1_Text_en                  | CODE_OFS_1_Text_en
-CODE_HIST_1_Text_fr                  | CODE_OFS_1_Text_fr
-CODE_HIST_1_Text_de                  | CODE_OFS_1_Text_de
-CODE_HIST_1_Text_it                  | CODE_OFS_1_Text_it
-CODE_HIST_1_Text                     | CODE_OFS_1_Text
+column name if `historicized_code = TRUE` | column name if `historicized_code = FALSE`
+----------------------------------------- | -------------------------------------
+CODE_HIST_1_Text_en                       | CODE_OFS_1_Text_en
+CODE_HIST_1_Text_fr                       | CODE_OFS_1_Text_fr
+CODE_HIST_1_Text_de                       | CODE_OFS_1_Text_de
+CODE_HIST_1_Text_it                       | CODE_OFS_1_Text_it
+CODE_HIST_1_Text                          | CODE_OFS_1_Text
 
 The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number".
 -> The URL parameter's name `useBfsCode` seems misleading (inversed)!
@@ -172,8 +172,8 @@ Determine the column names:
 ```r
 httr::GET(url = api_base_url,
                 path = paste0(api_common_path, "snapshots"),
-                query = list(startPeriod = as_api_date(NULL),
-                             endPeriod = as_api_date(NULL),
+                query = list(startPeriod = NULL,
+                             endPeriod = NULL,
                              useBfsCode = tolower(T))) %>%
   httr::content(as = "text") %>%
   stringr::str_split(pattern = "\n") %>%
@@ -193,7 +193,8 @@ httr::GET(url = api_base_url,
 #'
 #' @param start_date The begin of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
 #' @param end_date The end of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
-#' @param historicized_code If `TRUE`, the `CODE_HIST` of the municipalities is returned instead of the `CODE_OFS`?
+#' @param historicized_code By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. Set to `TRUE` in order to get the
+#'   _historicization number_ instead.
 #' @param use_cache `r pkgsnippets::param_label("use_cache")`
 #' @param cache_lifespan `r pkgsnippets::param_label("cache_lifespan")` Defaults to 1 day (24 hours).
 #'
