@@ -17,11 +17,6 @@ pkg <- utils::packageName()
 api_base_url <- "https://sms.bfs.admin.ch/"
 api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 
-# CSV column names which should be parsed as dates in the format `DD.MM.YYYY`
-date_colnames <- c("MutationDate",
-                   "ValidFrom",
-                   "ValidTo")
-
 # WSDL XML
 api_wsdl <- xml2::read_xml("https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl")
 
@@ -79,11 +74,12 @@ api_params <- function(type = c("snapshots",
 parse_result <- function(response,
                          col_types) {
   
-  response %>%
-    httr::content(as = "text") %>%
-    readr::read_csv(col_types = col_types) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(date_colnames),
-                                lubridate::dmy))
+  response %<>% httr::content(as = "text")
+  
+  response %>% readr::read_csv(col_types = pal::cols_regex("(Name|_Title|_Text|^ABBREV)" = readr::col_character(),
+                                                           "^(MutationDate|ValidFrom|ValidTo)$" = readr::col_date(format = "%d.%m.%Y"),
+                                                           .col_names = pal::dsv_colnames(response),
+                                                           .default = readr::col_integer()))
 }
 
 #' Get municipality snapshots
@@ -95,7 +91,8 @@ parse_result <- function(response,
 #'
 #' @param start_date The begin of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
 #' @param end_date The end of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
-#' @param historicized_code If `TRUE`, the `CODE_HIST` of the municipalities is returned instead of the `CODE_OFS`?
+#' @param historicized_code By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. Set to `TRUE` in order to get the
+#'   _historicization number_ instead.
 #' @param use_cache `r pkgsnippets::param_label("use_cache")`
 #' @param cache_lifespan `r pkgsnippets::param_label("cache_lifespan")` Defaults to 1 day (24 hours).
 #'
@@ -132,8 +129,7 @@ snapshots <- function(start_date = lubridate::today() - 1L,
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              useBfsCode = tolower(historicized_code))) %>%
-      parse_result(col_types = pal::as_string("iccii", rep("c",
-                                                           times = 29L)))
+      parse_result()
   }
   
   if (use_cache) {
@@ -189,7 +185,7 @@ congruences <- function(start_date = NULL,
                              endPeriod = as_api_date(end_date),
                              includeUnmodified = tolower(incl_unmodified),
                              includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
-      parse_result(col_types = "iiciciiicici")
+      parse_result()
   }
   
   if (use_cache) {
@@ -241,7 +237,7 @@ mutations <- function(start_date = NULL,
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
-      parse_result(col_types = "iciiciciiicici")
+      parse_result()
   }
   
   if (use_cache) {
@@ -294,8 +290,7 @@ classifications <- function(start_date = NULL,
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              useBfsCode = tolower(historicized_code))) %>%
-      parse_result(col_types = pal::as_string("iciii", rep("i",
-                                                           times = 49L), "ci"))
+      parse_result()
   }
   
   if (use_cache) {
