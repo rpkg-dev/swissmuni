@@ -20,7 +20,7 @@ congruences(
 
 \item{incl_unmodified}{Include municipalities where no changes occurred in the defined period.}
 
-\item{incl_territory_exchange}{Include information about territory exchanges between municipalities.}
+\item{incl_territory_exchange}{Include information (additional rows) about territory exchanges within and between municipalities.}
 
 \item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{cache_lifespan}.}
 
@@ -33,7 +33,7 @@ A \link[tibble:tbl_df]{tibble}.
 This function returns a \link[tibble:tbl_df]{tibble} with congruence data of Swiss municipalities.
 }
 \examples{
-congruences(start_date = "2010-01-01",
-            end_date = Sys.Date(),
+congruences(start_date = lubridate::today(),
+            end_date = lubridate::today(),
             cache_lifespan = "6 hours")
 }

@@ -17,7 +17,7 @@ mutations(
 
 \item{end_date}{The end of the period the data covers. A \href{base::Date}{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
-\item{incl_territory_exchange}{Include information about territory exchanges between municipalities.}
+\item{incl_territory_exchange}{Include information (additional rows) about territory exchanges within and between municipalities.}
 
 \item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{cache_lifespan}.}
 
@@ -31,5 +31,6 @@ This function returns a \link[tibble:tbl_df]{tibble} with mutation data of Swiss
 }
 \examples{
 mutations(start_date = "2020-01-01",
-          end_date = "2020-06-01")
+          end_date = "2020-06-30",
+          incl_territory_exchange = TRUE)
 }

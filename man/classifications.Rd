@@ -73,6 +73,8 @@ and the districts.
 }
 }
 \examples{
-classifications(name_type = "de",
-                cache_lifespan = "1 week")
+classifications(start_date = lubridate::today(),
+                end_date = lubridate::today(),
+                name_type = "de",
+                use_cache = FALSE)
 }

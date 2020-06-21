@@ -5,7 +5,7 @@
 \title{Get municipality snapshots}
 \usage{
 snapshots(
-  start_date = lubridate::today() - 1L,
+  start_date = lubridate::today(),
   end_date = start_date,
   historicized_code = FALSE,
   use_cache = TRUE,
@@ -67,7 +67,5 @@ and the districts.
 }
 }
 \examples{
-snapshots(start_date = "2020-01-01",
-          end_date = "2020-01-01",
-          use_cache = FALSE)
+snapshots(historicized_code = TRUE)
 }

@@ -147,10 +147,8 @@ parse_result <- function(response,
 #' @export
 #'
 #' @examples
-#' snapshots(start_date = "2020-01-01",
-#'           end_date = "2020-01-01",
-#'           use_cache = FALSE)
-snapshots <- function(start_date = lubridate::today() - 1L,
+#' snapshots(historicized_code = TRUE)
+snapshots <- function(start_date = lubridate::today(),
                       end_date = start_date,
                       historicized_code = FALSE,
                       use_cache = TRUE,
@@ -175,7 +173,7 @@ snapshots <- function(start_date = lubridate::today() - 1L,
                 path = paste0(api_common_path, "snapshots"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             useBfsCode = tolower(historicized_code))) %>%
+                             useBfsCode = tolower(checkmate::assert_flag(historicized_code)))) %>%
       parse_result()
   }
   
@@ -195,14 +193,14 @@ snapshots <- function(start_date = lubridate::today() - 1L,
 #'
 #' @inheritParams snapshots
 #' @param incl_unmodified Include municipalities where no changes occurred in the defined period.
-#' @param incl_territory_exchange Include information about territory exchanges between municipalities.
+#' @param incl_territory_exchange Include information (additional rows) about territory exchanges within and between municipalities.
 #'
 #' @inherit snapshots return
 #' @export
 #'
 #' @examples
-#' congruences(start_date = "2010-01-01",
-#'             end_date = Sys.Date(),
+#' congruences(start_date = lubridate::today(),
+#'             end_date = lubridate::today(),
 #'             cache_lifespan = "6 hours")
 congruences <- function(start_date = NULL,
                         end_date = NULL,
@@ -230,8 +228,8 @@ congruences <- function(start_date = NULL,
                 path = paste0(api_common_path, "correspondances"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             includeUnmodified = tolower(incl_unmodified),
-                             includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
+                             includeUnmodified = tolower(checkmate::assert_flag(incl_unmodified)),
+                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange)))) %>%
       parse_result()
   }
   
@@ -257,7 +255,8 @@ congruences <- function(start_date = NULL,
 #'
 #' @examples
 #' mutations(start_date = "2020-01-01",
-#'           end_date = "2020-06-01")
+#'           end_date = "2020-06-30",
+#'           incl_territory_exchange = TRUE)
 mutations <- function(start_date = NULL,
                       end_date = NULL,
                       incl_territory_exchange = FALSE,
@@ -283,7 +282,7 @@ mutations <- function(start_date = NULL,
                 path = paste0(api_common_path, "mutations"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             includeTerritoryExchange = tolower(incl_territory_exchange))) %>%
+                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange)))) %>%
       parse_result()
   }
   
@@ -314,8 +313,10 @@ mutations <- function(start_date = NULL,
 #' @export
 #'
 #' @examples
-#' classifications(name_type = "de",
-#'                 cache_lifespan = "1 week")
+#' classifications(start_date = lubridate::today(),
+#'                 end_date = lubridate::today(),
+#'                 name_type = "de",
+#'                 use_cache = FALSE)
 classifications <- function(start_date = NULL,
                             end_date = NULL,
                             historicized_code = FALSE,
@@ -344,7 +345,7 @@ classifications <- function(start_date = NULL,
                 path = paste0(api_common_path, "levels"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             useBfsCode = tolower(historicized_code))) %>%
+                             useBfsCode = tolower(checkmate::assert_flag(historicized_code)))) %>%
       parse_result()
   }
   
