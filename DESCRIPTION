@@ -1,7 +1,7 @@
 Package: swissmuni
 Title: Download Municipality Data from the Swiss Federal
     Statistical Office's Web Services
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: 
     person(given = "Salim",
            family = "Brüggemann",
