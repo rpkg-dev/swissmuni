@@ -8,6 +8,7 @@ classifications(
   start_date = NULL,
   end_date = NULL,
   historicized_code = FALSE,
+  name_type = c("ID", "en", "de", "fr", "it"),
   use_cache = TRUE,
   cache_lifespan = "1 day"
 )
@@ -20,6 +21,9 @@ classifications(
 \item{historicized_code}{By default, the \href{https://de.wikipedia.org/wiki/Gemeindenummer}{\emph{FSO commune number}} is returned. Set to \code{TRUE} in order to get the
 \emph{historicization number} instead.}
 
+\item{name_type}{The column name type to be returned. Defaults to the column IDs returned by the web service. If set to a language code, the columns
+starting with ID \code{HR_} will be named by its full label in the respective language instead.}
+
 \item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{cache_lifespan}.}
 
 \item{cache_lifespan}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
@@ -31,6 +35,9 @@ A \link[tibble:tbl_df]{tibble}.
 This function returns a \link[tibble:tbl_df]{tibble} with a wide range of geographical classifications of Swiss municipalities.
 }
 \details{
+There are some classifications which have multiple column IDs (e.g. \code{HR_ARBREG2000_L2} and \code{HR_TYPMSR2000_L2} both contain the \emph{spatial mobility regions}).
+If \code{name_type} is set to a language code, column duplicates are given the name suffix " (⎘)".
+
 \subsection{FSO commune number vs. historicization number}{
 
 By default, the \href{https://de.wikipedia.org/wiki/Gemeindenummer}{\emph{FSO commune number}} is returned. You
@@ -66,6 +73,6 @@ and the districts.
 }
 }
 \examples{
-classifications(historicized_code = TRUE,
+classifications(name_type = "de",
                 cache_lifespan = "1 week")
 }

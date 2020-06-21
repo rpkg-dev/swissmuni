@@ -20,6 +20,12 @@ api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 # WSDL XML
 api_wsdl <- xml2::read_xml("https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl")
 
+# column specification of the `levels` API endpoint
+col_spec_classifications <- readr::read_rds("inst/extdata/col_spec_classifications.Rds")
+
+# Unicode copy/paste symbol
+cp_symbol <- "\U2398"
+
 as_api_date <- function(date) {
   
   lubridate::ymd(date) %>%
@@ -71,6 +77,47 @@ api_params <- function(type = c("snapshots",
     purrr::map_dfr(tibble::as_tibble)
 }
 
+get_classifications_col_spec <- function() {
+  
+  # download raw XLS file
+  tmp_file <- fs::file_temp(pattern = "get_classifications_col_spec")
+  on.exit(unlink(tmp_file))
+  
+  httr::GET(url = "https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels?format=x",
+            httr::write_disk(path = tmp_file,
+                             overwrite = TRUE))
+  
+  # tidy up data
+  data <- 
+    readxl::read_excel(path = tmp_file) %>%
+    dplyr::rename_with(.fn =
+                         ~ tolower(.x) %>%
+                         stringr::str_remove_all(pattern = "[\\[\\]]") %>%
+                         stringr::str_replace_all(pattern = "\\s+",
+                                                  replacement = "_")) %>%
+    ## complete duplicated names with missing year
+    dplyr::rowwise() %>%
+    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
+                                ~ if (stringr::str_detect(column_id, "^HR_(AGGLGK20(00|12)_L1|DEGURB|MSREG|SPRGEB|STALAN)")) {
+                                  paste(.x, stringr::str_extract(column_id, "\\d{4}"))
+                                } else .x)) %>%
+    ## fix remaining duplicated names
+    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
+                                ~ if (stringr::str_detect(column_id, "^HR_GDETYP(1980|1990|2000)_L[12]$")) {
+                                  stringr::str_replace(.x, "1980-2000", stringr::str_extract(column_id, "\\d{4}"))
+                                } else .x)) %>%
+    dplyr::ungroup()
+}
+
+save_rds <- function(obj,
+                     path,
+                     compress = "gz") {
+  
+  readr::write_rds(x = obj,
+                   path = path,
+                   compress = compress)
+}
+
 parse_result <- function(response,
                          col_types) {
   
@@ -85,7 +132,7 @@ parse_result <- function(response,
 #' Get municipality snapshots
 #'
 #' This function returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
-#' point in time. Therefore you probably want to set `start_date = end_date`.
+#' point in time. Therefore you probably want to leave the default `end_date = start_date`.
 #'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
@@ -254,25 +301,33 @@ mutations <- function(start_date = NULL,
 #'
 #' This function returns a [tibble][tibble::tbl_df] with a wide range of geographical classifications of Swiss municipalities.
 #'
+#' There are some classifications which have multiple column IDs (e.g. `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` both contain the _spatial mobility regions_).
+#' If `name_type` is set to a language code, column duplicates are given the name suffix "`r paste0(' (', cp_symbol, ')')`".
+#'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
 #' @inheritParams snapshots
+#' @param name_type The column name type to be returned. Defaults to the column IDs returned by the web service. If set to a language code, the columns
+#'   starting with ID `HR_` will be named by its full label in the respective language instead.
 #'
 #' @inherit snapshots return
 #' @export
 #'
 #' @examples
-#' classifications(historicized_code = TRUE,
+#' classifications(name_type = "de",
 #'                 cache_lifespan = "1 week")
 classifications <- function(start_date = NULL,
                             end_date = NULL,
                             historicized_code = FALSE,
+                            name_type = c("ID", "en", "de", "fr", "it"),
                             use_cache = TRUE,
                             cache_lifespan = "1 day") {
   
   if (checkmate::assert_flag(use_cache)) {
     
-    pin_name <- pkgpins::call_to_name()
+    pin_name <- pkgpins::call_to_name(exclude_args = c("name_type",
+                                                       "use_cache",
+                                                       "cache_lifespan"))
     result <- pkgpins::get_obj(id = pin_name,
                                max_age = cache_lifespan,
                                pkg = pkg)
@@ -298,6 +353,23 @@ classifications <- function(start_date = NULL,
     pkgpins::cache_obj(x = result,
                        id = pin_name,
                        pkg = pkg)
+  }
+  
+  name_type <- rlang::arg_match(name_type)
+  
+  if (name_type != "ID") {
+    
+    hr_ix <- which(stringr::str_detect(colnames(result), "^HR_"))
+    hr_ids <- colnames(result) %>% stringr::str_subset("^HR_")
+    hr_names <- col_spec_classifications[[paste0("name_", name_type)]][match(hr_ids, col_spec_classifications$column_id)]
+    
+    # ensure column names are unique (there are different column IDs for the same values)
+    # -> add the unicode symbol for copy/paste
+    while (anyDuplicated(hr_names)) {
+      hr_names[which(duplicated(hr_names))] <- paste0(hr_names[which(duplicated(hr_names))], " (\U2398)")
+    }
+    
+    colnames(result)[hr_ix] <- hr_names
   }
   
   result

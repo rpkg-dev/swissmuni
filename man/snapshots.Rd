@@ -29,7 +29,7 @@ A \link[tibble:tbl_df]{tibble}.
 }
 \description{
 This function returns a \link[tibble:tbl_df]{tibble} with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
-point in time. Therefore you probably want to set \code{start_date = end_date}.
+point in time. Therefore you probably want to leave the default \code{end_date = start_date}.
 }
 \details{
 \subsection{FSO commune number vs. historicization number}{
