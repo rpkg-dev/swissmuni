@@ -1,7 +1,9 @@
 # TODOs
 
-- [ ] Figure out what the `format` API URL param's possible values...
+- [ ] Figure out what `incl_territory_exchange` really does!?
 
-- [ ] Rename (tidy) and document the returned vars (56 (!) in the case of `levels()`... 😵). But where to get documentation?
+- [ ] Rename (tidy) the remaining column names returned by the API (so far only the `HR_*` columns can be renamed). But where to get necessary documentation?
+
+- [ ] Add spinners to fetching op
 
 - [ ] Add a vignette with some real-life usage examples.
