@@ -177,7 +177,7 @@ snapshots <- function(start_date = lubridate::today(),
       parse_result()
   }
   
-  if (use_cache) {
+  if (use_cache & fetch) {
     
     pkgpins::cache_obj(x = result,
                        id = pin_name,
@@ -233,7 +233,7 @@ congruences <- function(start_date = NULL,
       parse_result()
   }
   
-  if (use_cache) {
+  if (use_cache & fetch) {
     
     pkgpins::cache_obj(x = result,
                        id = pin_name,
@@ -286,7 +286,7 @@ mutations <- function(start_date = NULL,
       parse_result()
   }
   
-  if (use_cache) {
+  if (use_cache & fetch) {
     
     pkgpins::cache_obj(x = result,
                        id = pin_name,
@@ -349,7 +349,7 @@ classifications <- function(start_date = NULL,
       parse_result()
   }
   
-  if (use_cache) {
+  if (use_cache & fetch) {
     
     pkgpins::cache_obj(x = result,
                        id = pin_name,
