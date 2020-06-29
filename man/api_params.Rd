@@ -12,13 +12,13 @@ api_params(
 \item{type}{The API endpoint.}
 }
 \value{
-A \link[tibble:tbl_df]{tibble}.
+A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
 Get allowed API URL parameters
 }
 \examples{
-# to get all params for all 3 API endpoints:
+# to get all URL params of all 3 API endpoints:
 library(magrittr)
 
 endpoints <- c("snapshots",
@@ -26,9 +26,10 @@ endpoints <- c("snapshots",
                "mutations",
                "classifications")
 
-\dontrun{
+\donttest{
 endpoints \%>\%
-  purrr::map(api_params) \%>\%
+  purrr::map(getFromNamespace("api_params",
+                              ns = "swissmuni")) \%>\%
   rlang::set_names(nm = endpoints)}
 }
 \keyword{internal}

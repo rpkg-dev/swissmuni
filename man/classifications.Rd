@@ -29,10 +29,10 @@ starting with ID \code{HR_} will be named by its full label in the respective la
 \item{cache_lifespan}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
 }
 \value{
-A \link[tibble:tbl_df]{tibble}.
+A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-This function returns a \link[tibble:tbl_df]{tibble} with a wide range of geographical classifications of Swiss municipalities.
+This function returns a \link[tibble:tbl_df-class]{tibble} with a wide range of geographical classifications of Swiss municipalities.
 }
 \details{
 There are some classifications which have multiple column IDs (e.g. \code{HR_ARBREG2000_L2} and \code{HR_TYPMSR2000_L2} both contain the \emph{spatial mobility regions}).

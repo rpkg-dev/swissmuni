@@ -36,8 +36,7 @@ This package borrows a lot of the [Tidyverse](https://www.tidyverse.org/) design
 As far as possible, these deviations from the TSG plus some additional restrictions are formally specified in the [lintr configuration file](https://github.com/jimhester/lintr#project-configuration) [`.lintr`](.lintr), so lintr can be used right away to check for formatting issues:
 
 ``` r
-lintr::lint_dir(path = "Rmd/",
-                pattern = ".+\\.Rmd")
+pkgpurl::lint_rmd()
 ```
 
 ## See also

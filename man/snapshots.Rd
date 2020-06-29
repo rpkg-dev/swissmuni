@@ -25,10 +25,10 @@ snapshots(
 \item{cache_lifespan}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
 }
 \value{
-A \link[tibble:tbl_df]{tibble}.
+A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-This function returns a \link[tibble:tbl_df]{tibble} with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
+This function returns a \link[tibble:tbl_df-class]{tibble} with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
 point in time. Therefore you probably want to leave the default \code{end_date = start_date}.
 }
 \details{

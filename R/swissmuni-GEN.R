@@ -17,9 +17,6 @@ pkg <- utils::packageName()
 api_base_url <- "https://sms.bfs.admin.ch/"
 api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 
-# WSDL XML
-api_wsdl <- xml2::read_xml("https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl")
-
 # column specification of the `levels` API endpoint
 col_spec_classifications <- readr::read_rds("inst/extdata/col_spec_classifications.Rds")
 
@@ -44,7 +41,7 @@ as_api_date <- function(date) {
 #' @keywords internal
 #'
 #' @examples
-#' # to get all params for all 3 API endpoints:
+#' # to get all URL params of all 3 API endpoints:
 #' library(magrittr)
 #'
 #' endpoints <- c("snapshots",
@@ -52,9 +49,10 @@ as_api_date <- function(date) {
 #'                "mutations",
 #'                "classifications")
 #'
-#' \dontrun{
+#' \donttest{
 #' endpoints %>%
-#'   purrr::map(api_params) %>%
+#'   purrr::map(getFromNamespace("api_params",
+#'                               ns = "swissmuni")) %>%
 #'   rlang::set_names(nm = endpoints)}
 api_params <- function(type = c("snapshots",
                                 "congruences",
@@ -67,7 +65,7 @@ api_params <- function(type = c("snapshots",
            "mutations" = "GetMutations",
            "classifications" = "GetGeographicLevel") %>%
     paste0("//xs:element[@name='", ., "']") %>%
-    xml2::xml_find_all(x = api_wsdl) %>%
+    xml2::xml_find_all(x = xml2::read_xml("https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl")) %>%
     checkmate::assert_list(len = 1L,
                            types = "xml_node",
                            any.missing = FALSE) %>%

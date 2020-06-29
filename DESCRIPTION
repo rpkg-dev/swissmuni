@@ -1,7 +1,7 @@
 Package: swissmuni
 Title: Download Municipality Data from the Swiss Federal
     Statistical Office's Web Services
-Version: 0.2.0
+Version: 0.2.1
 Authors@R: 
     person(given = "Salim",
            family = "Brüggemann",
@@ -39,4 +39,4 @@ Remotes:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0.9001
+RoxygenNote: 7.1.1
