@@ -197,24 +197,24 @@ parse_result <- function(response,
 
 ## API response's column names
 
-- To determine them for the `snapshots` endpoint, use:
+To determine them for the `snapshots` endpoint, use:
 
-  ```r
-  httr::GET(url = api_base_url,
-                  path = paste0(api_common_path, "snapshots"),
-                  query = list(startPeriod = NULL,
-                               endPeriod = NULL,
-                               useBfsCode = tolower(T))) %>%
-    httr::content(as = "text") %>%
-    stringr::str_split(pattern = "\n") %>%
-    dplyr::first() %>%
-    dplyr::first() %>%
-    stringr::str_split(pattern = ",") %>%
-    pal::cat_lines()
-  ```
+```{r, purl = FALSE}
+httr::GET(url = api_base_url,
+          path = paste0(api_common_path, "snapshots"),
+          query = list(startPeriod = NULL,
+                       endPeriod = NULL,
+                       useBfsCode = tolower(T))) %>%
+  httr::content(as = "text") %>%
+  stringr::str_split(pattern = "\n") %>%
+  dplyr::first() %>%
+  dplyr::first() %>%
+  stringr::str_split(pattern = ",") %>%
+  pal::cat_lines()
+```
 
-- The `MS` in the full column names returned by `get_classifications_col_spec()` stands for _mobilité spatiale_, cf.
-  <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>
+The `MS` in the full column names returned by `classifications_col_spec()` stands for _mobilité spatiale_, cf.
+<https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>
 
 ## API URL parameter details
 
