@@ -125,14 +125,14 @@ api_params <- function(type = c("snapshots",
 - The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values),
   except some year numbers. They are corrected by the function below.
 
-- The return value of `get_classifications_col_spec()` has been written to the package file `inst/extdata/col_spec_classifications.Rds` using
-  `save_rds(get_classifications_col_spec(), path = "inst/extdata/col_spec_classifications.Rds")`.
+- The return value of `classifications_col_spec()` has been written to the package file `inst/extdata/col_spec_classifications.Rds` using
+  `save_rds(classifications_col_spec(), path = "inst/extdata/col_spec_classifications.Rds")`.
 
 ```{r}
-get_classifications_col_spec <- function() {
+classifications_col_spec <- function() {
   
   # download raw XLS file
-  tmp_file <- fs::file_temp(pattern = "get_classifications_col_spec")
+  tmp_file <- fs::file_temp(pattern = "classifications_col_spec")
   on.exit(unlink(tmp_file))
   
   httr::GET(url = "https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels?format=x",
@@ -140,8 +140,7 @@ get_classifications_col_spec <- function() {
                              overwrite = TRUE))
   
   # tidy up data
-  data <- 
-    readxl::read_excel(path = tmp_file) %>%
+  readxl::read_excel(path = tmp_file) %>%
     dplyr::rename_with(.fn =
                          ~ tolower(.x) %>%
                          stringr::str_remove_all(pattern = "[\\[\\]]") %>%
