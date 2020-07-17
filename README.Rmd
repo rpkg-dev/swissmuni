@@ -21,17 +21,17 @@ Note that there's also an official web application [available](https://www.agvch
 
 
 ## Installation
-```{r, install-snippet-dev, child = pkgsnippets::snippet_path("installation-notice_dev-version_gitlab.Rmd")}
+```{r, install-snippet-dev, child = pkgsnip::snip_path("installation-notice_dev-version_gitlab.Rmd")}
 ```
 
 ## Development
 
 ### R Markdown format
-```{r, rmd-pkg-snippet, child = pkgsnippets::snippet_path("rmd-package-notice.Rmd")}
+```{r, rmd-pkg-snippet, child = pkgsnip::snip_path("rmd-package-notice.Rmd")}
 ```
 
 ### Coding style
-```{r, coding-style-snippet, child = pkgsnippets::snippet_path("coding-style-notice.Rmd")}
+```{r, coding-style-snippet, child = pkgsnip::snip_path("coding-style-notice.Rmd")}
 ```
 
 ## See also

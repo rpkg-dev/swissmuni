@@ -278,10 +278,10 @@ Possible URL parameters:
 #' @param end_date The end of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
 #' @param historicized_code By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. Set to `TRUE` in order to get the
 #'   _historicization number_ instead.
-#' @param use_cache `r pkgsnippets::param_label("use_cache")`
-#' @param cache_lifespan `r pkgsnippets::param_label("cache_lifespan")` Defaults to 1 day (24 hours).
+#' @param use_cache `r pkgsnip::param_label("use_cache")`
+#' @param cache_lifespan `r pkgsnip::param_label("cache_lifespan")` Defaults to 1 day (24 hours).
 #'
-#' @return `r pkgsnippets::return_label("data")`
+#' @return `r pkgsnip::return_label("data")`
 #' @export
 #'
 #' @examples
