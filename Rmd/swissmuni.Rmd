@@ -38,7 +38,7 @@ api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 col_spec_classifications <- readr::read_rds("inst/extdata/col_spec_classifications.Rds")
 
 # Unicode copy/paste symbol
-cp_symbol <- "\U2398"
+cp_symbol <- "\u2398"
 ```
 
 ## Convert ISO-8601 formatted date string to `DD-MM-YYYY` format
@@ -554,9 +554,9 @@ classifications <- function(start_date = NULL,
     hr_names <- col_spec_classifications[[paste0("name_", name_type)]][match(hr_ids, col_spec_classifications$column_id)]
     
     # ensure column names are unique (there are different column IDs for the same values)
-    # -> add the unicode symbol for copy/paste
+    # -> add the unicode symbol for copy/paste, multiple times if necessary
     while (anyDuplicated(hr_names)) {
-      hr_names[which(duplicated(hr_names))] <- paste0(hr_names[which(duplicated(hr_names))], " (\U2398)")
+      hr_names[which(duplicated(hr_names))] <- paste0(hr_names[which(duplicated(hr_names))], " ", cp_symbol)
     }
     
     colnames(result)[hr_ix] <- hr_names
