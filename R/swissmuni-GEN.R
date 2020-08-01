@@ -4,7 +4,9 @@
 utils::globalVariables(names = ".")
 
 .onLoad <- function(libname, pkgname) {
-  pkgpins::clear(pkg = pkgname)
+  pkgpins::clear(pkg = pkgname,
+                 max_age = getOption("swissmuni.max_cache_lifespan",
+                                     default = "30 days"))
 }
 
 .onUnload <- function(libpath) {
@@ -17,11 +19,8 @@ pkg <- utils::packageName()
 api_base_url <- "https://sms.bfs.admin.ch/"
 api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 
-# column specification of the `levels` API endpoint
-col_spec_classifications <- readr::read_rds("inst/extdata/col_spec_classifications.Rds")
-
 # Unicode copy/paste symbol
-cp_symbol <- "\U2398"
+cp_symbol <- "\u2398"
 
 as_api_date <- function(date) {
   
@@ -75,46 +74,6 @@ api_params <- function(type = c("snapshots",
     purrr::map_dfr(tibble::as_tibble)
 }
 
-classifications_col_spec <- function() {
-  
-  # download raw XLS file
-  tmp_file <- fs::file_temp(pattern = "classifications_col_spec")
-  on.exit(unlink(tmp_file))
-  
-  httr::GET(url = "https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels?format=x",
-            httr::write_disk(path = tmp_file,
-                             overwrite = TRUE))
-  
-  # tidy up data
-  readxl::read_excel(path = tmp_file) %>%
-    dplyr::rename_with(.fn =
-                         ~ tolower(.x) %>%
-                         stringr::str_remove_all(pattern = "[\\[\\]]") %>%
-                         stringr::str_replace_all(pattern = "\\s+",
-                                                  replacement = "_")) %>%
-    ## complete duplicated names with missing year
-    dplyr::rowwise() %>%
-    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
-                                ~ if (stringr::str_detect(column_id, "^HR_(AGGLGK20(00|12)_L1|DEGURB|MSREG|SPRGEB|STALAN)")) {
-                                  paste(.x, stringr::str_extract(column_id, "\\d{4}"))
-                                } else .x)) %>%
-    ## fix remaining duplicated names
-    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
-                                ~ if (stringr::str_detect(column_id, "^HR_GDETYP(1980|1990|2000)_L[12]$")) {
-                                  stringr::str_replace(.x, "1980-2000", stringr::str_extract(column_id, "\\d{4}"))
-                                } else .x)) %>%
-    dplyr::ungroup()
-}
-
-save_rds <- function(obj,
-                     path,
-                     compress = "gz") {
-  
-  readr::write_rds(x = obj,
-                   path = path,
-                   compress = compress)
-}
-
 parse_result <- function(response,
                          col_types) {
   
@@ -125,8 +84,6 @@ parse_result <- function(response,
                                                            .col_names = pal::dsv_colnames(response),
                                                            .default = readr::col_integer()))
 }
-
-
 
 #' Get municipality snapshots
 #'
@@ -364,9 +321,9 @@ classifications <- function(start_date = NULL,
     hr_names <- col_spec_classifications[[paste0("name_", name_type)]][match(hr_ids, col_spec_classifications$column_id)]
     
     # ensure column names are unique (there are different column IDs for the same values)
-    # -> add the unicode symbol for copy/paste
+    # -> add the unicode symbol for copy/paste, multiple times if necessary
     while (anyDuplicated(hr_names)) {
-      hr_names[which(duplicated(hr_names))] <- paste0(hr_names[which(duplicated(hr_names))], " (\U2398)")
+      hr_names[which(duplicated(hr_names))] <- paste0(hr_names[which(duplicated(hr_names))], " ", cp_symbol)
     }
     
     colnames(result)[hr_ix] <- hr_names
