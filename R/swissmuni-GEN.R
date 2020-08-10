@@ -58,6 +58,8 @@ api_params <- function(type = c("snapshots",
                                 "mutations",
                                 "classifications")) {
   
+  pal::assert_pkg("xml2")
+  
   rlang::arg_match(type) %>%
     switch("snapshots" = "GetSnapshot",
            "congruences" = "GetCorrespondances",

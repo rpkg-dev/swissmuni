@@ -39,8 +39,10 @@ httr::RETRY(verb = "GET",
 ```{r, purl = FALSE}
 gen_col_spec_classifications <- function() {
   
+  pal::assert_pkg("readxl")
+  
   # download raw XLS file
-  tmp_file <- fs::file_temp(pattern = "col_spec_classifications")
+  tmp_file <- tempfile(pattern = "col_spec_classifications")
   on.exit(unlink(tmp_file))
   
   httr::RETRY(verb = "GET",
@@ -212,6 +214,8 @@ api_params <- function(type = c("snapshots",
                                 "congruences",
                                 "mutations",
                                 "classifications")) {
+  
+  pal::assert_pkg("xml2")
   
   rlang::arg_match(type) %>%
     switch("snapshots" = "GetSnapshot",
