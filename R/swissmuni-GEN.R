@@ -125,11 +125,13 @@ snapshots <- function(start_date = lubridate::today(),
   if (fetch) {
     
     result <-
-      httr::GET(url = api_base_url,
-                path = paste0(api_common_path, "snapshots"),
-                query = list(startPeriod = as_api_date(start_date),
-                             endPeriod = as_api_date(end_date),
-                             useBfsCode = tolower(checkmate::assert_flag(historicized_code)))) %>%
+      httr::RETRY(verb = "GET",
+                  url = api_base_url,
+                  path = paste0(api_common_path, "snapshots"),
+                  query = list(startPeriod = as_api_date(start_date),
+                               endPeriod = as_api_date(end_date),
+                               useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                  times = 5L) %>%
       parse_result()
   }
   
@@ -180,12 +182,14 @@ congruences <- function(start_date = NULL,
   if (fetch) {
     
     result <-
-      httr::GET(url = api_base_url,
-                path = paste0(api_common_path, "correspondances"),
-                query = list(startPeriod = as_api_date(start_date),
+      httr::RETRY(verb = "GET",
+                  url = api_base_url,
+                  path = paste0(api_common_path, "correspondances"),
+                  query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              includeUnmodified = tolower(checkmate::assert_flag(incl_unmodified)),
-                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange)))) %>%
+                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
+                  times = 5L) %>%
       parse_result()
   }
   
@@ -234,11 +238,13 @@ mutations <- function(start_date = NULL,
   if (fetch) {
     
     result <-
-      httr::GET(url = api_base_url,
-                path = paste0(api_common_path, "mutations"),
-                query = list(startPeriod = as_api_date(start_date),
-                             endPeriod = as_api_date(end_date),
-                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange)))) %>%
+      httr::RETRY(verb = "GET",
+                  url = api_base_url,
+                  path = paste0(api_common_path, "mutations"),
+                  query = list(startPeriod = as_api_date(start_date),
+                               endPeriod = as_api_date(end_date),
+                               includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
+                  times = 5L) %>%
       parse_result()
   }
   
@@ -297,11 +303,13 @@ classifications <- function(start_date = NULL,
   if (fetch) {
     
     result <-
-      httr::GET(url = api_base_url,
-                path = paste0(api_common_path, "levels"),
-                query = list(startPeriod = as_api_date(start_date),
-                             endPeriod = as_api_date(end_date),
-                             useBfsCode = tolower(checkmate::assert_flag(historicized_code)))) %>%
+      httr::RETRY(verb = "GET",
+                  url = api_base_url,
+                  path = paste0(api_common_path, "levels"),
+                  query = list(startPeriod = as_api_date(start_date),
+                               endPeriod = as_api_date(end_date),
+                               useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                  times = 5L) %>%
       parse_result()
   }
   
