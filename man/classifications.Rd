@@ -14,9 +14,9 @@ classifications(
 )
 }
 \arguments{
-\item{start_date}{The begin of the period the data covers. A \href{base::Date}{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
+\item{start_date}{The begin of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
-\item{end_date}{The end of the period the data covers. A \href{base::Date}{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
+\item{end_date}{The end of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
 \item{historicized_code}{By default, the \href{https://de.wikipedia.org/wiki/Gemeindenummer}{\emph{FSO commune number}} is returned. Set to \code{TRUE} in order to get the
 \emph{historicization number} instead.}

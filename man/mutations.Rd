@@ -13,9 +13,9 @@ mutations(
 )
 }
 \arguments{
-\item{start_date}{The begin of the period the data covers. A \href{base::Date}{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
+\item{start_date}{The begin of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
-\item{end_date}{The end of the period the data covers. A \href{base::Date}{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
+\item{end_date}{The end of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
 \item{incl_territory_exchange}{Include information (additional rows) about territory exchanges within and between municipalities.}
 

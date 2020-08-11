@@ -94,8 +94,8 @@ parse_result <- function(response,
 #'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
-#' @param start_date The begin of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
-#' @param end_date The end of the period the data covers. A [date](base::Date) or a character scalar in the format `"YYYY-MM-DD"`.
+#' @param start_date `r pkgsnip::param_label("start_date")`
+#' @param end_date `r pkgsnip::param_label("end_date")`
 #' @param historicized_code By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. Set to `TRUE` in order to get the
 #'   _historicization number_ instead.
 #' @param use_cache `r pkgsnip::param_label("use_cache")`
