@@ -26,15 +26,13 @@ httr::RETRY(verb = "GET",
 
 ### Generate API response's full column names
 
-- Unfortunately, this is only possible for the `HR_*` columns of the `levels` API endpoint.
+-   Unfortunately, this is only possible for the `HR_*` columns of the `levels` API endpoint.
 
-- The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values),
-  except some year numbers. They are corrected by the function below.
+-   The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values), except some year numbers. They are corrected by the function below.
 
-- The `MS` in the full column names returned by `gen_col_spec_classifications()` stands for _mobilité spatiale_, cf.
-  <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>
+-   The `MS` in the full column names returned by `gen_col_spec_classifications()` stands for *mobilité spatiale*, cf. <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>
 
-- The code chunk below writes the return value of `gen_col_spec_classifications()` to the package file `R/sysdata.rda`.
+-   The code chunk below writes the return value of `gen_col_spec_classifications()` to the package file `R/sysdata.rda`.
 
 ```{r, purl = FALSE}
 gen_col_spec_classifications <- function() {
@@ -85,26 +83,24 @@ usethis::use_data(col_spec_classifications,
 
 ### `historicized_code`:
 
-column name if `historicized_code = TRUE` | column name if `historicized_code = FALSE`
------------------------------------------ | -------------------------------------
-CODE_HIST_1_Text_en                       | CODE_OFS_1_Text_en
-CODE_HIST_1_Text_fr                       | CODE_OFS_1_Text_fr
-CODE_HIST_1_Text_de                       | CODE_OFS_1_Text_de
-CODE_HIST_1_Text_it                       | CODE_OFS_1_Text_it
-CODE_HIST_1_Text                          | CODE_OFS_1_Text
+| column name if `historicized_code = TRUE` | column name if `historicized_code = FALSE` |
+|-------------------------------------------|--------------------------------------------|
+| CODE\_HIST\_1\_Text\_en                   | CODE\_OFS\_1\_Text\_en                     |
+| CODE\_HIST\_1\_Text\_fr                   | CODE\_OFS\_1\_Text\_fr                     |
+| CODE\_HIST\_1\_Text\_de                   | CODE\_OFS\_1\_Text\_de                     |
+| CODE\_HIST\_1\_Text\_it                   | CODE\_OFS\_1\_Text\_it                     |
+| CODE\_HIST\_1\_Text                       | CODE\_OFS\_1\_Text                         |
 
-The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number".
--> The URL parameter's name `useBfsCode` seems misleading (inversed)!
+The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number". -\> The URL parameter's name `useBfsCode` seems misleading (inversed)!
 
 ### `format`
 
-- Setting `format=csv` or none results in the normal CSV response.
+-   Setting `format=csv` or none results in the normal CSV response.
 
-- Setting `format` to anything else than `csv` results in a **XLS response**!
+-   Setting `format` to anything else than `csv` results in a **XLS response**!
 
-  - For the `snapshots`, `correspondances` and `mutations` endpoints, the XLS contains the normal data.
-  - For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also the only
-    one offering the `labelLanguages` URL param (see below).
+    -   For the `snapshots`, `correspondances` and `mutations` endpoints, the XLS contains the normal data.
+    -   For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also the only one offering the `labelLanguages` URL param (see below).
 
 ### `labelLanguages`
 
@@ -112,11 +108,11 @@ Only present in the `levels` API endpoint. Can be set to a comma-separated list 
 
 ### `oracleCompatible`
 
-Not a clue what that is supposed to do. The following has been tried and _didn't_ change the response:
+Not a clue what that is supposed to do. The following has been tried and *didn't* change the response:
 
-- `oracleCompatible`
-- `oracleCompatible=true`
-- `oracleCompatible=false`
+-   `oracleCompatible`
+-   `oracleCompatible=true`
+-   `oracleCompatible=false`
 
 # INTERNAL
 
@@ -171,12 +167,11 @@ as_api_date <- function(date) {
 
 ## Get allowed API URL parameters
 
-This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
-possible URL parameters.
+This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine possible URL parameters.
 
 Use the following code to get a tibble per API endpoint containing param details:
 
-```r
+``` {.r}
 c("snapshots",
   "congruences",
   "mutations",
@@ -238,10 +233,9 @@ api_params <- function(type = c("snapshots",
 
 **Notes:**
 
-- The API response doesn't have the proper content type set (would be `text/csv`).
+-   The API response doesn't have the proper content type set (would be `text/csv`).
 
-- The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column type spec
-  telling `readr::read_csv()` how to parse the results dynamically.
+-   The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column type spec telling `readr::read_csv()` how to parse the results dynamically.
 
 ```{r}
 parse_result <- function(response,
@@ -264,11 +258,11 @@ Example URL:
 
 Possible URL parameters:
 
-- `format`
-- `escapeChars`
-- `startPeriod`
-- `endPeriod`
-- `useBfsCode`
+-   `format`
+-   `escapeChars`
+-   `startPeriod`
+-   `endPeriod`
+-   `useBfsCode`
 
 ```{r}
 #' Get municipality snapshots
@@ -340,12 +334,12 @@ Example URL:
 
 Possible URL parameters:
 
-- `format`
-- `escapeChars`
-- `startPeriod`
-- `endPeriod`
-- `includeUnmodified`
-- `includeTerritoryExchange`
+-   `format`
+-   `escapeChars`
+-   `startPeriod`
+-   `endPeriod`
+-   `includeUnmodified`
+-   `includeTerritoryExchange`
 
 ```{r}
 #' Get municipality congruences
@@ -415,11 +409,11 @@ Example URL:
 
 Possible URL parameters:
 
-- `format`
-- `escapeChars`
-- `startPeriod`
-- `endPeriod`
-- `includeTerritoryExchange`
+-   `format`
+-   `escapeChars`
+-   `startPeriod`
+-   `endPeriod`
+-   `includeTerritoryExchange`
 
 ```{r}
 #' Get municipality mutations
@@ -486,13 +480,13 @@ Example URL:
 
 Possible URL parameters:
 
-- `format`
-- `escapeChars`
-- `startPeriod`
-- `endPeriod`
-- `useBfsCode`
-- `labelLanguages`
-- `oracleCompatible`
+-   `format`
+-   `escapeChars`
+-   `startPeriod`
+-   `endPeriod`
+-   `useBfsCode`
+-   `labelLanguages`
+-   `oracleCompatible`
 
 ```{r}
 #' Get geographical classifications of municipalities
