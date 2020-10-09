@@ -28,9 +28,11 @@ httr::RETRY(verb = "GET",
 
 -   Unfortunately, this is only possible for the `HR_*` columns of the `levels` API endpoint.
 
--   The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values), except some year numbers. They are corrected by the function below.
+-   The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values),
+    except some year numbers. They are corrected by the function below.
 
--   The `MS` in the full column names returned by `gen_col_spec_classifications()` stands for *mobilité spatiale*, cf. <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>
+-   The `MS` in the full column names returned by `gen_col_spec_classifications()` stands for *mobilité spatiale*, cf.
+    <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>
 
 -   The code chunk below writes the return value of `gen_col_spec_classifications()` to the package file `R/sysdata.rda`.
 
@@ -91,7 +93,8 @@ usethis::use_data(col_spec_classifications,
 | CODE\_HIST\_1\_Text\_it                   | CODE\_OFS\_1\_Text\_it                     |
 | CODE\_HIST\_1\_Text                       | CODE\_OFS\_1\_Text                         |
 
-The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number". -\> The URL parameter's name `useBfsCode` seems misleading (inversed)!
+The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number". -\>
+The URL parameter's name `useBfsCode` seems misleading (inversed)!
 
 ### `format`
 
@@ -100,7 +103,8 @@ The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia
 -   Setting `format` to anything else than `csv` results in a **XLS response**!
 
     -   For the `snapshots`, `correspondances` and `mutations` endpoints, the XLS contains the normal data.
-    -   For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also the only one offering the `labelLanguages` URL param (see below).
+    -   For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also th
+        only one offering the `labelLanguages` URL param (see below).
 
 ### `labelLanguages`
 
@@ -167,7 +171,8 @@ as_api_date <- function(date) {
 
 ## Get allowed API URL parameters
 
-This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine possible URL parameters.
+This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
+possible URL parameters.
 
 Use the following code to get a tibble per API endpoint containing param details:
 
@@ -235,7 +240,8 @@ api_params <- function(type = c("snapshots",
 
 -   The API response doesn't have the proper content type set (would be `text/csv`).
 
--   The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column type spec telling `readr::read_csv()` how to parse the results dynamically.
+-   The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column type spe
+    telling `readr::read_csv()` how to parse the results dynamically.
 
 ```{r}
 parse_result <- function(response,
@@ -571,3 +577,4 @@ classifications <- function(start_date = NULL,
   result
 }
 ```
+

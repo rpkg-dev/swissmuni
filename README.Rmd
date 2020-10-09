@@ -4,11 +4,18 @@ output: pal::gitlab_document
 
 # `r paste0(pal::desc_value("Package"), ": ", pal::desc_value("Title"))`
 
-swissmuni provides functions to access municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots), [congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances), [mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [geographical classifications](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the [web services](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl) provided by the [Swiss Federal Statistical Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's *Statistical Metadata System (SMS)*[^1].
-
-[^1]: Publicly accessible information about this system is scarce. A presentation introducing the system at the [4th SDMX Global Conference 2013](https://sdmx.org/?sdmx_events=4th-sdmx-global-conference) is found [here](https://web.archive.org/web/20200615113441/https://www.oecd.org/sdd/SDMX%202013%20Session%203.7%20-%20A%20statistical%20metadata%20system%20based%20on%20SDMX.pdf).
+swissmuni provides functions to access municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots),
+[congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances),
+[mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [geographical
+classifications](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the [web
+services](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl) provided by the [Swiss Federal Statistical Office
+(FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's *Statistical Metadata System (SMS)*[^1].
 
 Note that there's also an official web application [available](https://www.agvchapp.bfs.admin.ch/de/communes/query) to access Swiss municipality data.
+
+[^1]: Publicly accessible information about this system is scarce. A presentation introducing the system at the [4th SDMX Global Conference
+    2013](https://sdmx.org/?sdmx_events=4th-sdmx-global-conference) is found
+    [here](https://web.archive.org/web/20200615113441/https://www.oecd.org/sdd/SDMX%202013%20Session%203.7%20-%20A%20statistical%20metadata%20system%20based%20on%20SDMX.pdf).
 
 ## Installation
 
@@ -31,4 +38,5 @@ Note that there's also an official web application [available](https://www.agvch
 
 -   [Official municipality data web application from the Swiss Federal Statistical Office (FSO)](https://www.agvchapp.bfs.admin.ch/de/communes/query)
 
-------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
