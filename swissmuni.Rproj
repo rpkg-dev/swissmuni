@@ -24,6 +24,6 @@ PackageRoxygenize: rd,collate,namespace
 QuitChildProcessesOnExit: Yes
 
 MarkdownWrap: Column
-MarkdownWrapAtColumn: 159
+MarkdownWrapAtColumn: 160
 MarkdownReferences: Section
 MarkdownCanonical: Yes

@@ -103,8 +103,8 @@ The URL parameter's name `useBfsCode` seems misleading (inversed)!
 -   Setting `format` to anything else than `csv` results in a **XLS response**!
 
     -   For the `snapshots`, `correspondances` and `mutations` endpoints, the XLS contains the normal data.
-    -   For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also th
-        only one offering the `labelLanguages` URL param (see below).
+    -   For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also the only
+        one offering the `labelLanguages` URL param (see below).
 
 ### `labelLanguages`
 
@@ -577,4 +577,3 @@ classifications <- function(start_date = NULL,
   result
 }
 ```
-
