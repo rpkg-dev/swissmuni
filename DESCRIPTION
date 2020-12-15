@@ -13,7 +13,7 @@ Description: swissmuni provides functions to access
     classifications from the web services provided by the Swiss Federal
     Statistical Office (FSO). These web services are part of the FSO's
     Statistical Metadata System (SMS).
-License: AGPL-3
+License: AGPL (>= 3)
 URL: https://gitlab.com/salim_b/r/pkgs/swissmuni
 BugReports: https://gitlab.com/salim_b/r/pkgs/swissmuni/issues
 Depends: 
