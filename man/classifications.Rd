@@ -32,7 +32,7 @@ starting with ID \code{HR_} will be named by its full label in the respective la
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-This function returns a \link[tibble:tbl_df-class]{tibble} with a wide range of geographical classifications of Swiss municipalities.
+Returns a \link[tibble:tbl_df-class]{tibble} with a wide range of geographical classifications of Swiss municipalities.
 }
 \details{
 There are some classifications which have multiple column IDs (e.g. \code{HR_ARBREG2000_L2} and \code{HR_TYPMSR2000_L2} both contain the \emph{spatial mobility regions}).
@@ -73,8 +73,8 @@ and the districts.
 }
 }
 \examples{
-classifications(start_date = lubridate::today(),
-                end_date = lubridate::today(),
-                name_type = "de",
-                use_cache = FALSE)
+swissmuni::classifications(start_date = lubridate::today(),
+                           end_date = lubridate::today(),
+                           name_type = "de",
+                           use_cache = FALSE)
 }

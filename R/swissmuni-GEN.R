@@ -89,8 +89,8 @@ parse_result <- function(response,
 
 #' Get municipality snapshots
 #'
-#' This function returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
-#' point in time. Therefore you probably want to leave the default `end_date = start_date`.
+#' Returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time.
+#' Therefore you probably want to leave the default `end_date = start_date`.
 #'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
@@ -105,7 +105,7 @@ parse_result <- function(response,
 #' @export
 #'
 #' @examples
-#' snapshots(historicized_code = TRUE)
+#' swissmuni::snapshots(historicized_code = TRUE)
 snapshots <- function(start_date = lubridate::today(),
                       end_date = start_date,
                       historicized_code = FALSE,
@@ -149,7 +149,7 @@ snapshots <- function(start_date = lubridate::today(),
 
 #' Get municipality congruences
 #'
-#' This function returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities.
 #'
 #' @inheritParams snapshots
 #' @param incl_unmodified Include municipalities where no changes occurred in the defined period.
@@ -159,9 +159,9 @@ snapshots <- function(start_date = lubridate::today(),
 #' @export
 #'
 #' @examples
-#' congruences(start_date = lubridate::today(),
-#'             end_date = lubridate::today(),
-#'             cache_lifespan = "6 hours")
+#' swissmuni::congruences(start_date = lubridate::today(),
+#'                        end_date = lubridate::today(),
+#'                        cache_lifespan = "6 hours")
 congruences <- function(start_date = NULL,
                         end_date = NULL,
                         incl_unmodified = TRUE,
@@ -207,7 +207,7 @@ congruences <- function(start_date = NULL,
 
 #' Get municipality mutations
 #'
-#' This function returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities.
 #'
 #' @inheritParams snapshots
 #' @inheritParams congruences
@@ -216,9 +216,9 @@ congruences <- function(start_date = NULL,
 #' @export
 #'
 #' @examples
-#' mutations(start_date = "2020-01-01",
-#'           end_date = "2020-06-30",
-#'           incl_territory_exchange = TRUE)
+#' swissmuni::mutations(start_date = "2020-01-01",
+#'                      end_date = "2020-06-30",
+#'                      incl_territory_exchange = TRUE)
 mutations <- function(start_date = NULL,
                       end_date = NULL,
                       incl_territory_exchange = FALSE,
@@ -262,7 +262,7 @@ mutations <- function(start_date = NULL,
 
 #' Get geographical classifications of municipalities
 #'
-#' This function returns a [tibble][tibble::tbl_df] with a wide range of geographical classifications of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with a wide range of geographical classifications of Swiss municipalities.
 #'
 #' There are some classifications which have multiple column IDs (e.g. `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` both contain the _spatial mobility regions_).
 #' If `name_type` is set to a language code, column duplicates are given the name suffix "`r paste0(' (', cp_symbol, ')')`".
@@ -277,10 +277,10 @@ mutations <- function(start_date = NULL,
 #' @export
 #'
 #' @examples
-#' classifications(start_date = lubridate::today(),
-#'                 end_date = lubridate::today(),
-#'                 name_type = "de",
-#'                 use_cache = FALSE)
+#' swissmuni::classifications(start_date = lubridate::today(),
+#'                            end_date = lubridate::today(),
+#'                            name_type = "de",
+#'                            use_cache = FALSE)
 classifications <- function(start_date = NULL,
                             end_date = NULL,
                             historicized_code = FALSE,

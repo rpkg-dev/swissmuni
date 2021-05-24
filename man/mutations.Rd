@@ -27,10 +27,10 @@ mutations(
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-This function returns a \link[tibble:tbl_df-class]{tibble} with mutation data of Swiss municipalities.
+Returns a \link[tibble:tbl_df-class]{tibble} with mutation data of Swiss municipalities.
 }
 \examples{
-mutations(start_date = "2020-01-01",
-          end_date = "2020-06-30",
-          incl_territory_exchange = TRUE)
+swissmuni::mutations(start_date = "2020-01-01",
+                     end_date = "2020-06-30",
+                     incl_territory_exchange = TRUE)
 }

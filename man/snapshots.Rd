@@ -28,8 +28,8 @@ snapshots(
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-This function returns a \link[tibble:tbl_df-class]{tibble} with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified
-point in time. Therefore you probably want to leave the default \code{end_date = start_date}.
+Returns a \link[tibble:tbl_df-class]{tibble} with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time.
+Therefore you probably want to leave the default \code{end_date = start_date}.
 }
 \details{
 \subsection{FSO commune number vs. historicization number}{
@@ -67,5 +67,5 @@ and the districts.
 }
 }
 \examples{
-snapshots(historicized_code = TRUE)
+swissmuni::snapshots(historicized_code = TRUE)
 }

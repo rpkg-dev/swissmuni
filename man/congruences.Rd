@@ -30,10 +30,10 @@ congruences(
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-This function returns a \link[tibble:tbl_df-class]{tibble} with congruence data of Swiss municipalities.
+Returns a \link[tibble:tbl_df-class]{tibble} with congruence data of Swiss municipalities.
 }
 \examples{
-congruences(start_date = lubridate::today(),
-            end_date = lubridate::today(),
-            cache_lifespan = "6 hours")
+swissmuni::congruences(start_date = lubridate::today(),
+                       end_date = lubridate::today(),
+                       cache_lifespan = "6 hours")
 }
