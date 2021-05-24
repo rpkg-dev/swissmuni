@@ -1,6 +1,6 @@
 Package: swissmuni
-Title: Download Municipality Data from the Swiss Federal
-    Statistical Office's Web Services
+Title: Download Municipality Data from the Swiss Federal Statistical
+    Office's Web Services
 Version: 0.3.2
 Authors@R: 
     person(given = "Salim",
@@ -8,11 +8,11 @@ Authors@R:
            role = c("aut", "cre"),
            email = "salim-b@pm.me",
            comment = c(ORCID = "0000-0002-5329-5987"))
-Description: swissmuni provides functions to access
-    municipality snapshots, congruences, mutations and their geographical
-    classifications from the web services provided by the Swiss Federal
-    Statistical Office (FSO). These web services are part of the FSO's
-    Statistical Metadata System (SMS).
+Description: swissmuni provides access to Swiss municipality snapshots,
+    congruences, mutations and their geographical classifications from the
+    web services provided by the Swiss Federal Statistical Office (FSO).
+    These web services are part of the FSO's Statistical Metadata System
+    (SMS).
 License: AGPL (>= 3)
 URL: https://gitlab.com/salim_b/r/pkgs/swissmuni
 BugReports: https://gitlab.com/salim_b/r/pkgs/swissmuni/issues
