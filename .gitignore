@@ -1,9 +1,16 @@
-*_cache
-*.backup
-*.html
+# system-specific temp, backup, thumbnail etc. files
 .~lock*
-.httr-oauth
+*.backup
+~$*
+.DS_Store
+Thumbs.db
+
+# R(Studio)-specific (temp) files
+.Rapp.history
 .RData
 .Rhistory
 .Rproj.user
 .Ruserdata
+
+# API keys
+.httr-oauth
