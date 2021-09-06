@@ -138,14 +138,14 @@ utils::globalVariables(names = ".")
 }
 
 .onUnload <- function(libpath) {
-  pkgpins::deregister(pkg = pkg)
+  pkgpins::deregister(pkg = this_pkg)
 }
 ```
 
 ## Constants
 
 ```{r}
-pkg <- utils::packageName()
+this_pkg <- utils::packageName()
 
 # URLs/paths common to all API endpoints
 api_base_url <- "https://sms.bfs.admin.ch/"
@@ -236,7 +236,7 @@ api_params <- function(type = c("snapshots",
 
 ## Parse API result
 
-**Notes:**
+NOTES:
 
 -   The API response doesn't have the proper content type set (would be `text/csv`).
 
@@ -296,39 +296,24 @@ snapshots <- function(start_date = lubridate::today(),
                       use_cache = TRUE,
                       cache_lifespan = "1 day") {
   
-  if (checkmate::assert_flag(use_cache)) {
+  pkgpins::with_cache(expr = {
     
-    pin_name <- pkgpins::call_to_name()
-    result <- pkgpins::get_obj(id = pin_name,
-                               max_age = cache_lifespan,
-                               pkg = pkg)
-    fetch <- is.null(result)
-    
-  } else {
-    fetch <- TRUE
-  }
-  
-  if (fetch) {
-    
-    result <-
-      httr::RETRY(verb = "GET",
-                  url = api_base_url,
-                  path = paste0(api_common_path, "snapshots"),
-                  query = list(startPeriod = as_api_date(start_date),
-                               endPeriod = as_api_date(end_date),
-                               useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
-                  times = 5L) %>%
+    httr::RETRY(verb = "GET",
+                url = api_base_url,
+                path = paste0(api_common_path, "snapshots"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                times = 5L) %>%
       parse_result()
-  }
-  
-  if (use_cache & fetch) {
-    
-    pkgpins::cache_obj(x = result,
-                       id = pin_name,
-                       pkg = pkg)
-  }
-  
-  result
+  },
+  pkg = this_pkg,
+  from_fn = "snapshots",
+  start_date,
+  end_date,
+  historicized_code,
+  use_cache = use_cache,
+  cache_lifespan = cache_lifespan)
 }
 ```
 
@@ -370,40 +355,26 @@ congruences <- function(start_date = NULL,
                         use_cache = TRUE,
                         cache_lifespan = "1 day") {
   
-  if (checkmate::assert_flag(use_cache)) {
+  pkgpins::with_cache(expr = {
     
-    pin_name <- pkgpins::call_to_name()
-    result <- pkgpins::get_obj(id = pin_name,
-                               max_age = cache_lifespan,
-                               pkg = pkg)
-    fetch <- is.null(result)
-    
-  } else {
-    fetch <- TRUE
-  }
-  
-  if (fetch) {
-    
-    result <-
-      httr::RETRY(verb = "GET",
-                  url = api_base_url,
-                  path = paste0(api_common_path, "correspondances"),
-                  query = list(startPeriod = as_api_date(start_date),
+    httr::RETRY(verb = "GET",
+                url = api_base_url,
+                path = paste0(api_common_path, "correspondances"),
+                query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
                              includeUnmodified = tolower(checkmate::assert_flag(incl_unmodified)),
                              includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
-                  times = 5L) %>%
+                times = 5L) %>%
       parse_result()
-  }
-  
-  if (use_cache & fetch) {
-    
-    pkgpins::cache_obj(x = result,
-                       id = pin_name,
-                       pkg = pkg)
-  }
-  
-  result
+  },
+  pkg = this_pkg,
+  from_fn = "congruences",
+  start_date,
+  end_date,
+  incl_unmodified,
+  incl_territory_exchange,
+  use_cache = use_cache,
+  cache_lifespan = cache_lifespan)
 }
 ```
 
@@ -442,39 +413,24 @@ mutations <- function(start_date = NULL,
                       use_cache = TRUE,
                       cache_lifespan = "1 day") {
   
-  if (checkmate::assert_flag(use_cache)) {
+  pkgpins::with_cache(expr = {
     
-    pin_name <- pkgpins::call_to_name()
-    result <- pkgpins::get_obj(id = pin_name,
-                               max_age = cache_lifespan,
-                               pkg = pkg)
-    fetch <- is.null(result)
-    
-  } else {
-    fetch <- TRUE
-  }
-  
-  if (fetch) {
-    
-    result <-
-      httr::RETRY(verb = "GET",
-                  url = api_base_url,
-                  path = paste0(api_common_path, "mutations"),
-                  query = list(startPeriod = as_api_date(start_date),
-                               endPeriod = as_api_date(end_date),
-                               includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
-                  times = 5L) %>%
+    httr::RETRY(verb = "GET",
+                url = api_base_url,
+                path = paste0(api_common_path, "mutations"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
+                times = 5L) %>%
       parse_result()
-  }
-  
-  if (use_cache & fetch) {
-    
-    pkgpins::cache_obj(x = result,
-                       id = pin_name,
-                       pkg = pkg)
-  }
-  
-  result
+  },
+  pkg = this_pkg,
+  from_fn = "mutations",
+  start_date,
+  end_date,
+  incl_territory_exchange,
+  use_cache = use_cache,
+  cache_lifespan = cache_lifespan)
 }
 ```
 
@@ -523,39 +479,24 @@ classifications <- function(start_date = NULL,
                             use_cache = TRUE,
                             cache_lifespan = "1 day") {
   
-  if (checkmate::assert_flag(use_cache)) {
+  result <- pkgpins::with_cache(expr = {
     
-    pin_name <- pkgpins::call_to_name(exclude_args = c("name_type",
-                                                       "use_cache",
-                                                       "cache_lifespan"))
-    result <- pkgpins::get_obj(id = pin_name,
-                               max_age = cache_lifespan,
-                               pkg = pkg)
-    fetch <- is.null(result)
-    
-  } else {
-    fetch <- TRUE
-  }
-  
-  if (fetch) {
-    
-    result <-
-      httr::RETRY(verb = "GET",
-                  url = api_base_url,
-                  path = paste0(api_common_path, "levels"),
-                  query = list(startPeriod = as_api_date(start_date),
-                               endPeriod = as_api_date(end_date),
-                               useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
-                  times = 5L) %>%
+    httr::RETRY(verb = "GET",
+                url = api_base_url,
+                path = paste0(api_common_path, "levels"),
+                query = list(startPeriod = as_api_date(start_date),
+                             endPeriod = as_api_date(end_date),
+                             useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                times = 5L) %>%
       parse_result()
-  }
-  
-  if (use_cache & fetch) {
-    
-    pkgpins::cache_obj(x = result,
-                       id = pin_name,
-                       pkg = pkg)
-  }
+  },
+  pkg = this_pkg,
+  from_fn = "classifications",
+  start_date,
+  end_date,
+  historicized_code,
+  use_cache = use_cache,
+  cache_lifespan = cache_lifespan)
   
   name_type <- rlang::arg_match(name_type)
   
