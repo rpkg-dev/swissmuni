@@ -33,6 +33,8 @@ api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 # Unicode copy/paste symbol
 cp_symbol <- "\u2398"
 
+
+
 as_api_date <- function(date) {
   
   lubridate::ymd(date) %>%
@@ -49,21 +51,18 @@ as_api_date <- function(date) {
 #'
 #' @return A [tibble][tibble::tbl_df].
 #' @keywords internal
+#' @export
 #'
 #' @examples
 #' # to get all URL params of all 3 API endpoints:
-#' library(magrittr)
-#'
 #' endpoints <- c("snapshots",
 #'                "congruences",
 #'                "mutations",
 #'                "classifications")
 #'
-#' \donttest{
-#' endpoints %>%
-#'   purrr::map(getFromNamespace("api_params",
-#'                               ns = "swissmuni")) %>%
-#'   rlang::set_names(nm = endpoints)}
+#' endpoints |>
+#'   purrr::map(swissmuni::api_params) |>
+#'   rlang::set_names(nm = endpoints)
 api_params <- function(type = c("snapshots",
                                 "congruences",
                                 "mutations",

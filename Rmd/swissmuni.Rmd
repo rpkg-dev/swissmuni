@@ -169,7 +169,7 @@ as_api_date <- function(date) {
 }
 ```
 
-## Get allowed API URL parameters
+### `api_params`
 
 This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
 possible URL parameters.
@@ -183,7 +183,7 @@ c("snapshots",
   "classifications") %>%
   {
     rlang::set_names(x = purrr::map(.x = .,
-                                    .f = swissmuni:::api_params),
+                                    .f = swissmuni::api_params),
                      nm = .)
   }
 ```
@@ -195,21 +195,18 @@ c("snapshots",
 #'
 #' @return A [tibble][tibble::tbl_df].
 #' @keywords internal
+#' @export
 #'
 #' @examples
 #' # to get all URL params of all 3 API endpoints:
-#' library(magrittr)
-#'
 #' endpoints <- c("snapshots",
 #'                "congruences",
 #'                "mutations",
 #'                "classifications")
 #'
-#' \donttest{
-#' endpoints %>%
-#'   purrr::map(getFromNamespace("api_params",
-#'                               ns = "swissmuni")) %>%
-#'   rlang::set_names(nm = endpoints)}
+#' endpoints |>
+#'   purrr::map(swissmuni::api_params) |>
+#'   rlang::set_names(nm = endpoints)
 api_params <- function(type = c("snapshots",
                                 "congruences",
                                 "mutations",
