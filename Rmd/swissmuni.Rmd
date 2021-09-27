@@ -24,66 +24,9 @@ httr::RETRY(verb = "GET",
   pal::cat_lines()
 ```
 
-### Generate API response's full column names
-
--   Unfortunately, this is only possible for the `HR_*` columns of the `levels` API endpoint.
-
--   The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values),
-    except some year numbers. They are corrected by the function below.
-
--   The `MS` in the full column names returned by `gen_col_spec_classifications()` stands for *mobilité spatiale*, cf.
-    <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>.
-
--   The code chunk below writes the return value of `gen_col_spec_classifications()` to the package file `R/sysdata.rda`.
-
-```{r, purl = FALSE}
-gen_col_spec_classifications <- function() {
-  
-  pal::assert_pkg("readxl")
-  
-  # download raw XLS file
-  tmp_file <- tempfile(pattern = "col_spec_classifications")
-  on.exit(unlink(tmp_file))
-  
-  httr::RETRY(verb = "GET",
-              url = "https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels?format=x",
-              httr::write_disk(path = tmp_file,
-                               overwrite = TRUE),
-              times = 5L)
-  
-  # tidy up data
-  readxl::read_excel(path = tmp_file) %>%
-    dplyr::rename_with(.fn =
-                         ~ tolower(.x) %>%
-                         stringr::str_remove_all(pattern = "[\\[\\]]") %>%
-                         stringr::str_replace_all(pattern = "\\s+",
-                                                  replacement = "_")) %>%
-    ## complete duplicated names with missing year
-    dplyr::rowwise() %>%
-    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
-                                ~ if (stringr::str_detect(column_id, "^HR_(AGGLGK20(00|12)_L1|DEGURB|MSREG|SPRGEB|STALAN)")) {
-                                  paste(.x, stringr::str_extract(column_id, "\\d{4}"))
-                                } else .x)) %>%
-    ## fix remaining duplicated names
-    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
-                                ~ if (stringr::str_detect(column_id, "^HR_GDETYP(1980|1990|2000)_L[12]$")) {
-                                  stringr::str_replace(.x, "1980-2000", stringr::str_extract(column_id, "\\d{4}"))
-                                } else .x)) %>%
-    dplyr::ungroup()
-}
-
-col_spec_classifications <- gen_col_spec_classifications()
-
-usethis::use_data(col_spec_classifications,
-                  internal = TRUE,
-                  overwrite = TRUE,
-                  compress = "gzip", # difference to "xz" is only ~ +10%
-                  version = 3L)
-```
-
 ## API URL parameter details
 
-### `historicized_code`:
+### `historicized_code`
 
 | column name if `historicized_code = TRUE` | column name if `historicized_code = FALSE` |
 |-------------------------------------------|--------------------------------------------|
@@ -155,7 +98,72 @@ api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 cp_symbol <- "\u2398"
 ```
 
-## Convert ISO-8601 formatted date string to `DD-MM-YYYY` format
+## Data
+
+### `col_spec_classifications`
+
+Generate API response's full column names:
+
+-   Unfortunately, this is only possible for the `HR_*` columns of the `levels` API endpoint.
+
+-   The returned names seem to be right (there are columns with completely different IDs like `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` but identical values),
+    except some year numbers. They are corrected by the function below.
+
+-   The `MS` in the full column names returned by `gen_col_spec_classifications()` stands for *mobilité spatiale*, cf.
+    <https://www.bfs.admin.ch/bfs/de/home/statistiken/raum-umwelt/nomenklaturen/msreg.assetdetail.415729.html>.
+
+-   The code chunk below saves `col_spec_classifications` as internal package data in the file `R/sysdata.rda`.
+
+```{r, purl = FALSE}
+gen_col_spec_classifications <- function() {
+  
+  pal::assert_pkg("readxl")
+  
+  # download raw XLS file
+  tmp_file <- tempfile(pattern = "col_spec_classifications")
+  on.exit(unlink(tmp_file))
+  
+  httr::RETRY(verb = "GET",
+              url = "https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels?format=x",
+              httr::write_disk(path = tmp_file,
+                               overwrite = TRUE),
+              times = 5L)
+  
+  # tidy up data
+  readxl::read_excel(path = tmp_file) %>%
+    dplyr::rename_with(.fn =
+                         ~ tolower(.x) %>%
+                         stringr::str_remove_all(pattern = "[\\[\\]]") %>%
+                         stringr::str_replace_all(pattern = "\\s+",
+                                                  replacement = "_")) %>%
+    ## complete duplicated names with missing year
+    dplyr::rowwise() %>%
+    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
+                                ~ if (stringr::str_detect(column_id, "^HR_(AGGLGK20(00|12)_L1|DEGURB|MSREG|SPRGEB|STALAN)")) {
+                                  paste(.x, stringr::str_extract(column_id, "\\d{4}"))
+                                } else .x)) %>%
+    ## fix remaining duplicated names
+    dplyr::mutate(dplyr::across(dplyr::starts_with("name_"),
+                                ~ if (stringr::str_detect(column_id, "^HR_GDETYP(1980|1990|2000)_L[12]$")) {
+                                  stringr::str_replace(.x, "1980-2000", stringr::str_extract(column_id, "\\d{4}"))
+                                } else .x)) %>%
+    dplyr::ungroup()
+}
+
+col_spec_classifications <- gen_col_spec_classifications()
+
+usethis::use_data(col_spec_classifications,
+                  internal = TRUE,
+                  overwrite = TRUE,
+                  compress = "gzip", # difference to "xz" is only ~ +10%
+                  version = 3L)
+```
+
+## Functions
+
+### `as_api_date`
+
+Convert ISO-8601 formatted date string to `DD-MM-YYYY` format
 
 ```{r}
 as_api_date <- function(date) {
@@ -231,7 +239,7 @@ api_params <- function(type = c("snapshots",
 }
 ```
 
-## Parse API result
+### `parse_result`
 
 NOTES:
 
@@ -253,7 +261,7 @@ parse_result <- function(response,
 }
 ```
 
-# Get municipality snapshots
+# `snapshots`
 
 Example URL:
 
@@ -314,7 +322,7 @@ snapshots <- function(start_date = lubridate::today(),
 }
 ```
 
-# Get municipality congruences
+# `congruences`
 
 Example URL:
 
@@ -375,7 +383,7 @@ congruences <- function(start_date = NULL,
 }
 ```
 
-# Get municipality mutations
+# `mutations`
 
 Example URL:
 
@@ -431,7 +439,7 @@ mutations <- function(start_date = NULL,
 }
 ```
 
-# Get geographical classifications of municipalities
+# `classifications`
 
 Example URL:
 
