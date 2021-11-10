@@ -15,13 +15,9 @@
 utils::globalVariables(names = ".")
 
 .onLoad <- function(libname, pkgname) {
-  pkgpins::clear(pkg = pkgname,
-                 max_age = getOption("swissmuni.max_cache_lifespan",
-                                     default = "30 days"))
-}
-
-.onUnload <- function(libpath) {
-  pkgpins::deregister(pkg = this_pkg)
+  pkgpins::clear_cache(board = pkgpins::board(pkg = pkgname),
+                       max_age = getOption(paste0(pkgname, ".max_cache_lifespan"),
+                                           default = "30 days"))
 }
 
 this_pkg <- utils::packageName()

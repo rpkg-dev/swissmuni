@@ -4,14 +4,9 @@
 \name{swissmuni-package}
 \alias{swissmuni}
 \alias{swissmuni-package}
-\title{swissmuni: Download Municipality Data from the Swiss Federal Statistical
-    Office's Web Services}
+\title{swissmuni: Download Municipality Data from the Swiss Federal Statistical Office's Web Services}
 \description{
-swissmuni provides access to Swiss municipality snapshots,
-    congruences, mutations and their geographical classifications from the
-    web services provided by the Swiss Federal Statistical Office (FSO).
-    These web services are part of the FSO's Statistical Metadata System
-    (SMS).
+swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their geographical classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).
 }
 \seealso{
 Useful links:
