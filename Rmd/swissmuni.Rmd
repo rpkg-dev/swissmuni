@@ -36,8 +36,10 @@ httr::RETRY(verb = "GET",
 | CODE_HIST_1\_Text_it                      | CODE_OFS_1\_Text_it                        |
 | CODE_HIST_1\_Text                         | CODE_OFS_1\_Text                           |
 
-The `CODE_OFS*` corresponds to the ["GEOSTAT"/"BFS" number](https://de.wikipedia.org/wiki/Gemeindenummer) and the `CODE_HIST*` to the "historical number". ->
-The URL parameter's name `useBfsCode` seems misleading (inversed)!
+-   The `CODE_OFS*` corresponds to the [official Swiss community identification
+    number](https://en.wikipedia.org/wiki/Community_Identification_Number#Switzerland) (also called "GEOSTAT"/"BFS" number, see the [corresponding German
+    Wikipedia article](https://de.wikipedia.org/wiki/Gemeindenummer)).
+-   The `CODE_HIST*` corresponds to the "historical number". -> The URL parameter's name `useBfsCode` seems misleading (inversed)!
 
 ### `format`
 
@@ -257,7 +259,9 @@ parse_result <- function(response,
 }
 ```
 
-# `snapshots`
+# EXPORTED
+
+## `snapshots`
 
 Example URL:
 
@@ -318,7 +322,7 @@ snapshots <- function(start_date = lubridate::today(),
 }
 ```
 
-# `congruences`
+## `congruences`
 
 Example URL:
 
@@ -379,7 +383,7 @@ congruences <- function(start_date = NULL,
 }
 ```
 
-# `mutations`
+## `mutations`
 
 Example URL:
 
@@ -435,7 +439,7 @@ mutations <- function(start_date = NULL,
 }
 ```
 
-# `classifications`
+## `classifications`
 
 Example URL:
 
@@ -519,3 +523,4 @@ classifications <- function(start_date = NULL,
   result
 }
 ```
+
