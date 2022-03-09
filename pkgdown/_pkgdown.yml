@@ -1,0 +1,21 @@
+development:
+  mode: auto
+template:
+  opengraph:
+    twitter:
+      card: summary
+      creator: '@2BSalim'
+  params:
+    analytics:
+      goatcounter:
+        endpoint: https://rpkg-dev.goatcounter.com/count
+    bootswatch: yeti
+    mathjax: no
+    selfhost_assets: yes
+url: https://rpkg.dev/swissmuni
+reference:
+- contents:
+  - snapshots
+  - congruences
+  - mutations
+  - classifications
