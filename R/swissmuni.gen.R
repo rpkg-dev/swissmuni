@@ -29,8 +29,6 @@ api_common_path <- "WcfBFSSpecificService.svc/AnonymousRest/communes/"
 # Unicode copy/paste symbol
 cp_symbol <- "\u2398"
 
-
-
 as_api_date <- function(date) {
   
   lubridate::ymd(date) %>%
@@ -250,24 +248,26 @@ classifications <- function(start_date = NULL,
                             use_cache = TRUE,
                             cache_lifespan = "1 day") {
   
-  result <- pkgpins::with_cache(expr = {
-    
-    httr::RETRY(verb = "GET",
-                url = api_base_url,
-                path = paste0(api_common_path, "levels"),
-                query = list(startPeriod = as_api_date(start_date),
-                             endPeriod = as_api_date(end_date),
-                             useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
-                times = 5L) %>%
-      parse_result()
-  },
-  pkg = this_pkg,
-  from_fn = "classifications",
-  start_date,
-  end_date,
-  historicized_code,
-  use_cache = use_cache,
-  cache_lifespan = cache_lifespan)
+  result <- pkgpins::with_cache(
+    expr = {
+      
+      httr::RETRY(verb = "GET",
+                  url = api_base_url,
+                  path = paste0(api_common_path, "levels"),
+                  query = list(startPeriod = as_api_date(start_date),
+                               endPeriod = as_api_date(end_date),
+                               useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                  times = 5L) %>%
+        parse_result()
+    },
+    pkg = this_pkg,
+    from_fn = "classifications",
+    start_date,
+    end_date,
+    historicized_code,
+    use_cache = use_cache,
+    cache_lifespan = cache_lifespan
+  )
   
   name_type <- rlang::arg_match(name_type)
   

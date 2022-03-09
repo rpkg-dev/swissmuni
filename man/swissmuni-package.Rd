@@ -11,6 +11,7 @@ swissmuni provides access to Swiss municipality snapshots, congruences, mutation
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://rpkg.dev/swissmuni}
   \item \url{https://gitlab.com/salim_b/r/pkgs/swissmuni}
   \item Report bugs at \url{https://gitlab.com/salim_b/r/pkgs/swissmuni/issues}
 }
