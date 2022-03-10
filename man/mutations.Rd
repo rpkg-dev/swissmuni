@@ -27,7 +27,8 @@ mutations(
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-Returns a \link[tibble:tbl_df-class]{tibble} with mutation data of Swiss municipalities.
+Returns a \link[tibble:tbl_df-class]{tibble} with mutation data of Swiss municipalities. The data describes all changes related to the municipalities made between
+\code{start_date} and \code{end_date}.
 }
 \examples{
 swissmuni::mutations(start_date = "2020-01-01",

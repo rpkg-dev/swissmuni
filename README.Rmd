@@ -6,16 +6,22 @@ output: pal::gitlab_document
 
 swissmuni provides access to Swiss municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots),
 [congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances),
-[mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [geographical
+[mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [spatial
 classifications](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the [web
-services](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl) provided by the [Swiss Federal Statistical Office
-(FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's *Statistical Metadata System (SMS)*[^1].
+services](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.assetdetail.15224054.html) provided by the [Swiss Federal Statistical
+Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's *Statistical Metadata System (SMS)*[^1].
 
 Note that there's also an official web application [available](https://www.agvchapp.bfs.admin.ch/de/communes/query) to access Swiss municipality data.
 
+```{r, pkgdown, eval = !isTRUE(getOption("pal.build_readme.is_pkgdown")), results = "asis", echo = FALSE}
+pkgsnip::md_snip(name = "pkgdown_notice") %>%
+  paste0("## Documentation\n\n", .) %>%
+  pal::cat_lines()
+```
+
 [^1]: Publicly accessible information about this system is scarce. A presentation introducing the system at the [4th SDMX Global Conference
-2013](https://sdmx.org/?sdmx_events=4th-sdmx-global-conference) is found
-[here](https://web.archive.org/web/20200615113441/https://www.oecd.org/sdd/SDMX%202013%20Session%203.7%20-%20A%20statistical%20metadata%20system%20based%20on%20SDMX.pdf).
+    2013](https://sdmx.org/?sdmx_events=4th-sdmx-global-conference) is found
+    [here](https://web.archive.org/web/20200615113441/https://www.oecd.org/sdd/SDMX%202013%20Session%203.7%20-%20A%20statistical%20metadata%20system%20based%20on%20SDMX.pdf).
 
 ## Installation
 

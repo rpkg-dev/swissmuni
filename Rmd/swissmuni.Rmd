@@ -5,6 +5,9 @@ editor_options:
 
 # NOTES
 
+There's some sparse documentation available for download (PDF)
+[here](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.assetdetail.15224054.html).
+
 ## API response's raw column names
 
 An example snippet to determine them for the `snapshots` endpoint:
@@ -116,25 +119,11 @@ as_api_date <- function(date) {
 
 ### `api_params`
 
-This function parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
-possible URL parameters.
-
-Use the following code to get a tibble per API endpoint containing param details:
-
-``` r
-c("snapshots",
-  "congruences",
-  "mutations",
-  "classifications") %>%
-  {
-    rlang::set_names(x = purrr::map(.x = .,
-                                    .f = swissmuni::api_params),
-                     nm = .)
-  }
-```
-
 ```{r}
 #' Get allowed API URL parameters
+#' 
+#' Parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
+#' possible URL parameters.
 #'
 #' @param type The API endpoint.
 #'
@@ -143,7 +132,7 @@ c("snapshots",
 #' @export
 #'
 #' @examples
-#' # to get all URL params of all 3 API endpoints:
+#' # get all URL params of all 3 API endpoints:
 #' endpoints <- c("snapshots",
 #'                "congruences",
 #'                "mutations",
@@ -182,7 +171,7 @@ NOTES:
 
 -   The API response doesn't have the proper content type set (would be `text/csv`).
 
--   The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column type spe
+-   The API returns different numbers of columns depending on the provided URL params (like the `start/end_date`). Therefore we generate the column types
     telling `readr::read_csv()` how to parse the results dynamically.
 
 ```{r}
@@ -200,7 +189,9 @@ parse_result <- function(response,
 
 # EXPORTED
 
-## `snapshots`
+## Municipality data
+
+### `snapshots`
 
 Example URL:
 
@@ -217,8 +208,8 @@ Possible URL parameters:
 ```{r}
 #' Get municipality snapshots
 #'
-#' Returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time.
-#' Therefore you probably want to leave the default `end_date = start_date`.
+#' Returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot corresponds to the list of municipalities that are present at least
+#' partially during the specified period (or at the specified day when `end_date = start_date`).
 #'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
@@ -261,7 +252,7 @@ snapshots <- function(start_date = lubridate::today(),
 }
 ```
 
-## `congruences`
+### `congruences`
 
 Example URL:
 
@@ -279,7 +270,8 @@ Possible URL parameters:
 ```{r}
 #' Get municipality congruences
 #'
-#' Returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities. The data indicates for each existing municipality at the `start_date` to
+#' which municipality/municipalities it corresponds at the `end_date`.
 #'
 #' @inheritParams snapshots
 #' @param incl_unmodified Include municipalities where no changes occurred in the defined period.
@@ -322,7 +314,7 @@ congruences <- function(start_date = NULL,
 }
 ```
 
-## `mutations`
+### `mutations`
 
 Example URL:
 
@@ -339,7 +331,8 @@ Possible URL parameters:
 ```{r}
 #' Get municipality mutations
 #'
-#' Returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities. The data describes all changes related to the municipalities made between
+#' `start_date` and `end_date`.
 #'
 #' @inheritParams snapshots
 #' @inheritParams congruences
@@ -378,7 +371,9 @@ mutations <- function(start_date = NULL,
 }
 ```
 
-## `classifications`
+## Municipality metadata
+
+### `classifications`
 
 Example URL:
 
@@ -395,9 +390,10 @@ Possible URL parameters:
 -   `oracleCompatible`
 
 ```{r}
-#' Get geographical classifications of municipalities
+#' Get spatial classifications of municipalities
 #'
-#' Returns a [tibble][tibble::tbl_df] with a wide range of geographical classifications of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with a wide range of spatial classifications of Swiss municipalities, i.a. by language region, size of the municipality or
+#' degree of agglomeration/urbanization.
 #'
 #' There are some classifications which have multiple column IDs (e.g. `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` both contain the _spatial mobility regions_).
 #' If `name_type` is set to a language code, column duplicates are given the name suffix "`r paste0(' (', cp_symbol, ')')`".
@@ -464,3 +460,4 @@ classifications <- function(start_date = NULL,
   result
 }
 ```
+

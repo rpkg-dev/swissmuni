@@ -15,10 +15,11 @@ api_params(
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-Get allowed API URL parameters
+Parses the API's \href{https://en.wikipedia.org/wiki/Web_Services_Description_Language}{Web Services Description Language (WSDL)} file to determine
+possible URL parameters.
 }
 \examples{
-# to get all URL params of all 3 API endpoints:
+# get all URL params of all 3 API endpoints:
 endpoints <- c("snapshots",
                "congruences",
                "mutations",

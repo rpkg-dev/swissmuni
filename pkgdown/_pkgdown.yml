@@ -14,8 +14,10 @@ template:
     selfhost_assets: yes
 url: https://rpkg.dev/swissmuni
 reference:
+- title: Municipality data
 - contents:
   - snapshots
   - congruences
   - mutations
-  - classifications
+- title: Municipality metadata
+- contents: classifications

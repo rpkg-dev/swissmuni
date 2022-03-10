@@ -12,8 +12,8 @@
 <!-- clipboard.js --><script src="clipboard.min.js"></script><!-- headroom.js --><script src="headroom.min.js"></script><script src="jQuery.headroom.min.js"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Download Municipality Data from the Swiss Federal Statistical Office's Web Services">
-<meta name="description" content="swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their geographical classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).">
-<meta property="og:description" content="swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their geographical classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).">
+<meta name="description" content="swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their spatial classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).">
+<meta property="og:description" content="swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their spatial classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@2BSalim">
 <meta name="twitter:site" content="@2BSalim">
@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">swissmuni</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
       </span>
     </div>
 
@@ -74,8 +74,8 @@ Statistical Office’s Web Services</h1></div>
 <p>swissmuni provides access to Swiss municipality <a href="https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots" class="external-link">snapshots</a>,
 <a href="https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances" class="external-link">congruences</a>,
 <a href="https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations" class="external-link">mutations</a>
-and their <a href="https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels" class="external-link">geographical
-classifications</a> from the <a href="https://sms.bfs.admin.ch/WcfBFSSpecificService.svc?singleWsdl" class="external-link">web
+and their <a href="https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels" class="external-link">spatial
+classifications</a> from the <a href="https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.assetdetail.15224054.html" class="external-link">web
 services</a> provided by the <a href="https://www.bfs.admin.ch/bfs/en/home.html" class="external-link">Swiss Federal
 Statistical Office (FSO)</a>. The accessed web services are part of the
 FSO’s <em>Statistical Metadata System (SMS)</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
@@ -110,7 +110,7 @@ comments</a> only.</p>
 Markdown counterparts under <a href="Rmd/"><code>Rmd/</code></a> using
 <a href="https://rpkg.dev/pkgpurl/reference/purl_rmd.html" class="external-link"><code>pkgpurl::purl_rmd()</code></a><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>. Always
 make changes only to the <code>.Rmd</code> files – never the
-<code>.R</code> files – and then run <code><a href="https://rdrr.io/pkg/pkgpurl/man/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> to
+<code>.R</code> files – and then run <code><a href="https://rpkg.dev/pkgpurl/reference/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> to
 regenerate the R source files.</p>
 </div>
 <div id="coding-style" class="section level3">
@@ -140,7 +140,7 @@ additional restrictions are formally specified in the <a href="https://github.co
 configuration file</a> <a href=".lintr"><code>.lintr</code></a>, so
 lintr can be used right away to check for formatting issues:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">pkgpurl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgpurl/man/lint_rmd.html" class="external-link">lint_rmd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">pkgpurl</span><span class="fu">::</span><span class="fu"><a href="https://rpkg.dev/pkgpurl/reference/lint_rmd.html" class="external-link">lint_rmd</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="see-also" class="section level2">
@@ -164,7 +164,7 @@ leverage the R Markdown format to author R packages was originally
 proposed by Yihui Xie. See his excellent <a href="https://yihui.name/rlp/" class="external-link">blog post</a> for more detailed
 information about the benefits of literate programming techniques and
 some practical examples. Note that using
-<code><a href="https://rdrr.io/pkg/pkgpurl/man/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> is a less cumbersome alternative to the
+<code><a href="https://rpkg.dev/pkgpurl/reference/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> is a less cumbersome alternative to the
 Makefile approach outlined by him.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
 <li id="fn3"><p>The TSG <a href="https://style.tidyverse.org/pipes.html#assignment-2" class="external-link">explicitly
 instructs to avoid this operator</a> – presumably because it’s

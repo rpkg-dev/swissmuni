@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get geographical classifications of municipalities — classifications • swissmuni</title>
+<title>Get spatial classifications of municipalities — classifications • swissmuni</title>
 
 
 
@@ -42,9 +42,9 @@
 <script src="../pkgdown.js"></script>
 
 
-<meta property="og:title" content="Get geographical classifications of municipalities — classifications" />
-<meta name="description" content="Returns a tibble with a wide range of geographical classifications of Swiss municipalities.">
-<meta property="og:description" content="Returns a tibble with a wide range of geographical classifications of Swiss municipalities." />
+<meta property="og:title" content="Get spatial classifications of municipalities — classifications" />
+<meta name="description" content="Returns a tibble with a wide range of spatial classifications of Swiss municipalities, i.a. by language region, size of the municipality or degree of agglomeration/urbanization.">
+<meta property="og:description" content="Returns a tibble with a wide range of spatial classifications of Swiss municipalities, i.a. by language region, size of the municipality or degree of agglomeration/urbanization." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@2BSalim" />
 <meta name="twitter:site" content="@2BSalim" />
@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">swissmuni</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
       </span>
     </div>
 
@@ -113,13 +113,14 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get geographical classifications of municipalities</h1>
+    <h1>Get spatial classifications of municipalities</h1>
     <small class="dont-index">Source: <a href='https://gitlab.com/salim_b/r/pkgs/swissmuni/blob/master/R/swissmuni.gen.R'><code>R/swissmuni.gen.R</code></a></small>
     <div class="hidden name"><code>classifications.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a> with a wide range of geographical classifications of Swiss municipalities.</p>
+    <p>Returns a <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a> with a wide range of spatial classifications of Swiss municipalities, i.a. by language region, size of the municipality or
+degree of agglomeration/urbanization.</p>
     </div>
 
     <pre class="usage"><span class='fu'>classifications</span><span class='op'>(</span>
@@ -205,7 +206,7 @@ and the districts.</p>
 <span class='r-in'>                           name_type <span class='op'>=</span> <span class='st'>"de"</span>,</span>
 <span class='r-in'>                           use_cache <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 2,148 × 23</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>    Identifier Name   CODE_OFS `Kanton (2019-…` `Historisierte…` `Agglomeration…`</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    Identifier Name   CODE_OFS `Kanton (2022-…` `Historisierte…` `Agglomeration…`</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>         <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>            <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 1</span>      <span style='text-decoration: underline;'>10</span>009 Villn…     <span style='text-decoration: underline;'>4</span>122               19            <span style='text-decoration: underline;'>10</span>023                0</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'> 2</span>      <span style='text-decoration: underline;'>10</span>078 Vionn…     <span style='text-decoration: underline;'>6</span>158               23            <span style='text-decoration: underline;'>10</span>013                0</span>
@@ -220,10 +221,10 @@ and the districts.</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># … with 2,138 more rows, and 17 more variables:</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Agglomerationsgrössenklasse 2012` &lt;int&gt;, `Agglomerationen 2012 ⎘` &lt;int&gt;,</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Arbeitsmarktgrossregionen 2018` &lt;int&gt;, `Arbeitsmarktregionen 2018` &lt;int&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Urbanisierungsgrad (DEGURBA) - eurostat 2011` &lt;int&gt;, `` &lt;int&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `NA ⎘` &lt;int&gt;, `Stadt/Land-Typologie` &lt;int&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Gemeindetypologie 2012 (9 Typen)` &lt;int&gt;,</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Gemeindetypologie 2012 (25 Typen)` &lt;int&gt;, Berggebiete &lt;int&gt;, …</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Urbanisierungsgrad 2011 (DEGURBA) - eurostat 2011` &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Funktionale städtische Gebiete 2014 (FUA eurostat)` &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Erweiterte Städte 2011 (Greater cities eurostat)` &lt;int&gt;,</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'>#   `Städtische / Ländliche Gebiete` &lt;int&gt;, …</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

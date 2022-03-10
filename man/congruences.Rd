@@ -30,7 +30,8 @@ congruences(
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-Returns a \link[tibble:tbl_df-class]{tibble} with congruence data of Swiss municipalities.
+Returns a \link[tibble:tbl_df-class]{tibble} with congruence data of Swiss municipalities. The data indicates for each existing municipality at the \code{start_date} to
+which municipality/municipalities it corresponds at the \code{end_date}.
 }
 \examples{
 swissmuni::congruences(start_date = lubridate::today(),

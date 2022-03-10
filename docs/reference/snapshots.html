@@ -43,8 +43,8 @@
 
 
 <meta property="og:title" content="Get municipality snapshots — snapshots" />
-<meta name="description" content="Returns a tibble with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time. Therefore you probably want to leave the default end_date = start_date.">
-<meta property="og:description" content="Returns a tibble with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time. Therefore you probably want to leave the default end_date = start_date." />
+<meta name="description" content="Returns a tibble with snapshots of Swiss municipality data. A snapshot corresponds to the list of municipalities that are present at least partially during the specified period (or at the specified day when end_date = start_date).">
+<meta property="og:description" content="Returns a tibble with snapshots of Swiss municipality data. A snapshot corresponds to the list of municipalities that are present at least partially during the specified period (or at the specified day when end_date = start_date)." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:creator" content="@2BSalim" />
 <meta name="twitter:site" content="@2BSalim" />
@@ -83,7 +83,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">swissmuni</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.4.3</span>
       </span>
     </div>
 
@@ -119,8 +119,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Returns a <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a> with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time.
-Therefore you probably want to leave the default <code>end_date = start_date</code>.</p>
+    <p>Returns a <a href='https://tibble.tidyverse.org/reference/tbl_df-class.html'>tibble</a> with snapshots of Swiss municipality data. A snapshot corresponds to the list of municipalities that are present at least
+partially during the specified period (or at the specified day when <code>end_date = start_date</code>).</p>
     </div>
 
     <pre class="usage"><span class='fu'>snapshots</span><span class='op'>(</span>

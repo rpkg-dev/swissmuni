@@ -2,7 +2,7 @@
 % Please edit documentation in R/swissmuni.gen.R
 \name{classifications}
 \alias{classifications}
-\title{Get geographical classifications of municipalities}
+\title{Get spatial classifications of municipalities}
 \usage{
 classifications(
   start_date = NULL,
@@ -32,7 +32,8 @@ starting with ID \code{HR_} will be named by its full label in the respective la
 A \link[tibble:tbl_df-class]{tibble}.
 }
 \description{
-Returns a \link[tibble:tbl_df-class]{tibble} with a wide range of geographical classifications of Swiss municipalities.
+Returns a \link[tibble:tbl_df-class]{tibble} with a wide range of spatial classifications of Swiss municipalities, i.a. by language region, size of the municipality or
+degree of agglomeration/urbanization.
 }
 \details{
 There are some classifications which have multiple column IDs (e.g. \code{HR_ARBREG2000_L2} and \code{HR_TYPMSR2000_L2} both contain the \emph{spatial mobility regions}).

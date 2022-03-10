@@ -40,6 +40,9 @@ as_api_date <- function(date) {
 }
 
 #' Get allowed API URL parameters
+#' 
+#' Parses the API's [Web Services Description Language (WSDL)](https://en.wikipedia.org/wiki/Web_Services_Description_Language) file to determine
+#' possible URL parameters.
 #'
 #' @param type The API endpoint.
 #'
@@ -48,7 +51,7 @@ as_api_date <- function(date) {
 #' @export
 #'
 #' @examples
-#' # to get all URL params of all 3 API endpoints:
+#' # get all URL params of all 3 API endpoints:
 #' endpoints <- c("snapshots",
 #'                "congruences",
 #'                "mutations",
@@ -93,8 +96,8 @@ parse_result <- function(response,
 
 #' Get municipality snapshots
 #'
-#' Returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot is the state of the municipalities at a specified point in time.
-#' Therefore you probably want to leave the default `end_date = start_date`.
+#' Returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot corresponds to the list of municipalities that are present at least
+#' partially during the specified period (or at the specified day when `end_date = start_date`).
 #'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
@@ -138,7 +141,8 @@ snapshots <- function(start_date = lubridate::today(),
 
 #' Get municipality congruences
 #'
-#' Returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with congruence data of Swiss municipalities. The data indicates for each existing municipality at the `start_date` to
+#' which municipality/municipalities it corresponds at the `end_date`.
 #'
 #' @inheritParams snapshots
 #' @param incl_unmodified Include municipalities where no changes occurred in the defined period.
@@ -182,7 +186,8 @@ congruences <- function(start_date = NULL,
 
 #' Get municipality mutations
 #'
-#' Returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with mutation data of Swiss municipalities. The data describes all changes related to the municipalities made between
+#' `start_date` and `end_date`.
 #'
 #' @inheritParams snapshots
 #' @inheritParams congruences
@@ -220,9 +225,10 @@ mutations <- function(start_date = NULL,
   cache_lifespan = cache_lifespan)
 }
 
-#' Get geographical classifications of municipalities
+#' Get spatial classifications of municipalities
 #'
-#' Returns a [tibble][tibble::tbl_df] with a wide range of geographical classifications of Swiss municipalities.
+#' Returns a [tibble][tibble::tbl_df] with a wide range of spatial classifications of Swiss municipalities, i.a. by language region, size of the municipality or
+#' degree of agglomeration/urbanization.
 #'
 #' There are some classifications which have multiple column IDs (e.g. `HR_ARBREG2000_L2` and `HR_TYPMSR2000_L2` both contain the _spatial mobility regions_).
 #' If `name_type` is set to a language code, column duplicates are given the name suffix "`r paste0(' (', cp_symbol, ')')`".
