@@ -1,5 +1,7 @@
 # swissmuni: Download Municipality Data from the Swiss Federal Statistical Office’s Web Services
 
+<a href="https://cran.r-project.org/package=swissmuni" class="pkgdown-release"><img src="https://r-pkg.org/badges/version/swissmuni" alt="CRAN Status" /></a>
+
 swissmuni provides access to Swiss municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots), [congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances), [mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [spatial classifications](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the [web services](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.assetdetail.15224054.html) provided by the [Swiss Federal Statistical Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO’s *Statistical Metadata System (SMS)*[^1].
 
 Note that there’s also an official web application [available](https://www.agvchapp.bfs.admin.ch/de/communes/query) to access Swiss municipality data.

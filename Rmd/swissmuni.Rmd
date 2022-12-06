@@ -20,10 +20,9 @@ httr::RETRY(verb = "GET",
                          endPeriod = NULL,
                          useBfsCode = tolower(TRUE))) %>%
   httr::content(as = "text") %>%
-  stringr::str_split(pattern = "\n") %>%
+  stringr::str_split_1(pattern = "\n") %>%
   dplyr::first() %>%
-  dplyr::first() %>%
-  stringr::str_split(pattern = ",") %>%
+  stringr::str_split_1(pattern = ",") %>%
   pal::cat_lines()
 ```
 
@@ -48,7 +47,7 @@ httr::RETRY(verb = "GET",
 
 -   Setting `format=csv` or none results in the normal CSV response.
 
--   Setting `format` to anything else than `csv` results in a **XLS response**!
+-   Setting `format` to anything else than `csv` results in an **XLS response**!
 
     -   For the `snapshots`, `correspondances` and `mutations` endpoints, the XLS contains the normal data.
     -   For the `levels` endpoint, the XLS contains the **column name spec** of the normal API response's `HR_*` columns. The `levels` endpoint is also the only
@@ -460,4 +459,3 @@ classifications <- function(start_date = NULL,
   result
 }
 ```
-

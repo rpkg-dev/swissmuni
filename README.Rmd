@@ -4,6 +4,8 @@ output: pal::gitlab_document
 
 # `r paste0(pal::desc_value("Package"), ": ", pal::desc_value("Title"))`
 
+`r paste0('[![CRAN Status](https://r-pkg.org/badges/version/', pal::desc_value(key = "Package"), ')](https://cran.r-project.org/package=', pal::desc_value(key = "Package"), '){.pkgdown-release}')`
+
 swissmuni provides access to Swiss municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots),
 [congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances),
 [mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [spatial
@@ -13,7 +15,11 @@ Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web servi
 
 Note that there's also an official web application [available](https://www.agvchapp.bfs.admin.ch/de/communes/query) to access Swiss municipality data.
 
-```{r, pkgdown, eval = !isTRUE(getOption("pal.build_readme.is_pkgdown")), results = "asis", echo = FALSE}
+```{r}
+#| label: documentation
+#| eval: !expr '!isTRUE(getOption("pal.build_readme.is_pkgdown"))'
+#| results: asis
+#| echo: false
 pkgsnip::md_snip(name = "pkgdown_notice") %>%
   paste0("## Documentation\n\n", .) %>%
   pal::cat_lines()
@@ -25,19 +31,35 @@ pkgsnip::md_snip(name = "pkgdown_notice") %>%
 
 ## Installation
 
-```{r, install-snippet-dev, child = pkgsnip::snip_path("installation-notice_dev-version_gitlab.Rmd")}
+```{r}
+#| label: install-snippet-dev
+#| child: !expr pkgsnip::snip_path("installation-notice_dev-version_gitlab.Rmd")
+```
+
+```{r}
+#| label: usage
+#| eval: !expr isTRUE(getOption("pal.build_readme.is_pkgdown"))
+#| results: asis
+#| echo: false
+pkgsnip::md_snip(name = "usage_notice") %>%
+  paste0("## Usage\n\n", .) %>%
+  pal::cat_lines()
 ```
 
 ## Development
 
 ### R Markdown format
 
-```{r, rmd-pkg-snippet, child = pkgsnip::snip_path("rmd-package-notice.Rmd")}
+```{r}
+#| label: rmd-format
+#| child: !expr pkgsnip::snip_path("rmd-package-notice.Rmd")
 ```
 
 ### Coding style
 
-```{r, coding-style-snippet, child = pkgsnip::snip_path("coding-style-notice.Rmd")}
+```{r}
+#| label: coding-style
+#| child: !expr pkgsnip::snip_path("coding-style-notice.Rmd")
 ```
 
 ## See also

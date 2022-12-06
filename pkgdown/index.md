@@ -1,5 +1,7 @@
 # swissmuni: Download Municipality Data from the Swiss Federal Statistical Office's Web Services
 
+[![CRAN Status](https://r-pkg.org/badges/version/swissmuni)](https://cran.r-project.org/package=swissmuni){.pkgdown-release}
+
 swissmuni provides access to Swiss municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots), [congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances), [mutations](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/mutations) and their [spatial classifications](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/levels) from the [web services](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.assetdetail.15224054.html) provided by the [Swiss Federal Statistical Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web services are part of the FSO's *Statistical Metadata System (SMS)*[^1].
 
 Note that there's also an official web application [available](https://www.agvchapp.bfs.admin.ch/de/communes/query) to access Swiss municipality data.
@@ -16,6 +18,10 @@ if (!("remotes" %in% rownames(installed.packages()))) {
 
 remotes::install_gitlab(repo = "salim_b/r/pkgs/swissmuni")
 ```
+
+## Usage
+
+The (function) reference is found [here](reference).
 
 ## Development
 

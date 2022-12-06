@@ -1,17 +1,21 @@
+code:
+  width: 160
 development:
   mode: auto
 template:
+  bootstrap: 5
+  bslib:
+    primary: "#246abf"
+    link-color: "#246abf"
+    link-decoration: "none"
+    link-hover-decoration: "underline"
+  includes:
+    after_body: |
+      <script data-goatcounter="https://rpkg-dev.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   opengraph:
     twitter:
       card: summary
       creator: '@2BSalim'
-  params:
-    analytics:
-      goatcounter:
-        endpoint: https://rpkg-dev.goatcounter.com/count
-    bootswatch: yeti
-    mathjax: no
-    selfhost_assets: yes
 url: https://rpkg.dev/swissmuni
 reference:
 - title: Municipality data

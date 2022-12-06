@@ -1,4 +1,7 @@
 ^data-raw$
+^doc$
+^docs$
+^Meta$
 ^pkgdown$
 ^Rmd$
 ^snippets$
@@ -10,6 +13,7 @@
 ^_pkgdown\.yml$
 ^\.ackrc$
 ^\.github$
+^\.gitlab-ci\.yml$
 ^\.lintr$
 ^\.travis\.yml$
 ^.*\.Rproj$

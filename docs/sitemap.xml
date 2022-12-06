@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://rpkg.dev/swissmuni/404.html</loc>
+  </url>
+  <url>
+    <loc>https://rpkg.dev/swissmuni/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://rpkg.dev/swissmuni/TODO.html</loc>
+  </url>
+  <url>
+    <loc>https://rpkg.dev/swissmuni/authors.html</loc>
+  </url>
+  <url>
     <loc>https://rpkg.dev/swissmuni/index.html</loc>
   </url>
   <url>
@@ -11,6 +23,9 @@
   </url>
   <url>
     <loc>https://rpkg.dev/swissmuni/reference/congruences.html</loc>
+  </url>
+  <url>
+    <loc>https://rpkg.dev/swissmuni/reference/index.html</loc>
   </url>
   <url>
     <loc>https://rpkg.dev/swissmuni/reference/mutations.html</loc>
