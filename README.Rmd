@@ -21,7 +21,10 @@ Note that there's also an official web application [available](https://www.agvch
 #| results: asis
 #| echo: false
 pkgsnip::md_snip(name = "pkgdown_notice") %>%
-  paste0("## Documentation\n\n", .) %>%
+  paste0("## Documentation\n\n",
+         "[![Netlify Status](https://api.netlify.com/api/v1/badges/9c255431-9f12-4bd9-a169-a7be1e23b985/deploy-status)]",
+         "(https://app.netlify.com/sites/swissmuni-rpkg-dev/deploys)\n\n",
+         .) %>%
   pal::cat_lines()
 ```
 

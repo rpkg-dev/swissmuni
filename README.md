@@ -8,6 +8,8 @@ Note that there’s also an official web application [available](https://www.agv
 
 ## Documentation
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9c255431-9f12-4bd9-a169-a7be1e23b985/deploy-status)](https://app.netlify.com/sites/swissmuni-rpkg-dev/deploys)
+
 The documentation of this package is found [here](https://rpkg.dev/swissmuni).
 
 ## Installation
