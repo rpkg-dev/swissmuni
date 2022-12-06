@@ -11,7 +11,7 @@ Description: swissmuni provides access to Swiss municipality snapshots,
     These web services are part of the FSO's Statistical Metadata System
     (SMS).
 License: AGPL (>= 3)
-URL: https://rpkg.dev/swissmuni,
+URL: https://swissmuni.rpkg.dev,
     https://gitlab.com/salim_b/r/pkgs/swissmuni
 BugReports: https://gitlab.com/salim_b/r/pkgs/swissmuni/issues
 Depends: 

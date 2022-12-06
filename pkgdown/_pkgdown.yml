@@ -5,18 +5,17 @@ development:
 template:
   bootstrap: 5
   bslib:
-    primary: "#246abf"
-    link-color: "#246abf"
-    link-decoration: "none"
-    link-hover-decoration: "underline"
+    link-color: '#246abf'
+    link-decoration: none
+    link-hover-decoration: underline
   includes:
     after_body: |
-      <script data-goatcounter="https://rpkg-dev.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+      <script data-goatcounter="https://rpkg-dev.goatcounter.com/count" async src="https://rpkg.dev/counter-dev.js"></script>
   opengraph:
     twitter:
       card: summary
       creator: '@2BSalim'
-url: https://rpkg.dev/swissmuni
+url: https://swissmuni.rpkg.dev
 reference:
 - title: Municipality data
 - contents:
