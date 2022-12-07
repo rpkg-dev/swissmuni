@@ -30,7 +30,7 @@ Content-Security-Policy = '''
   manifest-src 'self';
   object-src 'self';
   prefetch-src 'self';
-  script-src 'self' 'unsafe-eval';
+  script-src 'self' 'unsafe-eval' https://rpkg-dev;
   style-src 'self' 'unsafe-inline';
 
   form-action 'self';
