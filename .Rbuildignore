@@ -6,6 +6,7 @@
 ^Rmd$
 ^snippets$
 ^cran-comments\.md$
+^netlify\.toml$
 ^TODO\.md$
 ^LICENSE(\.md)?$
 ^README\.Rmd$
