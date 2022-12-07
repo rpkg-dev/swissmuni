@@ -19,6 +19,7 @@ for = "/*"
 # - `object-src 'self';` has to be set to enable PDF preview in Chrome
 # - `img-src https://rpkg-dev.goatcounter.com/count` has to be set for GoatCounter, cf. https://www.goatcounter.com/help/csp
 # - `script-src 'unsafe-eval'` is required for MathJax, cf. https://github.com/mathjax/MathJax/issues/1988#issuecomment-384978927
+# - `script-src https://rpkg.dev https://cdn.counter.dev` is required for counter.dev analytics
 # - `style-src 'unsafe-inline'` is required for MathJax, cf. https://github.com/mathjax/MathJax/issues/1988#issuecomment-581567775
 Content-Security-Policy = '''
   base-uri 'self';
