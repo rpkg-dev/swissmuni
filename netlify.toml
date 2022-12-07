@@ -26,7 +26,7 @@ Content-Security-Policy = '''
   default-src 'none';
   connect-src 'self';
   font-src 'self';
-  img-src 'self' data: https://rpkg-dev.goatcounter.com/count;
+  img-src 'self' data: https://rpkg-dev.goatcounter.com/count https://r-pkg.org;
   manifest-src 'self';
   object-src 'self';
   prefetch-src 'self';
