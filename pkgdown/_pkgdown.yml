@@ -10,7 +10,7 @@ template:
     link-hover-decoration: underline
   includes:
     after_body: |
-      <script data-goatcounter="https://rpkg-dev.goatcounter.com/count" async src="https://rpkg.dev/counter-dev.js"></script>
+      <script data-goatcounter="https://rpkg-dev.goatcounter.com/count" async src="https://rpkg.dev/goatcounter.js"></script>
   opengraph:
     twitter:
       card: summary
