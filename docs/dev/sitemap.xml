@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/TODO.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/authors.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/index.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/api_params.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/classifications.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/congruences.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/mutations.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/snapshots.html</loc>
+  </url>
+  <url>
+    <loc>https://swissmuni.rpkg.dev/dev/reference/swissmuni-package.html</loc>
+  </url>
+</urlset>

@@ -35,8 +35,8 @@ as_api_date <- function(date) {
     checkmate::assert_date(any.missing = FALSE,
                            null.ok = TRUE,
                            .var.name = "start/end_date") %>%
-    purrr::when(length(.) == 0L ~ NULL,
-                ~ format(., "%d-%m-%Y"))
+    pal::when(length(.) == 0L ~ NULL,
+              ~ format(., "%d-%m-%Y"))
 }
 
 #' Get allowed API URL parameters
