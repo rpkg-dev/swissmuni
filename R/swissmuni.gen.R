@@ -80,7 +80,8 @@ api_params <- function(type = c("snapshots",
     xml2::xml_find_all(xpath = ".//xs:element") %>%
     xml2::xml_attrs() %>%
     purrr::map(as.list) %>%
-    purrr::map_dfr(tibble::as_tibble)
+    purrr::map(tibble::as_tibble) %>%
+    purrr::list_rbind()
 }
 
 parse_result <- function(response,
