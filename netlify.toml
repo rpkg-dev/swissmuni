@@ -41,3 +41,13 @@ Referrer-Policy = "strict-origin-when-cross-origin"
 X-Content-Type-Options = "nosniff"
 X-Frame-Options = "DENY"
 X-XSS-Protection = "1; mode=block"
+
+# ------- REDIRECTS -------
+# Redirect rules are processed [from top to bottom](https://docs.netlify.com/routing/redirects/#rule-processing-order), i.e. first matching one has priority
+
+# fall back to dev site (non-shadowing), so that links not (yet) available in stable site are automatically redirected to dev version if present
+[[redirects]]
+from = "/*"
+to = "/dev/:splat"
+status = 302
+force = false
