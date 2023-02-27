@@ -10,7 +10,7 @@ congruences(
   incl_unmodified = TRUE,
   incl_territory_exchange = FALSE,
   use_cache = TRUE,
-  cache_lifespan = "1 day"
+  max_cache_age = "1 day"
 )
 }
 \arguments{
@@ -22,9 +22,9 @@ congruences(
 
 \item{incl_territory_exchange}{Include information (additional rows) about territory exchanges within and between municipalities.}
 
-\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{cache_lifespan}.}
+\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{max_cache_age}.}
 
-\item{cache_lifespan}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
+\item{max_cache_age}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Use \code{Inf} to disable cache expiry. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
 }
 \value{
 A \link[tibble:tbl_df-class]{tibble}.
@@ -36,5 +36,5 @@ which municipality/municipalities it corresponds at the \code{end_date}.
 \examples{
 swissmuni::congruences(start_date = lubridate::today(),
                        end_date = lubridate::today(),
-                       cache_lifespan = "6 hours")
+                       max_cache_age = "6 hours")
 }

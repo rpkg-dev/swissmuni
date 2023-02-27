@@ -1,8 +1,8 @@
-pandoc: 2.19.2
+pandoc: '3.1'
 pkgdown: 2.0.7.9000
-pkgdown_sha: ~
+pkgdown_sha: 74d6ac5e629114cf0399760ba887c79cf07a5c20
 articles: {}
-last_built: 2022-12-23T17:26Z
+last_built: 2023-02-27T12:08Z
 urls:
   reference: https://swissmuni.rpkg.dev/reference
   article: https://swissmuni.rpkg.dev/articles

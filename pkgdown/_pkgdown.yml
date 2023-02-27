@@ -24,3 +24,5 @@ reference:
   - mutations
 - title: Municipality metadata
 - contents: classifications
+- title: Miscellaneous
+- contents: pkg_config

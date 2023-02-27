@@ -9,7 +9,7 @@ snapshots(
   end_date = start_date,
   historicized_code = FALSE,
   use_cache = TRUE,
-  cache_lifespan = "1 day"
+  max_cache_age = "1 day"
 )
 }
 \arguments{
@@ -20,9 +20,9 @@ snapshots(
 \item{historicized_code}{By default, the \href{https://de.wikipedia.org/wiki/Gemeindenummer}{\emph{FSO commune number}} is returned. Set to \code{TRUE} in order to get the
 \emph{historicization number} instead.}
 
-\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{cache_lifespan}.}
+\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{max_cache_age}.}
 
-\item{cache_lifespan}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
+\item{max_cache_age}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Use \code{Inf} to disable cache expiry. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
 }
 \value{
 A \link[tibble:tbl_df-class]{tibble}.

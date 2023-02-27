@@ -10,7 +10,7 @@ classifications(
   historicized_code = FALSE,
   name_type = c("ID", "en", "de", "fr", "it"),
   use_cache = TRUE,
-  cache_lifespan = "1 day"
+  max_cache_age = "1 day"
 )
 }
 \arguments{
@@ -24,9 +24,9 @@ classifications(
 \item{name_type}{The column name type to be returned. Defaults to the column IDs returned by the web service. If set to a language code, the columns
 starting with ID \code{HR_} will be named by its full label in the respective language instead.}
 
-\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{cache_lifespan}.}
+\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{max_cache_age}.}
 
-\item{cache_lifespan}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
+\item{max_cache_age}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Use \code{Inf} to disable cache expiry. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
 }
 \value{
 A \link[tibble:tbl_df-class]{tibble}.

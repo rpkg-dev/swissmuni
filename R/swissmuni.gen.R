@@ -2,7 +2,7 @@
 # See `README.md#r-markdown-format` for more information on the literate programming approach used applying the R Markdown format.
 
 # swissmuni: Download Municipality Data from the Swiss Federal Statistical Office's Web Services
-# Copyright (C) 2022 Salim Brüggemann
+# Copyright (C) 2023 Salim Brüggemann
 # 
 # This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free
 # Software Foundation, either version 3 of the License, or any later version.
@@ -15,9 +15,12 @@
 utils::globalVariables(names = ".")
 
 .onLoad <- function(libname, pkgname) {
-  pkgpins::clear_cache(board = pkgpins::board(pkg = pkgname),
-                       max_age = getOption(paste0(pkgname, ".max_cache_lifespan"),
-                                           default = "30 days"))
+  
+  # clear pkgpins cache
+  tryCatch(expr = pkgpins::clear_cache(board = pkgpins::board(pkg = pkgname),
+                                       max_age = pal::pkg_config_val(key = "global_max_cache_age",
+                                                                     pkg = pkgname)),
+           error = function(e) cli::cli_alert_warning(text = "Failed to clear pkgpins cache on load of {.pkg pkgname}. Error message: {e$message}"))
 }
 
 this_pkg <- utils::packageName()
@@ -107,7 +110,7 @@ parse_result <- function(response,
 #' @param historicized_code By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. Set to `TRUE` in order to get the
 #'   _historicization number_ instead.
 #' @param use_cache `r pkgsnip::param_label("use_cache")`
-#' @param cache_lifespan `r pkgsnip::param_label("cache_lifespan")` Defaults to 1 day (24 hours).
+#' @param max_cache_age `r pkgsnip::param_label("max_cache_age")` Defaults to 1 day (24 hours).
 #'
 #' @return `r pkgsnip::return_label("data")`
 #' @export
@@ -118,7 +121,7 @@ snapshots <- function(start_date = lubridate::today(),
                       end_date = start_date,
                       historicized_code = FALSE,
                       use_cache = TRUE,
-                      cache_lifespan = "1 day") {
+                      max_cache_age = "1 day") {
   
   pkgpins::with_cache(expr = {
     
@@ -137,7 +140,7 @@ snapshots <- function(start_date = lubridate::today(),
   end_date,
   historicized_code,
   use_cache = use_cache,
-  cache_lifespan = cache_lifespan)
+  max_cache_age = max_cache_age)
 }
 
 #' Get municipality congruences
@@ -155,13 +158,13 @@ snapshots <- function(start_date = lubridate::today(),
 #' @examples
 #' swissmuni::congruences(start_date = lubridate::today(),
 #'                        end_date = lubridate::today(),
-#'                        cache_lifespan = "6 hours")
+#'                        max_cache_age = "6 hours")
 congruences <- function(start_date = NULL,
                         end_date = NULL,
                         incl_unmodified = TRUE,
                         incl_territory_exchange = FALSE,
                         use_cache = TRUE,
-                        cache_lifespan = "1 day") {
+                        max_cache_age = "1 day") {
   
   pkgpins::with_cache(expr = {
     
@@ -182,7 +185,7 @@ congruences <- function(start_date = NULL,
   incl_unmodified,
   incl_territory_exchange,
   use_cache = use_cache,
-  cache_lifespan = cache_lifespan)
+  max_cache_age = max_cache_age)
 }
 
 #' Get municipality mutations
@@ -204,7 +207,7 @@ mutations <- function(start_date = NULL,
                       end_date = NULL,
                       incl_territory_exchange = FALSE,
                       use_cache = TRUE,
-                      cache_lifespan = "1 day") {
+                      max_cache_age = "1 day") {
   
   pkgpins::with_cache(expr = {
     
@@ -223,7 +226,7 @@ mutations <- function(start_date = NULL,
   end_date,
   incl_territory_exchange,
   use_cache = use_cache,
-  cache_lifespan = cache_lifespan)
+  max_cache_age = max_cache_age)
 }
 
 #' Get spatial classifications of municipalities
@@ -253,7 +256,7 @@ classifications <- function(start_date = NULL,
                             historicized_code = FALSE,
                             name_type = c("ID", "en", "de", "fr", "it"),
                             use_cache = TRUE,
-                            cache_lifespan = "1 day") {
+                            max_cache_age = "1 day") {
   
   result <- pkgpins::with_cache(
     expr = {
@@ -273,7 +276,7 @@ classifications <- function(start_date = NULL,
     end_date,
     historicized_code,
     use_cache = use_cache,
-    cache_lifespan = cache_lifespan
+    max_cache_age = max_cache_age
   )
   
   name_type <- rlang::arg_match(name_type)
@@ -295,3 +298,20 @@ classifications <- function(start_date = NULL,
   
   result
 }
+
+#' `r this_pkg` package configuration metadata
+#'
+#' A [tibble][tibble::tbl_df] with metadata of all possible `r this_pkg` package configuration options. See [pal::pkg_config_val()] for more information.
+#'
+#' @format `r pkgsnip::return_label("data_cols", cols = colnames(pkg_config))`
+#' @export
+#'
+#' @examples
+#' swissmuni::pkg_config
+pkg_config <-
+  tibble::tibble(key = character(),
+                 default_value = list(),
+                 description = character()) %>%
+  tibble::add_row(key = "global_max_cache_age",
+                  default_value = list("30 days"),
+                  description = pkgsnip::md_snip("opt_global_max_cache_age"))

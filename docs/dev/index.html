@@ -8,8 +8,8 @@
 <meta name="description" content="swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their spatial classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).">
 <title>Download Municipality Data from the Swiss Federal Statistical Office's Web Services • swissmuni</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link rel="stylesheet" href="deps/all.min.css">
+<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link rel="stylesheet" href="deps/all.min.css">
 <link rel="stylesheet" href="deps/v4-shims.min.css">
 <script src="deps/bootstrap-toc.min.js"></script><script src="deps/headroom.min.js"></script><script src="deps/jQuery.headroom.min.js"></script><script src="deps/clipboard.min.js"></script><script src="deps/fuse.js"></script><script src="deps/autocomplete.jquery.min.js"></script><script src="deps/mark.min.js"></script><script src="deps/MathJax.js"></script><script src="deps/TeX-AMS-MML_HTMLorMML.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Download Municipality Data from the Swiss Federal Statistical Office's Web Services">
 <meta property="og:description" content="swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their spatial classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).">
@@ -30,7 +30,7 @@
     
     <a class="navbar-brand me-2" href="index.html">swissmuni</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.3.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.4.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,7 +91,7 @@
 <h3 id="r-markdown-format">R Markdown format<a class="anchor" aria-label="anchor" href="#r-markdown-format"></a>
 </h3>
 <p>This package’s source code is written in the <a href="https://rmarkdown.rstudio.com/" class="external-link">R Markdown</a> file format to facilitate practices commonly referred to as <a href="https://en.wikipedia.org/wiki/Literate_programming" class="external-link"><em>literate programming</em></a>. It allows the actual code to be freely mixed with explanatory and supplementary information in expressive Markdown format instead of having to rely on <a href="https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Comments" class="external-link"><code>#</code> comments</a> only.</p>
-<p>All the <code>.gen.R</code> suffixed R source code found under <a href="R/"><code>R/</code></a> is generated from the respective R Markdown counterparts under <a href="Rmd/"><code>Rmd/</code></a> using <a href="https://pkgpurl.rpkg.dev/dev/reference/purl_rmd.html" class="external-link"><code>pkgpurl::purl_rmd()</code></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;This naming convention as well as the very idea to leverage the R Markdown format to author R packages was originally proposed by Yihui Xie. See his excellent &lt;a href="https://yihui.name/rlp/" class="external-link"&gt;blog post&lt;/a&gt; for more detailed information about the benefits of literate programming techniques and some practical examples. Note that using &lt;code&gt;&lt;a href="https://rdrr.io/pkg/pkgpurl/man/purl_rmd.html" class="external-link"&gt;pkgpurl::purl_rmd()&lt;/a&gt;&lt;/code&gt; is a less cumbersome alternative to the Makefile approach outlined by him.&lt;/p&gt;'><sup>2</sup></a>. Always make changes only to the <code>.Rmd</code> files – never the <code>.R</code> files – and then run <code><a href="https://rdrr.io/pkg/pkgpurl/man/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> to regenerate the R source files.</p>
+<p>All the <code>.gen.R</code> suffixed R source code found under <a href="R/"><code>R/</code></a> is generated from the respective R Markdown counterparts under <a href="Rmd/"><code>Rmd/</code></a> using <a href="https://pkgpurl.rpkg.dev/dev/reference/purl_rmd.html" class="external-link"><code>pkgpurl::purl_rmd()</code></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;This naming convention as well as the very idea to leverage the R Markdown format to author R packages was originally proposed by Yihui Xie. See his excellent &lt;a href="https://yihui.name/rlp/" class="external-link"&gt;blog post&lt;/a&gt; for more detailed information about the benefits of literate programming techniques and some practical examples. Note that using &lt;code&gt;&lt;a href="https://pkgpurl.rpkg.dev/reference/purl_rmd.html" class="external-link"&gt;pkgpurl::purl_rmd()&lt;/a&gt;&lt;/code&gt; is a less cumbersome alternative to the Makefile approach outlined by him.&lt;/p&gt;'><sup>2</sup></a>. Always make changes only to the <code>.Rmd</code> files – never the <code>.R</code> files – and then run <code><a href="https://pkgpurl.rpkg.dev/reference/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> to regenerate the R source files.</p>
 </div>
 <div class="section level3">
 <h3 id="coding-style">Coding style<a class="anchor" aria-label="anchor" href="#coding-style"></a>
@@ -121,7 +121,7 @@
 </ul>
 <p>As far as possible, these deviations from the TSG plus some additional restrictions are formally specified in the <a href="https://github.com/jimhester/lintr#project-configuration" class="external-link">lintr configuration file</a> <a href=".lintr"><code>.lintr</code></a>, so lintr can be used right away to check for formatting issues:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">pkgpurl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pkgpurl/man/lint_rmd.html" class="external-link">lint_rmd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pkgpurl</span><span class="fu">::</span><span class="fu"><a href="https://pkgpurl.rpkg.dev/reference/lint_rmd.html" class="external-link">lint_rmd</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

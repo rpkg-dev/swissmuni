@@ -8,6 +8,15 @@
 \description{
 swissmuni provides access to Swiss municipality snapshots, congruences, mutations and their spatial classifications from the web services provided by the Swiss Federal Statistical Office (FSO). These web services are part of the FSO's Statistical Metadata System (SMS).
 }
+\section{Package configuration}{
+
+
+Some of swissmuni's functionality is controlled via package-specific global configuration which can either be set via \R \link{options} or \href{https://en.wikipedia.org/wiki/Environment_variable}{environment variables} (the former take precedence). This configuration includes:\tabular{llll}{
+   \strong{Description} \tab \strong{R option} \tab \strong{Environment variable} \tab \strong{Default value} \cr
+   Maximal timespan to preserve the package's \href{https://pkgpins.rpkg.dev/}{pkgpins} cache. Cache entries older than this will be deleted upon package loading. \tab \code{swissmuni.global_max_cache_age} \tab \code{SWISSMUNI_GLOBAL_MAX_CACHE_AGE} \tab \code{"30 days"} \cr
+}
+}
+
 \seealso{
 Useful links:
 \itemize{
