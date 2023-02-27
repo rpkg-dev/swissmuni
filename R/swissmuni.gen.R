@@ -20,7 +20,7 @@ utils::globalVariables(names = ".")
   tryCatch(expr = pkgpins::clear_cache(board = pkgpins::board(pkg = pkgname),
                                        max_age = pal::pkg_config_val(key = "global_max_cache_age",
                                                                      pkg = pkgname)),
-           error = function(e) cli::cli_alert_warning(text = "Failed to clear pkgpins cache on load of {.pkg pkgname}. Error message: {e$message}"))
+           error = function(e) cli::cli_alert_warning(text = "Failed to clear pkgpins cache on load of {.pkg {pkgname}}. Error message: {e$message}"))
 }
 
 this_pkg <- utils::packageName()
@@ -308,10 +308,4 @@ classifications <- function(start_date = NULL,
 #'
 #' @examples
 #' swissmuni::pkg_config
-pkg_config <-
-  tibble::tibble(key = character(),
-                 default_value = list(),
-                 description = character()) %>%
-  tibble::add_row(key = "global_max_cache_age",
-                  default_value = list("30 days"),
-                  description = pkgsnip::md_snip("opt_global_max_cache_age"))
+"pkg_config"

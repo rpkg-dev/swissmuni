@@ -3,27 +3,25 @@ editor_options:
   chunk_output_type: console
 ---
 
-NOTES:
+# NOTES
 
 -   This file is *not* included in the [source package](https://r-pkgs.org/package-structure-state.html#source-package) because of the [`.nopurl` suffix in the
     filename](https://rpkg.dev/pkgpurl/reference/purl_rmd.html#-rmd-files-excluded-from-purling).
 
 -   The chunks below have to be manually executed in order to regenerate the package data.
 
-# Internal data
-
-NOTES:
-
 -   Although the datasets below are saved as ["internal data" in `R/sysdata.rda`](https://r-pkgs.org/data.html#data-sysdata), some of them might still be
     exported and documented (in the main `.Rmd` document), something [not explicitly
     mentioned](https://coolbutuseless.github.io/2018/12/10/r-packages-internal-and-external-data/) in the book [R
     Packages](https://r-pkgs.org/data.html#data-data).
 
+# Define data
+
 ## `col_spec_classifications`
 
 Generate API response's full column names
 
-NOTES
+NOTES:
 
 -   Unfortunately, this is only possible for the `HR_*` columns of the `levels` API endpoint.
 
@@ -72,13 +70,26 @@ gen_col_spec_classifications <- function() {
 col_spec_classifications <- gen_col_spec_classifications()
 ```
 
-## Write data
+## `pkg_config`
+
+```{r}
+pkg_config <-
+  tibble::tibble(key = character(),
+                 default_value = list(),
+                 description = character()) %>%
+  tibble::add_row(key = "global_max_cache_age",
+                  default_value = list("30 days"),
+                  description = pkgsnip::md_snip("opt_global_max_cache_age"))
+```
+
+# Write data
 
 Save all the small data objects as a single internal file `R/sysdata.rda`. Note that when documenting them, they must be explicitly `@export`ed to be available
 to package users.
 
 ```{r}
 usethis::use_data(col_spec_classifications,
+                  pkg_config,
                   internal = TRUE,
                   overwrite = TRUE,
                   compress = "xz",
