@@ -15,17 +15,16 @@ for = "/*"
 # - [OWASP CSP Cheat Sheet](https://github.com/OWASP/CheatSheetSeries/blob/master/cheatsheets/Content_Security_Policy_Cheat_Sheet.md)
 # notes:
 # - `connect-src data:` is required for asciinema (asciicast)
-# - `connect-src https://counter.dev` is required for counter.dev analytics
+# - `connect-src https://t.counter.dev` is required for counter.dev analytics
 # - `object-src 'self';` has to be set to enable PDF preview in Chrome
-# - `img-src https://rpkg-dev.goatcounter.com/count` has to be set for GoatCounter, cf. https://www.goatcounter.com/help/csp
 # - `script-src 'unsafe-eval'` is required for MathJax, cf. https://github.com/mathjax/MathJax/issues/1988#issuecomment-384978927
-# - `script-src https://rpkg.dev https://cdn.counter.dev` is required for counter.dev analytics
+# - `script-src https://rpkg.dev` is required for counter.dev analytics
 # - `style-src 'unsafe-inline'` is required for MathJax, cf. https://github.com/mathjax/MathJax/issues/1988#issuecomment-581567775
 Content-Security-Policy = '''
   base-uri 'self';
 
   default-src 'none';
-  connect-src 'self' data: https://counter.dev;
+  connect-src 'self' data: https://t.counter.dev;
   font-src 'self';
   img-src 'self' data: https://r-pkg.org;
   manifest-src 'self';
