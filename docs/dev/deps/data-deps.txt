@@ -8,7 +8,7 @@
 <script src="deps/headroom.min.js"></script>
 <script src="deps/jQuery.headroom.min.js"></script>
 <script src="deps/clipboard.min.js"></script>
-<script src="deps/fuse.js"></script>
+<script src="deps/fuse.min.js"></script>
 <script src="deps/autocomplete.jquery.min.js"></script>
 <script src="deps/mark.min.js"></script>
 <script src="deps/MathJax.js"></script>
