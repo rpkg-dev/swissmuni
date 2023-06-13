@@ -2,7 +2,14 @@
 output: pal::gitlab_document
 ---
 
-# `r paste0(pal::desc_value("Package"), ": ", pal::desc_value("Title"))`
+```{r}
+#| label: init
+#| include: false
+
+knitr::opts_knit$set(root.dir = getwd())
+```
+
+# `r pal::desc_value("Package")`
 
 `r paste0('[![CRAN Status](https://r-pkg.org/badges/version/', pal::desc_value(key = "Package"), ')](https://cran.r-project.org/package=', pal::desc_value(key = "Package"), '){.pkgdown-release}')`
 
