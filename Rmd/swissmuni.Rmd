@@ -32,11 +32,11 @@ httr::RETRY(verb = "GET",
 
 | column name if `historicized_code = TRUE` | column name if `historicized_code = FALSE` |
 |-------------------------------------------|--------------------------------------------|
-| CODE_HIST_1\_Text_en                      | CODE_OFS_1\_Text_en                        |
-| CODE_HIST_1\_Text_fr                      | CODE_OFS_1\_Text_fr                        |
-| CODE_HIST_1\_Text_de                      | CODE_OFS_1\_Text_de                        |
-| CODE_HIST_1\_Text_it                      | CODE_OFS_1\_Text_it                        |
-| CODE_HIST_1\_Text                         | CODE_OFS_1\_Text                           |
+| CODE_HIST_1_Text_en                       | CODE_OFS_1_Text_en                         |
+| CODE_HIST_1_Text_fr                       | CODE_OFS_1_Text_fr                         |
+| CODE_HIST_1_Text_de                       | CODE_OFS_1_Text_de                         |
+| CODE_HIST_1_Text_it                       | CODE_OFS_1_Text_it                         |
+| CODE_HIST_1_Text                          | CODE_OFS_1_Text                            |
 
 -   The `CODE_OFS*` corresponds to the [official Swiss community identification
     number](https://en.wikipedia.org/wiki/Community_Identification_Number#Switzerland) (also called "GEOSTAT"/"BFS" number, see the [corresponding German
@@ -147,8 +147,8 @@ api_params <- function(type = c("snapshots",
                                 "congruences",
                                 "mutations",
                                 "classifications")) {
-  
-  pal::assert_pkg("xml2")
+  rlang::check_installed("xml2",
+                         reason = pal::reason_pkg_required())
   
   rlang::arg_match(type) %>%
     switch("snapshots" = "GetSnapshot",

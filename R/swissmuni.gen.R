@@ -67,8 +67,8 @@ api_params <- function(type = c("snapshots",
                                 "congruences",
                                 "mutations",
                                 "classifications")) {
-  
-  pal::assert_pkg("xml2")
+  rlang::check_installed("xml2",
+                         reason = pal::reason_pkg_required())
   
   rlang::arg_match(type) %>%
     switch("snapshots" = "GetSnapshot",
