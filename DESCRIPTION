@@ -12,8 +12,8 @@ Description: swissmuni provides access to Swiss municipality snapshots,
     (SMS).
 License: AGPL (>= 3)
 URL: https://swissmuni.rpkg.dev,
-    https://gitlab.com/salim_b/r/pkgs/swissmuni
-BugReports: https://gitlab.com/salim_b/r/pkgs/swissmuni/issues
+    https://gitlab.com/rpkg.dev/swissmuni
+BugReports: https://gitlab.com/rpkg.dev/swissmuni/issues
 Depends: 
     R (>= 4.1)
 Imports:
@@ -36,9 +36,9 @@ Suggests:
     utils,
     xml2 (>= 1.3.2)
 Remotes:
-    gitlab::salim_b/r/pkgs/pal,
-    gitlab::salim_b/r/pkgs/pkgpins,
-    gitlab::salim_b/r/pkgs/pkgsnip
+    gitlab::rpkg.dev/pal,
+    gitlab::rpkg.dev/pkgpins,
+    gitlab::rpkg.dev/pkgsnip
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

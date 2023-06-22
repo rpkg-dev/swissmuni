@@ -21,8 +21,8 @@ Some of swissmuni's functionality is controlled via package-specific global conf
 Useful links:
 \itemize{
   \item \url{https://swissmuni.rpkg.dev}
-  \item \url{https://gitlab.com/salim_b/r/pkgs/swissmuni}
-  \item Report bugs at \url{https://gitlab.com/salim_b/r/pkgs/swissmuni/issues}
+  \item \url{https://gitlab.com/rpkg.dev/swissmuni}
+  \item Report bugs at \url{https://gitlab.com/rpkg.dev/swissmuni/issues}
 }
 
 }
