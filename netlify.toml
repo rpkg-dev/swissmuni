@@ -29,7 +29,6 @@ Content-Security-Policy = '''
   img-src 'self' data: https://r-pkg.org;
   manifest-src 'self';
   object-src 'self';
-  prefetch-src 'self';
   script-src 'self' 'unsafe-eval' https://rpkg.dev;
   style-src 'self' 'unsafe-inline';
 
