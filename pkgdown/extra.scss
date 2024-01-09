@@ -1,5 +1,19 @@
+/* set main font family as it was before bslib v0.6.0 */
+:root {
+  --bs-body-font-family: var(--bs-font-sans-serif);
+}
+
+/* style headings as they were before bslib v0.6.0 */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
 main {
-  /* 
+  /*
      add more spacing above headers
      
      Bootstrap only exposes a `$headings-margin-bottom` and [no `*-top` equivalent](https://github.com/twbs/bootstrap/blob/main/scss/_reboot.scss#L83-L91),
@@ -8,12 +22,13 @@ main {
   h2, h3, h4, h5, h6 {
     margin-top: 1em;
   }
-
+  
   /* tables that adapt to viewport width */
   .table-wide {
     min-width: 100%;
     max-width: 1320px;
     width: 85vw;
+    position: relative; /* this is needed for the table to be placed *above* the <aside> element, i.e. for text to be selectable */
   }
 }
 
