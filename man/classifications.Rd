@@ -14,9 +14,9 @@ classifications(
 )
 }
 \arguments{
-\item{start_date}{The begin of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
+\item{start_date}{Begin of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
-\item{end_date}{The end of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
+\item{end_date}{End of the period the data covers. A \link[base:Dates]{date} or a character scalar in the format \code{"YYYY-MM-DD"}.}
 
 \item{historicized_code}{By default, the \href{https://de.wikipedia.org/wiki/Gemeindenummer}{\emph{FSO commune number}} is returned. Set to \code{TRUE} in order to get the
 \emph{historicization number} instead.}
@@ -24,9 +24,9 @@ classifications(
 \item{name_type}{The column name type to be returned. Defaults to the column IDs returned by the web service. If set to a language code, the columns
 starting with ID \code{HR_} will be named by its full label in the respective language instead.}
 
-\item{use_cache}{Return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{max_cache_age}.}
+\item{use_cache}{Whether or not to return cached results if possible. If \code{FALSE}, results are always newly fetched regardless of \code{max_cache_age}.}
 
-\item{max_cache_age}{The duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Use \code{Inf} to disable cache expiry. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
+\item{max_cache_age}{Duration after which cached results are refreshed (i.e. newly fetched). A valid \link[lubridate:as.duration]{lubridate duration}. Use \code{Inf} to disable cache expiry. Only relevant if \code{use_cache = TRUE}. Defaults to 1 day (24 hours).}
 }
 \value{
 A \link[tibble:tbl_df-class]{tibble}.

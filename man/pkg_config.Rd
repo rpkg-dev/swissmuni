@@ -5,7 +5,7 @@
 \alias{pkg_config}
 \title{swissmuni package configuration metadata}
 \format{
-A \link[tibble:tbl_df-class]{tibble} with the columns \code{key}, \code{default_value} and \code{description}.
+A \link[tibble:tbl_df-class]{tibble} with the columns \code{key}, \code{default_value}, and \code{description}.
 }
 \usage{
 pkg_config
