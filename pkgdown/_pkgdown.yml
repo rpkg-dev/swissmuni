@@ -1,20 +1,5 @@
-code:
-  width: 160
-development:
-  mode: auto
 template:
-  bootstrap: 5
-  bslib:
-    link-color: '#246abf'
-    link-decoration: none
-    link-hover-decoration: underline
-  includes:
-    in_header: |
-      <script src="https://rpkg.dev/counter-dev.min.js" data-id="4c4963fe-9fcf-4d81-95bb-2135e114b85b" data-utcoffset="1"></script>
-  opengraph:
-    twitter:
-      card: summary
-      creator: '@2BSalim'
+  package: pkgdown.tpl
 url: https://swissmuni.rpkg.dev
 reference:
 - title: Municipality data

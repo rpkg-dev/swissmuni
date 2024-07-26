@@ -31,12 +31,14 @@ Imports:
     tibble (>= 3.0.3)
 Suggests:
     dplyr (>= 1.0.0),
-    pkgsnip (>= 0.0.9034),
+    pkgdown.tpl (>= 0.0.9000),
+    pkgsnip (>= 0.0.9037),
     readxl (>= 1.3.1),
     utils,
     xml2 (>= 1.3.2)
 Remotes:
     gitlab::rpkg.dev/pal,
+    gitlab::rpkg.dev/pkgdown.tpl,
     gitlab::rpkg.dev/pkgpins,
     gitlab::rpkg.dev/pkgsnip
 Encoding: UTF-8
