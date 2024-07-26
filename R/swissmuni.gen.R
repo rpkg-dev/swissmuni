@@ -2,7 +2,7 @@
 # See `README.md#r-markdown-format` for more information on the literate programming approach used applying the R Markdown format.
 
 # swissmuni: Download Municipality Data from the Swiss Federal Statistical Office's Web Services
-# Copyright (C) 2023 Salim Brüggemann
+# Copyright (C) 2024 Salim Brüggemann
 # 
 # This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free
 # Software Foundation, either version 3 of the License, or any later version.
@@ -105,14 +105,14 @@ parse_result <- function(response,
 #'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
-#' @param start_date `r pkgsnip::param_label("start_date")`
-#' @param end_date `r pkgsnip::param_label("end_date")`
+#' @param start_date `r pkgsnip::param_lbl("start_date")`
+#' @param end_date `r pkgsnip::param_lbl("end_date")`
 #' @param historicized_code By default, the [_FSO commune number_](https://de.wikipedia.org/wiki/Gemeindenummer) is returned. Set to `TRUE` in order to get the
 #'   _historicization number_ instead.
-#' @param use_cache `r pkgsnip::param_label("use_cache")`
-#' @param max_cache_age `r pkgsnip::param_label("max_cache_age")` Defaults to 1 day (24 hours).
+#' @param use_cache `r pkgsnip::param_lbl("use_cache")`
+#' @param max_cache_age `r pkgsnip::param_lbl("max_cache_age")` Defaults to 1 day (24 hours).
 #'
-#' @return `r pkgsnip::return_label("data")`
+#' @return `r pkgsnip::return_lbl("tibble")`
 #' @export
 #'
 #' @examples
@@ -303,7 +303,7 @@ classifications <- function(start_date = NULL,
 #'
 #' A [tibble][tibble::tbl_df] with metadata of all possible `r this_pkg` package configuration options. See [pal::pkg_config_val()] for more information.
 #'
-#' @format `r pkgsnip::return_label("data_cols", cols = colnames(pkg_config))`
+#' @format `r pkgsnip::return_lbl("tibble_cols", cols = colnames(pkg_config))`
 #' @export
 #'
 #' @examples
