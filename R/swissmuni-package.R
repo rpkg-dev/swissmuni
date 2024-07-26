@@ -10,7 +10,9 @@
 #' @importFrom magrittr %>%
 #' @importFrom magrittr %<>%
 #' @importFrom magrittr %T>%
+#' @importFrom magrittr %!>%
 #' @importFrom magrittr %$%
+#' @importFrom rlang %|%
 "_PACKAGE"
 
 # The following block is used by usethis to automatically manage
