@@ -110,12 +110,39 @@ Convert ISO-8601 formatted date string to `DD-MM-YYYY` format
 ```{r}
 as_api_date <- function(date) {
   
-  lubridate::ymd(date) %>%
+  if (!inherits(date, "Date")) {
+    if (is.character(date)) {
+      date %<>% clock::date_parse()
+      
+    } else {
+      date %<>% lubridate::as_date()
+    }
+  }
+  
+  result <-
+    date |>
     checkmate::assert_date(any.missing = FALSE,
                            null.ok = TRUE,
-                           .var.name = "start/end_date") %>%
+                           .var.name = "start/end_date") |>
     pal::when(length(.) == 0L ~ NULL,
               ~ format(., "%d-%m-%Y"))
+  
+  # add leading zeroes to year if necessary
+  if (stringr::str_detect(string = result,
+                          pattern = "\\d{4}$",
+                          negate = TRUE)) {
+    
+    year <- stringr::str_extract(string = result,
+                                 pattern = "\\d+$")
+    year <- paste0(pal::as_str(rep("0",
+                                   times = 4L - nchar(year))),
+                   year)
+    
+    result %<>% stringr::str_replace(pattern = "\\d+$",
+                                     replacement = year)
+  }
+  
+  result
 }
 ```
 
