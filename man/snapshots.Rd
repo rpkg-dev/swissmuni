@@ -32,6 +32,9 @@ Returns a \link[tibble:tbl_df-class]{tibble} with snapshots of Swiss municipalit
 partially during the specified period (or at the specified day when \code{end_date = start_date}).
 }
 \details{
+Note that for technical and organizational reasons, those municipalities that only existed in the period before the first allocation of FSO numbers in 1960
+\href{https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch.html}{were given the FSO commune number \strong{7700}}.
+
 \subsection{FSO commune number vs. historicization number}{
 
 By default, the \href{https://de.wikipedia.org/wiki/Gemeindenummer}{\emph{FSO commune number}} is returned. You

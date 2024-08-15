@@ -241,6 +241,9 @@ Possible URL parameters:
 #' Returns a [tibble][tibble::tbl_df] with snapshots of Swiss municipality data. A snapshot corresponds to the list of municipalities that are present at least
 #' partially during the specified period (or at the specified day when `end_date = start_date`).
 #'
+#' Note that for technical and organizational reasons, those municipalities that only existed in the period before the first allocation of FSO numbers in 1960
+#' [were given the FSO commune number **7700**](https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch.html).
+#'
 #' @includeRmd snippets/fso_vs_historicized_code.Rmd
 #'
 #' @param start_date `r pkgsnip::param_lbl("start_date")`
