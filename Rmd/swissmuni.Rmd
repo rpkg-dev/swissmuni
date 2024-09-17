@@ -28,15 +28,15 @@ httr::RETRY(verb = "GET",
 
 ## API URL parameter details
 
-### `historicized_code`
+### `useBfsCode`
 
-| column name if `historicized_code = TRUE` | column name if `historicized_code = FALSE` |
-|-------------------------------------------|--------------------------------------------|
-| CODE_HIST_1_Text_en                       | CODE_OFS_1_Text_en                         |
-| CODE_HIST_1_Text_fr                       | CODE_OFS_1_Text_fr                         |
-| CODE_HIST_1_Text_de                       | CODE_OFS_1_Text_de                         |
-| CODE_HIST_1_Text_it                       | CODE_OFS_1_Text_it                         |
-| CODE_HIST_1_Text                          | CODE_OFS_1_Text                            |
+| column name if `useBfsCode=true` | column name if `useBfsCode=false` |
+|----------------------------------|-----------------------------------|
+| CODE_HIST_1_Text_en              | CODE_OFS_1_Text_en                |
+| CODE_HIST_1_Text_fr              | CODE_OFS_1_Text_fr                |
+| CODE_HIST_1_Text_de              | CODE_OFS_1_Text_de                |
+| CODE_HIST_1_Text_it              | CODE_OFS_1_Text_it                |
+| CODE_HIST_1_Text                 | CODE_OFS_1_Text                   |
 
 -   The `CODE_OFS*` corresponds to the [official Swiss community identification
     number](https://en.wikipedia.org/wiki/Community_Identification_Number#Switzerland) (also called "GEOSTAT"/"BFS" number, see the [corresponding German
