@@ -57,6 +57,13 @@ httr::RETRY(verb = "GET",
 
 Only present in the `levels` API endpoint. Can be set to a comma-separated list of language abbreviations. Supported are `de`, `en`, `fr` and `it`.
 
+### `escapeChars`
+
+Allows to define replacements for specific character sequences in the response body, in the form `SEQUENCE(REPLACEMENT)` where `SEQUENCE` are the character(s)
+to be replaced and `REPLACEMENT` are the character(s) to replace `SEQUENCE` with.
+
+It is unclear what the specific use cases of such replacements might be, hence support for `escapeChars` is currently not implemented in swissmuni.
+
 ### `oracleCompatible`
 
 Not a clue what that is supposed to do. The following has been tried and *didn't* change the response:
