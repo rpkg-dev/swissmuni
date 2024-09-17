@@ -34,6 +34,7 @@ cp_symbol <- "\u2398"
 
 as_api_date <- function(date) {
   
+  # convert to date if necessary
   if (!inherits(date, "Date")) {
     if (is.character(date)) {
       date %<>% clock::date_parse()
@@ -43,15 +44,15 @@ as_api_date <- function(date) {
     }
   }
   
-  result <-
-    date |>
-    checkmate::assert_date(any.missing = FALSE,
-                           null.ok = TRUE,
-                           .var.name = "start/end_date") |>
-    pal::when(length(.) == 0L ~ NULL,
-              ~ format(., "%d-%m-%Y"))
+  # return `NULL` for 0-length input
+  if (length(date) == 0L) {
+    return(NULL)
+  }
   
-  # add leading zeroes to year if necessary
+  # convert date to string in the format expected by the API (`DD-MM-YYYY`)
+  result <- format(date, "%d-%m-%Y")
+  
+  ## add leading zeroes to year if necessary
   if (stringr::str_detect(string = result,
                           pattern = "\\d{4}$",
                           negate = TRUE)) {
