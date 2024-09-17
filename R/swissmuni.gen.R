@@ -153,6 +153,8 @@ snapshots <- function(start_date = lubridate::today(),
                       use_cache = TRUE,
                       max_cache_age = "1 day") {
   
+  checkmate::assert_flag(historicized_code)
+  
   pkgpins::with_cache(expr = {
     
     httr::RETRY(verb = "GET",
@@ -160,7 +162,7 @@ snapshots <- function(start_date = lubridate::today(),
                 path = paste0(api_common_path, "snapshots"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                             useBfsCode = tolower(historicized_code)),
                 times = 5L) %>%
       parse_result()
   },
@@ -196,6 +198,9 @@ congruences <- function(start_date = NULL,
                         use_cache = TRUE,
                         max_cache_age = "1 day") {
   
+  checkmate::assert_flag(incl_unmodified)
+  checkmate::assert_flag(incl_territory_exchange)
+  
   pkgpins::with_cache(expr = {
     
     httr::RETRY(verb = "GET",
@@ -203,8 +208,8 @@ congruences <- function(start_date = NULL,
                 path = paste0(api_common_path, "correspondances"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             includeUnmodified = tolower(checkmate::assert_flag(incl_unmodified)),
-                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
+                             includeUnmodified = tolower(incl_unmodified),
+                             includeTerritoryExchange = tolower(incl_territory_exchange)),
                 times = 5L) %>%
       parse_result()
   },
@@ -239,6 +244,8 @@ mutations <- function(start_date = NULL,
                       use_cache = TRUE,
                       max_cache_age = "1 day") {
   
+  checkmate::assert_flag(incl_territory_exchange)
+  
   pkgpins::with_cache(expr = {
     
     httr::RETRY(verb = "GET",
@@ -246,7 +253,7 @@ mutations <- function(start_date = NULL,
                 path = paste0(api_common_path, "mutations"),
                 query = list(startPeriod = as_api_date(start_date),
                              endPeriod = as_api_date(end_date),
-                             includeTerritoryExchange = tolower(checkmate::assert_flag(incl_territory_exchange))),
+                             includeTerritoryExchange = tolower(incl_territory_exchange)),
                 times = 5L) %>%
       parse_result()
   },
@@ -288,6 +295,8 @@ classifications <- function(start_date = NULL,
                             use_cache = TRUE,
                             max_cache_age = "1 day") {
   
+  checkmate::assert_flag(historicized_code)
+  
   result <- pkgpins::with_cache(
     expr = {
       
@@ -296,7 +305,7 @@ classifications <- function(start_date = NULL,
                   path = paste0(api_common_path, "levels"),
                   query = list(startPeriod = as_api_date(start_date),
                                endPeriod = as_api_date(end_date),
-                               useBfsCode = tolower(checkmate::assert_flag(historicized_code))),
+                               useBfsCode = tolower(historicized_code)),
                   times = 5L) %>%
         parse_result()
     },
