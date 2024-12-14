@@ -6,6 +6,9 @@ output: pal::gitlab_document
 #| label: init
 #| include: false
 
+library(magrittr,
+        include.only = c("%>%", "%<>%", "%T>%", "%!>%", "%$%"))
+
 knitr::opts_knit$set(root.dir = getwd())
 ```
 
@@ -23,11 +26,12 @@ Office (FSO)](https://www.bfs.admin.ch/bfs/en/home.html). The accessed web servi
 Note that there's also an official web application [available](https://www.agvchapp.bfs.admin.ch/de/communes/query) to access Swiss municipality data.
 
 ```{r}
-#| label: documentation
+#| label: pkg-doc
 #| eval: !expr '!isTRUE(getOption("pal.build_readme.is_pkgdown"))'
 #| results: asis
 #| echo: false
-pkgsnip::md_snip(id = "pkgdown_notice") %>%
+
+pkgsnip::md_snip(id = "pkgdown_site") %>%
   paste0("## Documentation\n\n",
          "[![Netlify Status](https://api.netlify.com/api/v1/badges/9c255431-9f12-4bd9-a169-a7be1e23b985/deploy-status)]",
          "(https://app.netlify.com/sites/swissmuni-rpkg-dev/deploys)\n\n",
@@ -42,16 +46,17 @@ pkgsnip::md_snip(id = "pkgdown_notice") %>%
 ## Installation
 
 ```{r}
-#| label: install-snippet-dev
-#| child: !expr pkgsnip::snip_path("installation-notice_dev-version_gitlab.Rmd")
+#| label: pkg-instl-dev
+#| child: !expr pkgsnip::snip_path("pkg-instl-dev-gitlab.Rmd")
 ```
 
 ```{r}
-#| label: usage
+#| label: pkg-usage
 #| eval: !expr isTRUE(getOption("pal.build_readme.is_pkgdown"))
 #| results: asis
 #| echo: false
-pkgsnip::md_snip(id = "usage_notice") %>%
+
+pkgsnip::md_snip(id = "pkg_usage") %>%
   paste0("## Usage\n\n", .) %>%
   pal::cat_lines()
 ```
@@ -61,15 +66,15 @@ pkgsnip::md_snip(id = "usage_notice") %>%
 ### R Markdown format
 
 ```{r}
-#| label: rmd-format
-#| child: !expr pkgsnip::snip_path("rmd-package-notice.Rmd")
+#| label: pkgpurl
+#| child: !expr pkgsnip::snip_path("pkgpurl.Rmd")
 ```
 
 ### Coding style
 
 ```{r}
-#| label: coding-style
-#| child: !expr pkgsnip::snip_path("coding-style-notice.Rmd")
+#| label: pkg-code-style
+#| child: !expr pkgsnip::snip_path("pkg-code-style.Rmd")
 ```
 
 ## See also
