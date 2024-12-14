@@ -1,8 +1,0 @@
-# This is an [ack configuration file](https://beyondgrep.com/documentation/ack-2.28-man.html#THE-.ackrc-FILE) with options [complementing/overriding ack's defaults](https://beyondgrep.com/documentation/ack-2.28-man.html#ACKRC-LOCATION-SEMANTICS)
-
-## Direcories to ignore
---ignore-dir=.Rproj.user
-
-## File types to ignore
---ignore-file=ext:RData
---ignore-file=ext:Rhistory
