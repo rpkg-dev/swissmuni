@@ -3,7 +3,7 @@ Title: Download Municipality Data from the Swiss Federal Statistical
     Office's Web Services
 Version: 0.4.5.9000
 Authors@R: 
-    person("Salim", "Brüggemann", , "salim-b@pm.me", role = c("aut", "cre"),
+    person("Salim", "Brüggemann", , "salim@rpkg.dev", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-5329-5987"))
 Description: swissmuni provides access to Swiss municipality snapshots,
     congruences, mutations and their spatial classifications from the web
@@ -12,7 +12,7 @@ Description: swissmuni provides access to Swiss municipality snapshots,
     (SMS).
 License: AGPL (>= 3)
 URL: https://swissmuni.rpkg.dev, https://gitlab.com/rpkg.dev/swissmuni
-BugReports: https://gitlab.com/rpkg.dev/swissmuni/issues
+BugReports: https://gitlab.com/rpkg.dev/swissmuni/-/issues
 Depends: 
     R (>= 4.4)
 Imports:
