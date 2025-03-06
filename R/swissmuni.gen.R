@@ -2,7 +2,7 @@
 # See `README.md#r-markdown-format` for more information on the literate programming approach used applying the R Markdown format.
 
 # swissmuni: Download Municipality Data from the Swiss Federal Statistical Office's Web Services
-# Copyright (C) 2024 Salim Brüggemann
+# Copyright (C) 2025 Salim Brüggemann
 # 
 # This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free
 # Software Foundation, either version 3 of the License, or any later version.
@@ -18,7 +18,7 @@ utils::globalVariables(names = ".")
   
   # clear pkgpins cache
   tryCatch(expr = pkgpins::clear_cache(board = pkgpins::board(pkg = pkgname),
-                                       max_age = pal::pkg_config_val(key = "global_max_cache_age",
+                                       max_age = funky::config_val(key = "global_max_cache_age",
                                                                      pkg = pkgname)),
            error = function(e) cli::cli_alert_warning(text = "Failed to clear pkgpins cache on load of {.pkg {pkgname}}. Error message: {e$message}"))
 }
@@ -341,11 +341,11 @@ classifications <- function(start_date = NULL,
 
 #' `r this_pkg` package configuration metadata
 #'
-#' A [tibble][tibble::tbl_df] with metadata of all possible `r this_pkg` package configuration options. See [pal::pkg_config_val()] for more information.
+#' A [tibble][tibble::tbl_df] with metadata of all possible `r this_pkg` package configuration options. See [funky::config_val()] for more information.
 #'
-#' @format `r pkgsnip::return_lbl("tibble_cols", cols = colnames(pkg_config))`
+#' @format `r pkgsnip::return_lbl("tibble_cols", cols = colnames(funky_config))`
 #' @export
 #'
 #' @examples
-#' swissmuni::pkg_config
-"pkg_config"
+#' swissmuni::funky_config
+"funky_config"

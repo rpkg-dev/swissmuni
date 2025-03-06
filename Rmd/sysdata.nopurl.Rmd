@@ -72,13 +72,11 @@ gen_col_spec_classifications <- function() {
 col_spec_classifications <- gen_col_spec_classifications()
 ```
 
-## `pkg_config`
+## `funky_config`
 
 ```{r}
-pkg_config <-
-  tibble::tibble(key = character(),
-                 default_value = list(),
-                 description = character()) %>%
+funky_config <-
+  funky::ptype_config %>%
   tibble::add_row(key = "global_max_cache_age",
                   default_value = list("30 days"),
                   description = pkgsnip::md_snip("opt_global_max_cache_age"))
@@ -91,7 +89,7 @@ to package users.
 
 ```{r}
 usethis::use_data(col_spec_classifications,
-                  pkg_config,
+                  funky_config,
                   internal = TRUE,
                   overwrite = TRUE,
                   compress = "xz",
