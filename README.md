@@ -35,7 +35,7 @@ All the `.gen.R` suffixed R source code found under [`R/`](https://gitlab.com/rp
 
 ### Coding style
 
-This package borrows a lot of the [Tidyverse](https://www.tidyverse.org/) design philosophies. The R code adheres to the principles specified in the [Tidyverse Design Guide](https://principles.tidyverse.org/) wherever possible and is formatted according to the [Tidyverse Style Guide](https://style.tidyverse.org/) (TSG) with the following exceptions:
+This package borrows a lot of the [Tidyverse](https://www.tidyverse.org/) design philosophies. The R code is guided by the [Tidy design principles](https://design.tidyverse.org/) and is formatted according to the [Tidyverse Style Guide](https://style.tidyverse.org/) (TSG) with the following exceptions:
 
 -   Line width is limited to **160 characters**, double the [limit proposed by the TSG](https://style.tidyverse.org/syntax.html#long-lines) (80 characters is ridiculously little given today’s high-resolution wide screen monitors).
 
@@ -69,11 +69,9 @@ As far as possible, these deviations from the TSG plus some additional restricti
 
 -   [Official municipality data web application from the Swiss Federal Statistical Office (FSO)](https://www.agvchapp.bfs.admin.ch/de/communes/query)
 
----
-
 [^1]: Publicly accessible information about this system is scarce. A presentation introducing the system at the [4th SDMX Global Conference 2013](https://sdmx.org/?sdmx_events=4th-sdmx-global-conference) is found [here](https://web.archive.org/web/20200615113441/https://www.oecd.org/sdd/SDMX%202013%20Session%203.7%20-%20A%20statistical%20metadata%20system%20based%20on%20SDMX.pdf).
 
-[^2]: The very idea to leverage the R Markdown format to author R packages was originally proposed by Yihui Xie. See his excellent [blog post](https://yihui.name/rlp/) for his point of view on the advantages of literate programming techniques and some practical examples. Note that using `pkgpurl::purl_rmd()` is a less cumbersome alternative to the Makefile approach outlined by him.
+[^2]: The very idea to leverage the R Markdown format to author R packages was originally proposed by Yihui Xie. See his excellent [blog post](https://yihui.org/rlp/) for his point of view on the advantages of literate programming techniques and some practical examples. Note that using `pkgpurl::purl_rmd()` is a less cumbersome alternative to the Makefile approach outlined by him.
 
 [^3]: The TSG [explicitly instructs to avoid this operator](https://style.tidyverse.org/pipes.html#assignment-2) – presumably because it’s relatively unknown and therefore might be confused with the forward pipe operator `%>%` when skimming code only briefly. I don’t consider this to be an actual issue since there aren’t many sensible usage patterns of `%>%` at the beginning of a pipe sequence inside a function – I can only think of creating side effects and relying on [R’s implicit return of the last evaluated expression](https://rdrr.io/r/base/function.html). Therefore – and because I really like the `%<>%` operator – it’s usage is welcome.
 

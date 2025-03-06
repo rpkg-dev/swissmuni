@@ -88,12 +88,12 @@
 <h3 id="r-markdown-format">R Markdown format<a class="anchor" aria-label="anchor" href="#r-markdown-format"></a>
 </h3>
 <p>This package’s source code is written in the <a href="https://rmarkdown.rstudio.com/" class="external-link">R Markdown</a> file format to facilitate practices commonly referred to as <a href="https://en.wikipedia.org/wiki/Literate_programming" class="external-link"><em>literate programming</em></a>. It allows the actual code to be freely mixed with explanatory and supplementary information in expressive Markdown format instead of having to rely on <a href="https://rstudio.github.io/r-manuals/r-lang/Parser.html#comments" class="external-link"><code>#</code> comments</a> only.</p>
-<p>All the <code>.gen.R</code> suffixed R source code found under <a href="https://gitlab.com/rpkg.dev/swissmuni/-/tree/master/R/" class="external-link"><code>R/</code></a> is generated from the respective R Markdown counterparts under <a href="https://gitlab.com/rpkg.dev/swissmuni/-/tree/master/Rmd/" class="external-link"><code>Rmd/</code></a> using <a href="https://pkgpurl.rpkg.dev/dev/reference/purl_rmd.html" class="external-link"><code>pkgpurl::purl_rmd()</code></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;The very idea to leverage the R Markdown format to author R packages was originally proposed by Yihui Xie. See his excellent &lt;a href="https://yihui.name/rlp/" class="external-link"&gt;blog post&lt;/a&gt; for his point of view on the advantages of literate programming techniques and some practical examples. Note that using &lt;code&gt;&lt;a href="https://pkgpurl.rpkg.dev/reference/purl_rmd.html" class="external-link"&gt;pkgpurl::purl_rmd()&lt;/a&gt;&lt;/code&gt; is a less cumbersome alternative to the Makefile approach outlined by him.&lt;/p&gt;'><sup>2</sup></a>. Always make changes only to the <code>.Rmd</code> files – never the <code>.R</code> files – and then run <code><a href="https://pkgpurl.rpkg.dev/reference/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> to regenerate the R source files.</p>
+<p>All the <code>.gen.R</code> suffixed R source code found under <a href="https://gitlab.com/rpkg.dev/swissmuni/-/tree/master/R/" class="external-link"><code>R/</code></a> is generated from the respective R Markdown counterparts under <a href="https://gitlab.com/rpkg.dev/swissmuni/-/tree/master/Rmd/" class="external-link"><code>Rmd/</code></a> using <a href="https://pkgpurl.rpkg.dev/dev/reference/purl_rmd.html" class="external-link"><code>pkgpurl::purl_rmd()</code></a><a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;The very idea to leverage the R Markdown format to author R packages was originally proposed by Yihui Xie. See his excellent &lt;a href="https://yihui.org/rlp/" class="external-link"&gt;blog post&lt;/a&gt; for his point of view on the advantages of literate programming techniques and some practical examples. Note that using &lt;code&gt;&lt;a href="https://pkgpurl.rpkg.dev/reference/purl_rmd.html" class="external-link"&gt;pkgpurl::purl_rmd()&lt;/a&gt;&lt;/code&gt; is a less cumbersome alternative to the Makefile approach outlined by him.&lt;/p&gt;'><sup>2</sup></a>. Always make changes only to the <code>.Rmd</code> files – never the <code>.R</code> files – and then run <code><a href="https://pkgpurl.rpkg.dev/reference/purl_rmd.html" class="external-link">pkgpurl::purl_rmd()</a></code> to regenerate the R source files.</p>
 </div>
 <div class="section level3">
 <h3 id="coding-style">Coding style<a class="anchor" aria-label="anchor" href="#coding-style"></a>
 </h3>
-<p>This package borrows a lot of the <a href="https://www.tidyverse.org/" class="external-link">Tidyverse</a> design philosophies. The R code adheres to the principles specified in the <a href="https://principles.tidyverse.org/" class="external-link">Tidyverse Design Guide</a> wherever possible and is formatted according to the <a href="https://style.tidyverse.org/" class="external-link">Tidyverse Style Guide</a> (TSG) with the following exceptions:</p>
+<p>This package borrows a lot of the <a href="https://www.tidyverse.org/" class="external-link">Tidyverse</a> design philosophies. The R code is guided by the <a href="https://design.tidyverse.org/" class="external-link">Tidy design principles</a> and is formatted according to the <a href="https://style.tidyverse.org/" class="external-link">Tidyverse Style Guide</a> (TSG) with the following exceptions:</p>
 <ul>
 <li>
 <p>Line width is limited to <strong>160 characters</strong>, double the <a href="https://style.tidyverse.org/syntax.html#long-lines" class="external-link">limit proposed by the TSG</a> (80 characters is ridiculously little given today’s high-resolution wide screen monitors).</p>
@@ -133,7 +133,7 @@
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
 <li><a href="https://gitlab.com/rpkg.dev/swissmuni/" class="external-link">Browse source code</a></li>
-<li><a href="https://gitlab.com/rpkg.dev/swissmuni/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://gitlab.com/rpkg.dev/swissmuni/-/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -171,7 +171,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
 </div>
 
     </footer>
