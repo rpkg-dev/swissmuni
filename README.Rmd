@@ -12,9 +12,9 @@ library(magrittr,
 knitr::opts_knit$set(root.dir = getwd())
 ```
 
-# `r pal::desc_value("Package")`
+# `r pal::desc_get_field_safe("Package")`
 
-`r paste0('[![CRAN Status](https://r-pkg.org/badges/version/', pal::desc_value(key = "Package"), ')](https://cran.r-project.org/package=', pal::desc_value(key = "Package"), '){.pkgdown-release}')`
+`r paste0('[![CRAN Status](https://r-pkg.org/badges/version/', pal::desc_get_field_safe(key = "Package"), ')](https://cran.r-project.org/package=', pal::desc_get_field_safe(key = "Package"), '){.pkgdown-release}')`
 
 swissmuni provides access to Swiss municipality [snapshots](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/snapshots),
 [congruences](https://sms.bfs.admin.ch/WcfBFSSpecificService.svc/AnonymousRest/communes/correspondances),
