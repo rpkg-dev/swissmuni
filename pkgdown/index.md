@@ -25,6 +25,8 @@ The (function) reference is found [here](reference).
 
 ## Development
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/rpkg-dev/swissmuni)
+
 ### R Markdown format
 
 This package's source code is written in the [R Markdown](https://rmarkdown.rstudio.com/) file format to facilitate practices commonly referred to as [*literate programming*](https://en.wikipedia.org/wiki/Literate_programming). It allows the actual code to be freely mixed with explanatory and supplementary information in expressive Markdown format instead of having to rely on [`#` comments](https://rstudio.github.io/r-manuals/r-lang/Parser.html#comments) only.
@@ -35,37 +37,37 @@ All the `.gen.R` suffixed R source code found under [`R/`](https://gitlab.com/rp
 
 This package borrows a lot of the [Tidyverse](https://www.tidyverse.org/) design philosophies. The R code is guided by the [Tidy design principles](https://design.tidyverse.org/) and is formatted according to the [Tidyverse Style Guide](https://style.tidyverse.org/) (TSG) with the following exceptions:
 
--   Line width is limited to **160 characters**, double the [limit proposed by the TSG](https://style.tidyverse.org/syntax.html#long-lines) (80 characters is ridiculously little given today's high-resolution wide screen monitors).
+- Line width is limited to **160 characters**, double the [limit proposed by the TSG](https://style.tidyverse.org/syntax.html#long-lines) (80 characters is ridiculously little given today's high-resolution wide screen monitors).
 
-    Furthermore, the preferred style for breaking long lines differs. Instead of wrapping directly after an expression's opening bracket as [suggested by the TSG](https://style.tidyverse.org/syntax.html#long-lines), we prefer two fewer line breaks and indent subsequent lines within the expression by its opening bracket:
+  Furthermore, the preferred style for breaking long lines differs. Instead of wrapping directly after an expression's opening bracket as [suggested by the TSG](https://style.tidyverse.org/syntax.html#long-lines), we prefer two fewer line breaks and indent subsequent lines within the expression by its opening bracket:
 
-    ``` r
-    # TSG proposes this
-    do_something_very_complicated(
-      something = "that",
-      requires = many,
-      arguments = "some of which may be long"
-    )
+  ``` r
+  # TSG proposes this
+  do_something_very_complicated(
+    something = "that",
+    requires = many,
+    arguments = "some of which may be long"
+  )
 
-    # we prefer this
-    do_something_very_complicated(something = "that",
-                                  requires = many,
-                                  arguments = "some of which may be long")
-    ```
+  # we prefer this
+  do_something_very_complicated(something = "that",
+                                requires = many,
+                                arguments = "some of which may be long")
+  ```
 
-    This results in less vertical and more horizontal spread of the code and better readability in pipes.
+  This results in less vertical and more horizontal spread of the code and better readability in pipes.
 
--   Usage of [magrittr's compound assignment pipe-operator `%<>%`](https://magrittr.tidyverse.org/reference/compound.html) is desirable[^3].
+- Usage of [magrittr's compound assignment pipe-operator `%<>%`](https://magrittr.tidyverse.org/reference/compound.html) is desirable[^3].
 
--   Usage of [R's right-hand assignment operator `->`](https://rdrr.io/r/base/assignOps.html) is not allowed[^4].
+- Usage of [R's right-hand assignment operator `->`](https://rdrr.io/r/base/assignOps.html) is not allowed[^4].
 
--   R source code is *not* split over several files as [suggested by the TSG](https://style.tidyverse.org/package-files.html) but instead is (as far as possible) kept in the single file [`Rmd/swissmuni.Rmd`](https://gitlab.com/rpkg.dev/swissmuni/-/tree/master/Rmd/swissmuni.Rmd) which is well-structured thanks to its [Markdown support](#r-markdown-format).
+- R source code is *not* split over several files as [suggested by the TSG](https://style.tidyverse.org/package-files.html) but instead is (as far as possible) kept in the single file [`Rmd/swissmuni.Rmd`](https://gitlab.com/rpkg.dev/swissmuni/-/tree/master/Rmd/swissmuni.Rmd) which is well-structured thanks to its [Markdown support](#r-markdown-format).
 
 As far as possible, these deviations from the TSG plus some additional restrictions are formally specified in [`pkgpurl::default_linters`](https://pkgpurl.rpkg.dev/reference/default_linters), which is (by default) used in [`pkgpurl::lint_rmd()`](https://pkgpurl.rpkg.dev/reference/lint_rmd), which in turn is the recommended way to lint this package.
 
 ## See also
 
--   [Official municipality data web application from the Swiss Federal Statistical Office (FSO)](https://www.agvchapp.bfs.admin.ch/de/communes/query)
+- [Official municipality data web application from the Swiss Federal Statistical Office (FSO)](https://www.agvchapp.bfs.admin.ch/de/communes/query)
 
 [^1]: Publicly accessible information about this system is scarce. A presentation introducing the system at the [4th SDMX Global Conference 2013](https://sdmx.org/?sdmx_events=4th-sdmx-global-conference) is found [here](https://web.archive.org/web/20200615113441/https://www.oecd.org/sdd/SDMX%202013%20Session%203.7%20-%20A%20statistical%20metadata%20system%20based%20on%20SDMX.pdf).
 

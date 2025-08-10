@@ -134,7 +134,7 @@ and the districts.</p>
 <span class="r-in"><span>                           end_date <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                           name_type <span class="op">=</span> <span class="st">"de"</span>,</span></span>
 <span class="r-in"><span>                           use_cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,121 × 31</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2,115 × 34</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Identifier Name                CODE_OFS `Kantone (2025-01-01)` Historisiertes Bezirkve…¹ `Agglomerationen 2012` Urbanisierungsgrad 2…² `Stadt/Land-Typologie`</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>      <span style="text-decoration: underline;">10</span>009 Villnachern             <span style="text-decoration: underline;">4</span>122                     19                     <span style="text-decoration: underline;">10</span>023                      0                      2                      3</span>
@@ -147,9 +147,9 @@ and the districts.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>      <span style="text-decoration: underline;">10</span>268 Wil (ZH)                  71                      1                     <span style="text-decoration: underline;">10</span>081                    261                      3                      3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>      <span style="text-decoration: underline;">10</span>275 Wettingen               <span style="text-decoration: underline;">4</span>045                     19                     <span style="text-decoration: underline;">10</span>025                   <span style="text-decoration: underline;">4</span>021                      2                      1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>      <span style="text-decoration: underline;">10</span>277 Wetzikon (ZH)            121                      1                     <span style="text-decoration: underline;">10</span>079                    261                      2                      1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,111 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2,105 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ abbreviated names: ¹​`Historisiertes Bezirkverzeichnis der Schweiz (2025-01-01)`, ²​`Urbanisierungsgrad 2011 (DEGURBA) - eurostat 2011`</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 23 more variables: `Gemeindetypologie (9 Typen)` &lt;int&gt;, `Gemeindetypologie (25 Typen)` &lt;int&gt;, `Grossregionen der Schweiz` &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 26 more variables: `Gemeindetypologie (9 Typen)` &lt;int&gt;, `Gemeindetypologie (25 Typen)` &lt;int&gt;, `Grossregionen der Schweiz` &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   `Raum mit städtischem Charakter` &lt;int&gt;, `Statistische Städte` &lt;int&gt;, `Agglomerationsgrössenklasse 2012` &lt;int&gt;, `Agglomerationen 2012 ⎘` &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   `Arbeitsmarktgrossregionen 2018` &lt;int&gt;, `Arbeitsmarktregionen 2018` &lt;int&gt;, Berggebiete &lt;int&gt;, `Funktionale städtische Gebiete 2014 (FUA eurostat)` &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   `Erweiterte Städte 2011 (Greater cities eurostat)` &lt;int&gt;, `Sprachgebiete 2020` &lt;int&gt;, `Agglomerationen 2020` &lt;int&gt;, `Stadt/Land-Typologie ⎘` &lt;int&gt;,</span></span>
@@ -165,7 +165,7 @@ and the districts.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
