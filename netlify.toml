@@ -17,6 +17,9 @@ for = "/*"
 # - `connect-src data:` is required for asciinema (asciicast)
 # - `connect-src https://t.counter.dev` is required for counter.dev analytics
 # - `object-src 'self';` has to be set to enable PDF preview in Chrome
+# - `img-src https://deepwiki.com` has to be set for the DeepWiki badge in the README
+# - `img-src https://github.com` has to be set for the `R CMD check` badge in the README
+# - `img-src https://r-pkg.org` has to be set for the CRAN badge in the README
 # - `script-src 'unsafe-eval'` is required for MathJax, cf. https://github.com/mathjax/MathJax/issues/1988#issuecomment-384978927
 # - `script-src https://rpkg.dev` is required for counter.dev analytics
 # - `style-src 'unsafe-inline'` is required for MathJax, cf. https://github.com/mathjax/MathJax/issues/1988#issuecomment-581567775
@@ -26,7 +29,7 @@ Content-Security-Policy = '''
   default-src 'none';
   connect-src 'self' data: https://t.counter.dev;
   font-src 'self';
-  img-src 'self' data: https://r-pkg.org;
+  img-src 'self' data: https://deepwiki.com https://github.com https://r-pkg.org;
   manifest-src 'self';
   object-src 'self';
   script-src 'self' 'unsafe-eval' https://rpkg.dev;

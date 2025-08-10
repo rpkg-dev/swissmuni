@@ -63,6 +63,11 @@ pkgsnip::md_snip(id = "pkg_usage") %>%
 
 ## Development
 
+```{r}
+#| label: pkg-deepwiki
+#| child: !expr pkgsnip::snip_path("pkg-deepwiki.Rmd")
+```
+
 ### R Markdown format
 
 ```{r}
